@@ -139,46 +139,5 @@
 .btnText:hover{ background:rgba(255,255,255,.08); border-color:#fff; transform:translateY(-2px) }
 
 @media (max-width: 900px){
-  .hero{
-    min-height:calc(100svh - 64px);
-    display:flex;
-    align-items:flex-end;
-    padding-top:40px;
-    padding-bottom:88px;
-  }
-  .hero::before,.hero::after{display:none}
-  .wrap{width:100%}
-  .content{
-    position:relative;
-    text-align:right;
-    max-width:none;
-    margin:0;
-  }
-  .eyebrow{
-    position:static;transform:none;
-    justify-content:flex-start;
-    margin:0 0 22px;
-  }
-  .headline{
-    position:static;right:auto;bottom:auto;
-    max-width:none;margin:0 0 18px;
-    font-size:clamp(40px, 12vw, 64px);
-  }
-  .lede{
-    position:static;right:auto;bottom:auto;
-    max-width:none;margin:0 0 30px;
-    font-size:17px;line-height:1.65;
-  }
-  .ctas{
-    position:static;margin:0;
-    flex-direction:row;flex-wrap:wrap;
-    align-items:stretch;justify-content:flex-start;
-    gap:14px;
-  }
-  .btnPrimary,.btnText{
-    position:static;left:auto;bottom:auto;
-    justify-content:center;
-  }
-  .btnPrimary{padding:18px 28px}
-  .btnText{padding:16px 26px}
+  .content{grid-template-columns:1fr}
 }
