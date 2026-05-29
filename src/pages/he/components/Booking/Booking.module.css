@@ -406,6 +406,46 @@
 @media (max-width: 900px){
   .head, .grid{grid-template-columns:1fr}
 }
+@media (max-width: 640px){
+  .form .formSection[data-collapsed]{
+    border-top:1px solid var(--ink-30);
+    padding-top:18px;
+    margin-bottom:18px;
+  }
+  .form .formSection[data-collapsed]:first-of-type{
+    border-top:0;padding-top:0;
+  }
+  .form .formSectionHead{
+    cursor:pointer;
+    display:flex;
+    align-items:center;
+    gap:14px;
+    margin-bottom:0;
+    user-select:none;
+    -webkit-tap-highlight-color:transparent;
+    padding:6px 0;
+  }
+  .form .formSection[data-collapsed] .formSectionHead::after{
+    content:"";
+    width:9px;height:9px;
+    border-right:1.5px solid var(--ink-70);
+    border-bottom:1.5px solid var(--ink-70);
+    transform:rotate(45deg);
+    margin-inline-start:auto;
+    margin-bottom:3px;
+    transition:transform .25s ease;
+  }
+  .form .formSection[data-collapsed="false"] .formSectionHead{
+    margin-bottom:22px;
+  }
+  .form .formSection[data-collapsed="false"] .formSectionHead::after{
+    transform:rotate(-135deg);
+    margin-bottom:-3px;
+  }
+  .form .formSection[data-collapsed="true"] > :not(.formSectionHead){
+    display:none;
+  }
+}
 @media (max-width: 560px){
   .upgradeList{grid-template-columns:1fr}
   .tdMedia{height:240px}

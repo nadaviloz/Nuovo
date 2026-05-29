@@ -110,6 +110,9 @@ const Booking = forwardRef(function Booking(_, ref) {
   const [tableDesignConfirmed, setTableDesignConfirmed] = useState(false)
   const [tableDesignHadConfirm, setTableDesignHadConfirm] = useState(false)
   const [submitted, setSubmitted] = useState(false)
+  const [openSection, setOpenSection] = useState(0)
+  const toggleSection = (idx) => setOpenSection(prev => prev === idx ? -1 : idx)
+  const sectionAttrs = (idx) => ({ 'data-collapsed': openSection === idx ? 'false' : 'true' })
 
   const removeTableDesign = () => { setTableDesign(false); setTableDesignConfirmed(false); setTableDesignHadConfirm(false) }
   const confirmTableDesign = () => { setTableDesignConfirmed(true); setTableDesignHadConfirm(true) }
@@ -210,8 +213,8 @@ const Booking = forwardRef(function Booking(_, ref) {
 
           <form className={styles.form} onSubmit={onSubmit}>
             {/* Section 01 - האירוע */}
-            <div className={styles.formSection}>
-              <div className={styles.formSectionHead}>
+            <div className={styles.formSection} {...sectionAttrs(0)}>
+              <div className={styles.formSectionHead} onClick={() => toggleSection(0)}>
                 <div className={styles.formSectionNum}>01</div>
                 <div className={styles.formSectionTitle}>האירוע</div>
               </div>
@@ -305,8 +308,8 @@ const Booking = forwardRef(function Booking(_, ref) {
             </div>
 
             {/* Section 02 - הסיפור */}
-            <div className={styles.formSection}>
-              <div className={styles.formSectionHead}>
+            <div className={styles.formSection} {...sectionAttrs(1)}>
+              <div className={styles.formSectionHead} onClick={() => toggleSection(1)}>
                 <div className={styles.formSectionNum}>02</div>
                 <div className={styles.formSectionTitle}>הסיפור</div>
               </div>
@@ -357,8 +360,8 @@ const Booking = forwardRef(function Booking(_, ref) {
             </div>
 
             {/* Section 03 - פרטים שעוזרים */}
-            <div className={styles.formSection}>
-              <div className={styles.formSectionHead}>
+            <div className={styles.formSection} {...sectionAttrs(2)}>
+              <div className={styles.formSectionHead} onClick={() => toggleSection(2)}>
                 <div className={styles.formSectionNum}>03</div>
                 <div className={styles.formSectionTitle}>פרטים שעוזרים</div>
               </div>
@@ -380,8 +383,8 @@ const Booking = forwardRef(function Booking(_, ref) {
             </div>
 
             {/* Section 04 - איך נחזור */}
-            <div className={styles.formSection}>
-              <div className={styles.formSectionHead}>
+            <div className={styles.formSection} {...sectionAttrs(3)}>
+              <div className={styles.formSectionHead} onClick={() => toggleSection(3)}>
                 <div className={styles.formSectionNum}>04</div>
                 <div className={styles.formSectionTitle}>איך נחזור אליכם</div>
               </div>
