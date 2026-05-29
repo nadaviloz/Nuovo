@@ -127,5 +127,23 @@
   .head{grid-template-columns:1fr}
 }
 @media (max-width: 640px){
-  .grid{column-count:1}
+  .grid{
+    column-count: unset;
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    margin-inline: calc(var(--pad-x) * -1);
+    padding-inline: var(--pad-x);
+    padding-bottom: 14px;
+  }
+  .grid::-webkit-scrollbar{ display: none }
+  .chat{
+    flex: 0 0 85%;
+    margin: 0;
+    scroll-snap-align: center;
+  }
 }
