@@ -1,0 +1,225 @@
+.tiers{
+  margin-top:18px;
+  display:flex;flex-direction:column;gap:16px;
+}
+.intro{
+  font-size:14px;color:var(--ink-70);line-height:1.6;
+  padding:14px 16px;
+  background:var(--paper);
+  border:1px dashed var(--ink-30);
+  border-radius:6px;
+}
+.intro em{font-family:var(--accent);font-style:italic;color:var(--ink)}
+
+.tierWrap{position:relative}
+
+.tier{
+  background:#fff;
+  border:1px solid var(--ink-30);
+  border-radius:10px;
+  padding:20px 22px;
+}
+.tierFish{
+  background: linear-gradient(180deg, #0e0e0e 0%, #050505 100%);
+  color:var(--paper);
+  border-color:#0a0a0a;
+}
+.tierFish .tierName,
+.tierFish .tierHint,
+.tierFish .count,
+.tierFish .cardName,
+.tierFish .priceLine{color:var(--paper)}
+.tierFish .card{
+  background:#1a1a1a;border-color:#262626;
+}
+.tierFish .card:hover{border-color:#fafafa}
+.tierFish .cardOn{border-color:#fafafa;background:#202020}
+.tierFish .placeholder{
+  background:linear-gradient(135deg,#202020 0%,#0a0a0a 100%);color:#666;
+}
+
+.tierHead{
+  display:flex;align-items:center;gap:12px;
+  margin-bottom:6px;
+}
+.tierBadge{
+  font-family:var(--label);
+  font-size:10px;letter-spacing:.22em;text-transform:uppercase;font-weight:500;
+  padding:5px 10px;border-radius:999px;
+  background:var(--ink);color:var(--paper);
+  white-space:nowrap;
+}
+.badge_base{background:#e8e8e8;color:#0a0a0a}
+.badge_ext{background:var(--ink);color:var(--paper)}
+.badge_fish{background:var(--paper);color:var(--ink)}
+
+.tierName{
+  font-family:var(--serif);
+  font-size:19px;font-weight:400;letter-spacing:-.012em;
+  color:var(--ink);
+  flex:1;
+}
+.count{
+  font-family:var(--accent);font-style:italic;
+  font-size:18px;color:var(--ink);
+}
+.tierHint{
+  font-size:13px;color:var(--ink-70);line-height:1.5;
+  margin:0 0 14px;
+}
+
+.remove{
+  position:absolute;
+  top:14px;left:14px;
+  z-index:2;
+  background:#fff;border:1px solid var(--ink-30);
+  color:var(--ink-70);
+  width:30px;height:30px;border-radius:999px;
+  font-size:18px;line-height:1;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  transition:transform .2s, border-color .2s, color .2s;
+}
+.remove:hover{transform:rotate(90deg);color:var(--ink);border-color:var(--ink)}
+.removeDark{background:#0a0a0a;border-color:#262626;color:#999}
+.removeDark:hover{color:#fff;border-color:#fff}
+
+.grid{
+  display:grid;
+  grid-template-columns:repeat(4, 1fr);
+  gap:12px;
+}
+@media (max-width:900px){.grid{grid-template-columns:repeat(3, 1fr)}}
+@media (max-width:600px){.grid{grid-template-columns:repeat(2, 1fr)}}
+
+.card{
+  position:relative;
+  display:flex;flex-direction:column;gap:10px;
+  padding:8px 8px 12px;
+  background:#fafafa;
+  border:1px solid var(--ink-30);
+  border-radius:8px;
+  cursor:pointer;
+  text-align:center;
+  transition: transform .2s ease, border-color .2s, background .2s, box-shadow .2s;
+  overflow:hidden;
+}
+.card:hover{
+  transform:translateY(-2px);
+  border-color:var(--ink);
+  box-shadow:0 10px 24px rgba(10,10,10,.08);
+}
+.cardOn{
+  border-color:var(--ink);
+  background:#fff;
+  box-shadow:0 10px 24px rgba(10,10,10,.12);
+}
+.cardDim{opacity:.35;pointer-events:none}
+
+.thumb{
+  position:relative;
+  width:100%;
+  aspect-ratio:1/1;
+  border-radius:6px;
+  overflow:hidden;
+  background:#eee;
+}
+.thumb img{
+  width:100%;height:100%;object-fit:cover;display:block;
+  transition: transform .4s ease;
+}
+.card:hover .thumb img{transform:scale(1.05)}
+
+.placeholder{
+  width:100%;height:100%;
+  display:flex;align-items:center;justify-content:center;
+  background:
+    linear-gradient(135deg, #f3f3f3 0%, #e2e2e2 100%);
+  color:#aaa;
+}
+.placeholder span{
+  font-family:var(--accent);font-style:italic;
+  font-size:42px;line-height:1;
+}
+
+.check{
+  position:absolute;
+  top:8px;right:8px;
+  width:24px;height:24px;border-radius:999px;
+  background:var(--ink);color:var(--paper);
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:0 4px 12px rgba(0,0,0,.25);
+}
+
+.cardName{
+  font-size:13px;line-height:1.35;
+  color:var(--ink);
+  padding:0 4px;
+  min-height:34px;
+  display:flex;align-items:center;justify-content:center;
+}
+
+.priceLine{
+  margin-top:14px;
+  padding-top:14px;
+  border-top:1px solid var(--ink-30);
+  font-size:13px;color:var(--ink-70);
+}
+.priceLine em{font-family:var(--accent);font-style:italic;color:var(--ink);font-size:15px}
+.tierFish .priceLine{border-top-color:#262626}
+.tierFish .priceLine em{color:var(--paper)}
+
+.addBtn{
+  position:relative;
+  display:flex;flex-direction:column;align-items:flex-start;
+  gap:4px;
+  width:100%;
+  padding:18px 22px;
+  background:var(--paper);
+  border:1px dashed var(--ink-30);
+  border-radius:8px;
+  cursor:pointer;
+  text-align:right;
+  transition: border-color .2s, transform .2s, background .2s;
+}
+.addBtn:hover{border-color:var(--ink);transform:translateY(-1px)}
+.addBtnLabel{
+  font-family:var(--serif);
+  font-size:18px;font-weight:400;color:var(--ink);
+}
+.addBtnSub{
+  font-family:var(--label);
+  font-size:10px;letter-spacing:.22em;text-transform:uppercase;font-weight:500;
+  color:var(--ink-55);
+}
+.addBtnPlus{
+  position:absolute;
+  left:22px;top:50%;transform:translateY(-50%);
+  width:36px;height:36px;border-radius:999px;
+  background:var(--ink);color:var(--paper);
+  display:flex;align-items:center;justify-content:center;
+  font-size:22px;line-height:1;
+}
+.addBtnDark{
+  background:linear-gradient(180deg, #fafafa 0%, #f1f1f1 100%);
+  border-style:solid;border-color:#0a0a0a;
+}
+.addBtnDark .addBtnLabel{font-family:var(--accent);font-style:italic;font-size:22px}
+
+.totals{
+  display:flex;align-items:baseline;justify-content:space-between;
+  padding:14px 18px;
+  background:#0a0a0a;color:var(--paper);
+  border-radius:8px;
+}
+.totalsLabel{
+  font-family:var(--label);
+  font-size:11px;letter-spacing:.22em;text-transform:uppercase;font-weight:500;
+}
+.totalsValue{
+  font-family:var(--serif);font-size:20px;
+}
+.totalsAside{
+  font-family:var(--sans);font-size:13px;letter-spacing:0;
+  opacity:.7;margin-inline-start:8px;
+}
+.totalsAside em{font-family:var(--accent);font-style:italic;opacity:1;font-size:16px}

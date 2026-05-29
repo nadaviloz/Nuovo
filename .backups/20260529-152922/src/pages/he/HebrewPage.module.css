@@ -1,0 +1,42 @@
+.page{
+  --paper:#FAFAFA;
+  --paper-pure:#FFFFFF;
+  --paper-2:#EEEEEE;
+  --ink:#0A0A0A;
+  --ink-70:rgba(10,10,10,.7);
+  --ink-55:rgba(10,10,10,.55);
+  --ink-30:rgba(10,10,10,.2);
+  --rule:rgba(10,10,10,.1);
+  --rule-strong:rgba(10,10,10,.26);
+
+  --t-fast:.17s;
+  --ease:cubic-bezier(.2,.7,.2,1);
+
+  --serif:"Assistant", system-ui, sans-serif;
+  --sans:"Helvetica Neue", "DM Sans", "Assistant", "Heebo", system-ui, sans-serif;
+  --label:"DM Sans", "Josefin Sans", "Assistant", system-ui, sans-serif;
+  --brand:"Assistant", system-ui, sans-serif;
+  --accent:"Assistant", system-ui, sans-serif;
+
+  --pad-x: clamp(24px, 5vw, 96px);
+  --max: 1440px;
+
+  background:var(--paper);
+  color:var(--ink);
+  font-family:var(--sans);
+  font-synthesis:none;
+  font-size:16px;
+  line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+  text-rendering:optimizeLegibility;
+  min-height:100vh;
+  scroll-behavior:smooth;
+}
+.page ::selection{ background:var(--ink); color:var(--paper) }
+
+.wrap{
+  max-width:var(--max);
+  margin:0 auto;
+  padding-left:var(--pad-x);
+  padding-right:var(--pad-x);
+}

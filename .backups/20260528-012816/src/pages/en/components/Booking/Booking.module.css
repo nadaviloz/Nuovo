@@ -1,0 +1,92 @@
+.section{
+  padding-top:clamp(90px,10vw,160px);
+  padding-bottom:clamp(90px,10vw,160px);
+  background:var(--ivory);
+}
+.wrap{
+  max-width:var(--max);
+  margin:0 auto;
+  padding-left:var(--pad-x);
+  padding-right:var(--pad-x);
+}
+.head{
+  display:grid;grid-template-columns:1fr 1.6fr;gap:60px;
+  margin-bottom: clamp(60px, 7vw, 100px);
+  align-items:end;
+}
+.num{
+  font-family:"SF Mono", ui-monospace, Menlo, monospace;
+  font-size:13px;color:var(--clay-deep);letter-spacing:.1em;
+}
+.title{
+  font-family:var(--serif);font-weight:500;
+  font-size:clamp(44px,5.4vw,84px);
+  line-height:1;letter-spacing:-.02em;
+  margin-top:18px;
+}
+.lede{
+  font-size:18px;line-height:1.55;color:var(--espresso-60);
+  max-width: 46ch;justify-self:end;
+}
+.grid{
+  display:grid;grid-template-columns:1.05fr .95fr;
+  gap: clamp(40px,6vw,96px);
+  align-items:start;
+}
+.headline{
+  font-family:var(--serif);font-weight:500;
+  font-size:clamp(56px,7vw,108px);
+  line-height:.96;letter-spacing:-.025em;
+}
+.headline em{font-style:italic;color:var(--clay)}
+.form{
+  background:var(--ivory-2);
+  border-radius:8px;
+  padding: clamp(28px,3.5vw,48px);
+  border:1px solid var(--rule);
+}
+.field{margin-bottom:22px}
+.field label{
+  display:block;
+  font-size:12px;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--espresso-60);margin-bottom:10px;font-weight:600;
+}
+.field input, .field select{
+  width:100%;background:transparent;border:0;border-bottom:1px solid var(--espresso-30);
+  padding:10px 0 14px;font:inherit;color:var(--espresso);font-size:18px;
+  font-family:var(--serif);
+}
+.field input:focus, .field select:focus{outline:none;border-color:var(--espresso)}
+.fieldRow{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+.submit{
+  width:100%;background:var(--clay);color:var(--ivory);
+  padding:22px;border-radius:999px;margin-top:12px;
+  font-size:14px;letter-spacing:.1em;text-transform:uppercase;font-weight:600;
+  transition:background .2s;
+}
+.submit:hover{background:var(--clay-deep)}
+.fine{
+  margin-top:16px;text-align:center;
+  font-size:12px;color:var(--espresso-60);
+}
+.list{
+  margin-top:48px;
+  border-top:1px solid var(--rule);
+}
+.row{
+  display:grid;grid-template-columns:.5fr 1fr 1fr auto;
+  align-items:center;gap:28px;
+  padding:24px 0;
+  border-bottom:1px solid var(--rule);
+  font-size:15px;
+}
+.rowNum{
+  font-family:"SF Mono",monospace;font-size:12px;color:var(--clay-deep);letter-spacing:.1em;
+}
+.rowName{font-family:var(--serif);font-size:22px;letter-spacing:-.01em}
+.rowDetail{color:var(--espresso-60)}
+.rowPrice{font-family:var(--serif);font-size:22px}
+
+@media (max-width: 900px){
+  .head, .grid{grid-template-columns:1fr}
+}

@@ -1,0 +1,31 @@
+.page{
+  --ivory:#F4EDE2;
+  --ivory-2:#EBE2D2;
+  --clay:#B5573B;
+  --clay-deep:#8E4127;
+  --espresso:#2A211C;
+  --espresso-60:rgba(42,33,28,.6);
+  --espresso-30:rgba(42,33,28,.18);
+  --rule:rgba(42,33,28,.14);
+
+  --serif:"Cormorant Garamond", "Times New Roman", serif;
+  --sans:"Manrope", system-ui, sans-serif;
+
+  --pad-x: clamp(24px, 5vw, 96px);
+  --max: 1440px;
+
+  background:var(--ivory);
+  color:var(--espresso);
+  font-family:var(--sans);
+  font-size:16px;
+  line-height:1.5;
+  -webkit-font-smoothing:antialiased;
+  min-height:100vh;
+}
+
+.wrap{
+  max-width:var(--max);
+  margin:0 auto;
+  padding-left:var(--pad-x);
+  padding-right:var(--pad-x);
+}

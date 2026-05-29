@@ -1,0 +1,91 @@
+.host{
+  background:var(--espresso);color:var(--ivory);
+  padding-top:clamp(90px,10vw,160px);
+  padding-bottom:clamp(90px,10vw,160px);
+}
+.wrap{
+  max-width:var(--max);
+  margin:0 auto;
+  padding-left:var(--pad-x);
+  padding-right:var(--pad-x);
+}
+.head{
+  display:grid;grid-template-columns:1fr 1.6fr;gap:60px;
+  margin-bottom: clamp(60px, 7vw, 100px);
+  align-items:end;
+}
+.num{
+  font-family:"SF Mono", ui-monospace, Menlo, monospace;
+  font-size:13px;letter-spacing:.1em;
+  color:#E69A7C;
+}
+.title{
+  font-family:var(--serif);font-weight:500;
+  font-size:clamp(44px,5.4vw,84px);
+  line-height:1;letter-spacing:-.02em;
+  margin-top:18px;
+}
+.lede{
+  font-size:18px;line-height:1.55;color:rgba(244,237,226,.65);
+  max-width: 46ch;justify-self:end;
+}
+.layout{
+  display:grid;grid-template-columns: 1.1fr .9fr;
+  gap: clamp(40px,6vw,96px);
+  align-items:center;
+}
+.quote{
+  font-family:var(--serif);font-style:italic;
+  font-size:clamp(36px,3.6vw,56px);
+  line-height:1.12;letter-spacing:-.015em;
+  font-weight:400;
+}
+.clay{color:#E69A7C}
+.byline{
+  margin-top:36px;
+  display:flex;align-items:center;gap:18px;
+  font-size:13px;letter-spacing:.12em;text-transform:uppercase;
+  color:rgba(244,237,226,.55);
+}
+.bylineDash{width:28px;height:1px;background:rgba(244,237,226,.4)}
+.card{
+  aspect-ratio: 4/5;border-radius:6px;overflow:hidden;
+  background:
+    repeating-linear-gradient(135deg,
+      #3a2e26 0 14px,
+      #423229 14px 15px);
+  border:1px solid rgba(244,237,226,.12);
+  position:relative;
+}
+.cardTag{
+  position:absolute;left:20px;bottom:20px;
+  font-family: "SF Mono", ui-monospace, Menlo, monospace;
+  font-size:11px; letter-spacing:.06em;
+  background:#3a2e26;color:rgba(244,237,226,.7);
+  padding:8px 12px;border-radius:4px;
+}
+.stats{
+  margin-top:80px;
+  display:grid;grid-template-columns:repeat(3,1fr);
+  border-top:1px solid rgba(244,237,226,.18);
+}
+.stat{
+  padding:36px 0 0;
+  border-right:1px solid rgba(244,237,226,.12);
+  padding-right:32px;
+}
+.stat:last-child{border-right:0}
+.statNum{
+  font-family:var(--serif);font-size:64px;letter-spacing:-.02em;
+  color:#E69A7C;line-height:1;
+}
+.statLabel{
+  margin-top:14px;
+  font-size:14px;color:rgba(244,237,226,.7);max-width:30ch;line-height:1.5;
+}
+
+@media (max-width: 900px){
+  .head, .layout{grid-template-columns:1fr}
+  .stats{grid-template-columns:1fr}
+  .stat{border-right:0;border-bottom:1px solid rgba(244,237,226,.12);padding-bottom:32px;margin-bottom:32px}
+}

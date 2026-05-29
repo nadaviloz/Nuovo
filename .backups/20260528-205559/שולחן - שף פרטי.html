@@ -1,0 +1,1816 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>שולחן — שף פרטי</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&family=Frank+Ruhl+Libre:wght@300;400;500;700;900&family=Assistant:wght@300;400;500;600;700&family=Josefin+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#FAFAFA;
+    --paper-2:#EEEEEE;
+    --ink:#0A0A0A;
+    --ink-70:rgba(14,14,14,.7);
+    --ink-55:rgba(14,14,14,.55);
+    --ink-30:rgba(14,14,14,.22);
+    --rule:rgba(14,14,14,.14);
+
+    /* Type system
+       ─────────────────────────────────────────────
+       --serif  : Hebrew + Latin editorial display
+                  (Frank Ruhl for HE, Cormorant for EN)
+       --sans   : Hebrew body / UI                (Assistant)
+       --label  : ALL-CAPS labels, nav, micro     (Josefin Sans)
+       --brand  : the Latin wordmark "Nuovo"      (Cormorant italic)
+       --accent : Latin italic pull-quote runs    (Cormorant italic)
+    */
+    --serif:"Frank Ruhl Libre", "Cormorant Garamond", "Times New Roman", serif;
+    --sans:"Assistant", "Heebo", system-ui, sans-serif;
+    --label:"Josefin Sans", "Assistant", system-ui, sans-serif;
+    --brand:"Cormorant Garamond", "Frank Ruhl Libre", serif;
+    --accent:"Cormorant Garamond", serif;
+
+    --pad-x: clamp(24px, 5vw, 96px);
+    --max: 1440px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{background:var(--paper);color:var(--ink);font-family:var(--sans);-webkit-font-smoothing:antialiased}
+  body{font-size:16px;line-height:1.55}
+  img{display:block;max-width:100%}
+  a{color:inherit;text-decoration:none}
+  button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+
+  .wrap{max-width:var(--max);margin:0 auto;padding-left:var(--pad-x);padding-right:var(--pad-x)}
+
+  /* ---------- NAV ---------- */
+  .nav{
+    position:sticky;top:0;z-index:10;
+    background:var(--paper);
+    border-bottom:1px solid var(--rule);
+  }
+  .nav-inner{
+    display:flex;align-items:center;justify-content:space-between;
+    height:84px;
+  }
+  .brand{
+    font-family:var(--brand);
+    font-style:italic;
+    font-weight:500;
+    font-size:42px;
+    letter-spacing:-.02em;
+    line-height:1;
+    direction:ltr;
+    display:flex;align-items:baseline;gap:2px;
+  }
+  .brand .dot{width:5px;height:5px;background:var(--ink);display:inline-block;border-radius:50%;transform:translateY(-3px);margin-inline-start:2px}
+  .nav-links{
+    display:flex;gap:38px;
+    font-family:var(--label);
+    font-size:12px;letter-spacing:.18em;text-transform:uppercase;
+    color:var(--ink-70);font-weight:500;
+  }
+  .nav-links a:hover{color:var(--ink)}
+  .nav-cta{
+    font-family:var(--label);
+    font-size:12px;letter-spacing:.18em;text-transform:uppercase;font-weight:500;
+    padding:14px 26px;border:1px solid var(--ink);border-radius:999px;
+    transition:background .2s, color .2s;
+  }
+  .nav-cta:hover{background:var(--ink);color:var(--paper)}
+  .lang{
+    font-family:var(--label);
+    font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--ink-55);
+    display:flex;gap:10px;font-weight:500;
+  }
+  .lang b{color:var(--ink);font-weight:600}
+
+  /* ---------- HERO (image as background + text overlay) ---------- */
+  .hero{
+    position:relative;
+    min-height: calc(100vh - 84px);
+    background:
+      linear-gradient(180deg, rgba(10,10,10,.15) 0%, rgba(10,10,10,.35) 55%, rgba(10,10,10,.85) 100%),
+      url('assets/chef-hero.png');
+    background-size: cover;
+    background-position: center 30%;
+    background-repeat:no-repeat;
+    display:flex;flex-direction:column;justify-content:space-between;
+    padding-top: clamp(40px, 6vw, 80px);
+    padding-bottom: clamp(30px, 4vw, 50px);
+    color: var(--paper);
+  }
+  .hero .eyebrow{color:rgba(250,250,250,.85)}
+  .hero .eyebrow::before{background:var(--paper)}
+  .hero .headline{color:var(--paper)}
+  .hero .headline em{color:var(--paper)}
+  .hero .hero-lede{color:rgba(250,250,250,.85)}
+  .hero .btn-primary{background:var(--paper);color:var(--ink)}
+  .hero .btn-primary .arrow{background:var(--ink);color:var(--paper)}
+  .hero .btn-text{color:var(--paper);border-color:var(--paper)}
+  .hero-content{
+    display:grid;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(40px, 6vw, 96px);
+    align-items:end;
+  }
+  .hero-image-tag{
+    display:none;
+  }
+  .eyebrow{
+    font-family:var(--label);
+    font-size:12px;letter-spacing:.24em;text-transform:uppercase;
+    color:var(--ink-70);font-weight:500;
+    display:flex;align-items:center;gap:14px;
+  }
+  .eyebrow::before{content:"";width:32px;height:1px;background:var(--ink)}
+  h1.headline{
+    font-family:var(--serif);
+    font-weight:400;
+    font-size: clamp(56px, 8.4vw, 132px);
+    line-height:.98;
+    letter-spacing:-.028em;
+    margin-top:28px;
+  }
+  h1.headline em{
+    font-family:var(--accent);
+    font-style:italic;font-weight:400;
+    letter-spacing:-.02em;
+  }
+  .hero-lede{
+    margin-top:36px;
+    font-size:19px;line-height:1.7;
+    color:var(--ink-70);
+    max-width: 50ch;
+    font-weight:400;
+  }
+  .hero-ctas{
+    margin-top:44px;
+    display:flex;align-items:center;gap:22px;flex-wrap:wrap;
+  }
+  .btn-primary{
+    background:var(--ink);color:var(--paper);
+    padding:20px 30px;border-radius:999px;
+    font-family:var(--label);
+    font-size:12px;letter-spacing:.22em;text-transform:uppercase;font-weight:500;
+    display:inline-flex;align-items:center;gap:14px;
+    transition:opacity .2s;
+  }
+  .btn-primary:hover{opacity:.85}
+  .btn-primary .arrow{
+    width:24px;height:24px;border-radius:50%;background:var(--paper);color:var(--ink);
+    display:inline-flex;align-items:center;justify-content:center;
+    font-size:13px;
+  }
+  .btn-text{
+    font-family:var(--label);
+    font-size:12px;letter-spacing:.22em;text-transform:uppercase;font-weight:500;
+    border-bottom:1px solid var(--ink);padding-bottom:4px;
+  }
+
+  .hero-visual{
+    position:relative;
+    aspect-ratio: 4/5;
+    border-radius:4px;
+    overflow:hidden;
+    background:
+      repeating-linear-gradient(135deg,
+        var(--paper-2) 0 14px,
+        #DDDDDD 14px 15px);
+    border:1px solid var(--rule);
+  }
+  .visual-tag{
+    position:absolute;left:20px;bottom:20px;
+    font-family: var(--label);
+    font-size:10px; letter-spacing:.22em;text-transform:uppercase;font-weight:500;
+    color:var(--ink-70);
+    background:var(--paper);padding:8px 12px;border-radius:3px;
+    direction:ltr;text-align:left;
+  }
+  .hero-meta{
+    display:flex;justify-content:space-between;align-items:end;
+    margin-top:48px;
+    border-top:1px solid var(--rule);
+    padding-top:28px;
+    font-family:var(--label);
+    font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-55);
+    gap:24px;font-weight:500;
+  }
+  .hero-meta b{color:var(--ink);font-weight:400;display:block;font-size:38px;font-family:var(--serif);margin-bottom:8px;letter-spacing:-.01em;line-height:1}
+
+  /* ---------- MARQUEE SLOGAN ---------- */
+  .marquee{
+    border-top:1px solid var(--rule);
+    border-bottom:1px solid var(--rule);
+    overflow:hidden;
+    background:var(--paper);
+  }
+  .marquee-track{
+    display:flex;gap:64px;
+    padding:34px 0;
+    white-space:nowrap;
+    font-family:var(--serif);
+    font-weight:300;
+    font-size:42px;
+    letter-spacing:-.015em;
+    color:var(--ink);
+    animation: slide 42s linear infinite;
+  }
+  .marquee-track span{display:inline-flex;align-items:center;gap:64px}
+  .marquee-track .dot{
+    width:6px;height:6px;background:var(--ink);
+    display:inline-block;
+  }
+  @keyframes slide{
+    from{transform:translateX(0)}
+    to{transform:translateX(50%)}
+  }
+
+  /* ---------- SECTION HEADER ---------- */
+  .section{padding-top:clamp(90px,10vw,160px); padding-bottom:clamp(90px,10vw,160px)}
+  .section-head{
+    display:grid;grid-template-columns:1fr 1.6fr;gap:60px;
+    margin-bottom: clamp(60px, 7vw, 100px);
+    align-items:end;
+  }
+  .section-num{
+    font-family:var(--label);
+    font-size:11px;color:var(--ink-70);letter-spacing:.24em;text-transform:uppercase;font-weight:500;
+    direction:ltr;text-align:right;
+  }
+  .section-title{
+    font-family:var(--serif);font-weight:400;
+    font-size:clamp(44px,5.4vw,84px);
+    line-height:1;letter-spacing:-.025em;
+    margin-top:18px;
+  }
+  .section-title em{font-family:var(--accent);font-style:italic;font-weight:400;letter-spacing:-.018em}
+  .section-lede{
+    font-size:19px;line-height:1.7;color:var(--ink-70);
+    max-width: 50ch;justify-self:start;
+  }
+
+  /* ---------- PROCESS (Sec 2) ---------- */
+  .process-grid{
+    display:grid;grid-template-columns:repeat(4, 1fr);
+    border-top:1px solid var(--ink);
+  }
+  .step{
+    border-left:1px solid var(--rule);
+    padding:36px 0 40px 28px;
+    display:flex;flex-direction:column;gap:18px;
+    min-height: 380px;
+  }
+  .step:last-child{border-left:0}
+  .step-num{
+    font-family:var(--label);
+    font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--ink-70);font-weight:500;
+    direction:ltr;text-align:right;
+  }
+  .step-title{
+    font-family:var(--serif);font-weight:400;
+    font-size:44px;letter-spacing:-.02em;line-height:1.04;
+  }
+  .step-body{
+    font-size:15px;line-height:1.65;color:var(--ink-70);
+    margin-top:auto;max-width:32ch;
+  }
+  .step-icon{
+    width:46px;height:46px;border:1px solid var(--ink);border-radius:50%;
+    display:flex;align-items:center;justify-content:center;
+    font-family:var(--accent);font-style:italic;font-size:22px;font-weight:500;
+    direction:ltr;
+  }
+
+  /* ---------- TESTIMONIALS (Sec 3) ---------- */
+  .host{
+    background:var(--ink);color:var(--paper);
+  }
+  .host .section-lede{color:rgba(250,250,250,.65)}
+  .host .section-num{color:rgba(250,250,250,.6)}
+  .host .section-title em{color:var(--paper)}
+
+  .testimonials-grid{
+    display:grid;
+    grid-template-columns: 1.4fr 1fr;
+    gap: 22px;
+  }
+  .testimonials-side{
+    display:grid;grid-template-rows: 1fr 1fr;
+    gap:22px;
+  }
+  .testimonials-row{
+    margin-top:22px;
+    display:grid;grid-template-columns: repeat(4, 1fr);
+    gap:22px;
+  }
+
+  .t-tile{
+    position:relative;
+    border-radius:4px;
+    overflow:hidden;
+    border:1px solid rgba(250,250,250,.12);
+    background:#181818;
+    aspect-ratio: 4/5;
+  }
+  .t-tile.featured{aspect-ratio: auto; height:100%; min-height: 620px}
+  .t-tile.quote{
+    background:var(--paper);color:var(--ink);
+    padding: 36px 32px;
+    display:flex;flex-direction:column;justify-content:space-between;
+    border-color:transparent;
+  }
+  .t-tile.video-placeholder{
+    background:
+      repeating-linear-gradient(135deg,
+        #181818 0 14px,
+        #1f1f1f 14px 15px);
+  }
+  .t-tile video, .t-tile img.t-photo{
+    width:100%;height:100%;object-fit:cover;
+    display:block;
+  }
+  .t-tile .t-overlay{
+    position:absolute;inset:auto 0 0 0;
+    padding: 20px 22px;
+    background: linear-gradient(0deg, rgba(0,0,0,.75) 0%, rgba(0,0,0,0) 100%);
+    color:var(--paper);
+    pointer-events:none;
+  }
+  .t-tile .t-name{
+    font-family:var(--serif);
+    font-size:22px;letter-spacing:-.015em;font-weight:400;
+  }
+  .t-tile .t-meta{
+    font-family:var(--label);
+    font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:rgba(250,250,250,.7);
+    margin-top:8px;font-weight:500;
+  }
+  .t-tile .t-rating{
+    color:var(--paper);font-size:14px;letter-spacing:.1em;
+    direction:ltr;text-align:left;
+  }
+  .t-tile .play-button{
+    position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+    width:72px;height:72px;border-radius:50%;
+    background:rgba(250,250,250,.92);color:var(--ink);
+    display:flex;align-items:center;justify-content:center;
+    cursor:pointer;
+    transition: transform .3s, background .3s;
+    z-index:2;
+  }
+  .t-tile.featured .play-button{width:96px;height:96px}
+  .t-tile:hover .play-button{transform:translate(-50%,-50%) scale(1.08);background:var(--paper)}
+  .t-tile .play-button::after{
+    content:"";
+    width:0;height:0;
+    border-style:solid;
+    border-width: 14px 0 14px 20px;
+    border-color: transparent transparent transparent currentColor;
+    margin-left: 5px;
+  }
+  .t-tile.featured .play-button::after{border-width: 18px 0 18px 26px;margin-left:6px}
+  .t-tile .t-badge{
+    position:absolute;top:18px;right:18px;
+    background:rgba(10,10,10,.7);color:var(--paper);
+    font-family:var(--label);
+    font-size:10px;letter-spacing:.22em;text-transform:uppercase;font-weight:500;
+    padding:7px 12px;border-radius:999px;
+    backdrop-filter: blur(8px);
+    z-index:2;direction:ltr;
+  }
+
+  .t-quote-text{
+    font-family:var(--serif);
+    font-weight:300;
+    font-size: clamp(22px, 2vw, 30px);
+    line-height:1.4;letter-spacing:-.015em;
+  }
+  .t-quote-foot{
+    display:flex;align-items:center;gap:14px;
+    margin-top:24px;
+    padding-top:18px;
+    border-top:1px solid var(--rule);
+  }
+  .t-quote-avatar{
+    width:44px;height:44px;border-radius:50%;
+    background:
+      repeating-linear-gradient(135deg,
+        var(--paper-2) 0 8px,
+        #DDDDDD 8px 9px);
+    border:1px solid var(--rule);
+    flex-shrink:0;
+    overflow:hidden;
+  }
+  .t-quote-avatar img{width:100%;height:100%;object-fit:cover}
+  .t-quote-name{font-family:var(--serif);font-size:18px;font-weight:500;letter-spacing:-.01em}
+  .t-quote-meta{font-family:var(--label);font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-70);margin-top:6px;font-weight:500}
+  .t-quote-rating{
+    margin-inline-start:auto;
+    color:var(--ink);font-size:14px;letter-spacing:.15em;direction:ltr;
+  }
+
+  /* Lightbox for videos */
+  .video-lightbox{
+    position:fixed;inset:0;z-index:100;
+    background:rgba(0,0,0,.92);
+    display:none;align-items:center;justify-content:center;
+    padding: 40px;
+  }
+  .video-lightbox.open{display:flex}
+  .video-lightbox video{
+    max-width:90%;max-height:90vh;
+    border-radius:4px;
+  }
+  .video-lightbox .close{
+    position:absolute;top:20px;left:20px;
+    width:40px;height:40px;border-radius:50%;
+    background:rgba(250,250,250,.15);color:var(--paper);
+    display:flex;align-items:center;justify-content:center;
+    cursor:pointer;font-size:24px;
+  }
+  .video-lightbox .close:hover{background:rgba(250,250,250,.25)}
+
+  /* ---------- BOOKING (Sec 4) ---------- */
+  .booking-grid{
+    display:grid;grid-template-columns:.85fr 1.15fr;
+    gap: clamp(40px,6vw,96px);
+    align-items:start;
+  }
+  .booking-headline{
+    font-family:var(--serif);font-weight:400;
+    font-size:clamp(56px,7vw,108px);
+    line-height:1;letter-spacing:-.028em;
+  }
+  .booking-headline em{font-family:var(--accent);font-style:italic;font-weight:400;letter-spacing:-.02em}
+  .booking-form{
+    background:var(--paper-2);
+    border-radius:6px;
+    padding: clamp(28px,3.5vw,48px);
+    border:1px solid var(--rule);
+  }
+  .field{margin-bottom:22px}
+  .field label{
+    display:block;
+    font-family:var(--label);
+    font-size:11px;letter-spacing:.22em;text-transform:uppercase;
+    color:var(--ink-70);margin-bottom:12px;font-weight:500;
+  }
+  .field input, .field select{
+    width:100%;background:transparent;border:0;border-bottom:1px solid var(--ink-30);
+    padding:10px 0 14px;font:inherit;color:var(--ink);font-size:20px;
+    font-family:var(--serif);font-weight:400;
+    direction:rtl;
+  }
+  .field input:focus, .field select:focus{outline:none;border-color:var(--ink)}
+  .field-row{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+  .submit{
+    width:100%;background:var(--ink);color:var(--paper);
+    padding:22px;border-radius:999px;margin-top:12px;
+    font-family:var(--label);
+    font-size:12px;letter-spacing:.24em;text-transform:uppercase;font-weight:500;
+    transition:opacity .2s;
+  }
+  .submit:hover{opacity:.85}
+  .booking-fine{
+    margin-top:18px;text-align:center;
+    font-family:var(--label);
+    font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--ink-55);font-weight:500;
+  }
+
+  /* ---------- BOOKING — extended ---------- */
+  .form-section{
+    padding-top:8px;
+    margin-bottom:32px;
+    border-top:1px solid var(--ink-30);
+  }
+  .form-section:first-of-type{border-top:0;padding-top:0}
+  .form-section-head{
+    display:flex;align-items:baseline;gap:14px;
+    margin-bottom:24px;
+  }
+  .form-section-num{
+    font-family:var(--label);
+    font-size:10px;letter-spacing:.24em;text-transform:uppercase;
+    color:var(--ink-55);font-weight:500;
+    direction:ltr;
+  }
+  .form-section-title{
+    font-family:var(--serif);
+    font-size:28px;font-weight:400;letter-spacing:-.018em;line-height:1;
+  }
+  .form-section-hint{
+    font-size:14px;color:var(--ink-70);line-height:1.55;
+    margin-top:-12px;margin-bottom:22px;max-width:42ch;
+  }
+
+  /* chips — multi-select tag bar */
+  .chip-row{
+    display:flex;flex-wrap:wrap;gap:8px;
+    margin-top:4px;
+  }
+  .chip{
+    font-family:var(--label);
+    font-size:11px;letter-spacing:.18em;text-transform:uppercase;font-weight:500;
+    padding:11px 16px;
+    border:1px solid var(--ink-30);
+    border-radius:999px;
+    background:transparent;color:var(--ink-70);
+    cursor:pointer;
+    transition: all .18s ease;
+    user-select:none;
+  }
+  .chip:hover{border-color:var(--ink);color:var(--ink)}
+  .chip.active{
+    background:var(--ink);color:var(--paper);border-color:var(--ink);
+  }
+  .chip.disabled{
+    opacity:.35;
+    cursor:not-allowed;
+    text-decoration:line-through;
+    text-decoration-thickness:1px;
+  }
+  .chip.disabled:hover{border-color:var(--ink-30);color:var(--ink-70)}
+
+  /* segmented control — single-select */
+  .segmented{
+    display:grid;
+    grid-template-columns:repeat(3, 1fr);
+    border:1px solid var(--ink-30);
+    border-radius:999px;
+    overflow:hidden;
+    background:var(--paper);
+  }
+  .segmented .seg{
+    font-family:var(--label);
+    font-size:11px;letter-spacing:.16em;text-transform:uppercase;font-weight:500;
+    padding:14px 8px;text-align:center;cursor:pointer;
+    color:var(--ink-70);
+    border-inline-start:1px solid var(--ink-30);
+    transition: background .15s, color .15s;
+  }
+  .segmented .seg:first-child{border-inline-start:0}
+  .segmented .seg:hover{color:var(--ink)}
+  .segmented .seg.active{background:var(--ink);color:var(--paper)}
+
+  /* large story textarea */
+  .field textarea{
+    width:100%;background:var(--paper);border:1px solid var(--ink-30);border-radius:6px;
+    padding:18px 20px;font:inherit;color:var(--ink);font-size:16px;line-height:1.6;
+    font-family:var(--sans);
+    resize:vertical;
+    min-height:140px;
+    direction:rtl;
+    transition: border-color .2s;
+  }
+  .field textarea:focus{outline:none;border-color:var(--ink)}
+  .field textarea::placeholder{color:var(--ink-55);font-style:italic;font-family:var(--accent);font-size:16px;line-height:1.7}
+
+  .field-helper{
+    font-size:13px;color:var(--ink-55);line-height:1.5;
+    margin-top:8px;
+  }
+  .field-helper em{font-family:var(--accent);font-style:italic;color:var(--ink-70)}
+
+  /* completion meter */
+  .meter{
+    margin-top:22px;
+    padding:18px 20px;
+    background:var(--paper);
+    border:1px solid var(--ink-30);
+    border-radius:6px;
+  }
+  .meter-head{
+    display:flex;justify-content:space-between;align-items:baseline;
+    margin-bottom:10px;
+    font-family:var(--label);
+    font-size:10px;letter-spacing:.22em;text-transform:uppercase;font-weight:500;
+    color:var(--ink-70);
+  }
+  .meter-head .pct{
+    font-family:var(--accent);font-style:italic;
+    color:var(--ink);font-size:18px;letter-spacing:-.01em;
+    text-transform:none;
+  }
+  .meter-bar{
+    height:4px;background:var(--ink-30);border-radius:999px;overflow:hidden;
+  }
+  .meter-fill{
+    height:100%;background:var(--ink);width:0;
+    transition: width .4s cubic-bezier(.2,.7,.2,1);
+  }
+  .meter-note{
+    margin-top:12px;
+    font-size:13px;color:var(--ink-70);line-height:1.5;
+  }
+  .meter-note em{font-family:var(--accent);font-style:italic;color:var(--ink)}
+
+  .booking-list{
+    margin-top:48px;
+    border-top:1px solid var(--rule);
+  }
+  .booking-list-row{
+    display:grid;grid-template-columns:.4fr 1.2fr 1.4fr auto;
+    align-items:center;gap:28px;
+    padding:26px 0;
+    border-bottom:1px solid var(--rule);
+    font-size:15px;
+  }
+  .booking-list-row .num{
+    font-family:var(--label);font-size:11px;color:var(--ink-70);letter-spacing:.22em;text-transform:uppercase;font-weight:500;
+    direction:ltr;text-align:right;
+  }
+  .booking-list-row .name{font-family:var(--serif);font-size:26px;letter-spacing:-.015em;font-weight:500}
+  .booking-list-row .detail{color:var(--ink-70)}
+  .booking-list-row .price{font-family:var(--accent);font-size:24px;font-style:italic;font-weight:500}
+
+  /* ---------- ABOUT (מי אני) ---------- */
+  .about-grid{
+    display:grid;grid-template-columns: .85fr 1.15fr;
+    gap: clamp(40px,6vw,96px);
+    align-items:start;
+  }
+  .about-portrait{
+    aspect-ratio: 4/5;
+    border-radius:4px;
+    overflow:hidden;
+    background:
+      repeating-linear-gradient(135deg,
+        var(--paper-2) 0 14px,
+        #DDDDDD 14px 15px);
+    border:1px solid var(--rule);
+    position:relative;
+  }
+  .about-portrait .visual-tag{position:absolute;left:20px;bottom:20px;background:var(--paper);padding:8px 12px;border-radius:3px;font-family:var(--label);font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--ink-70);direction:ltr;text-align:left;font-weight:500}
+  .about-lead{
+    font-family:var(--serif);
+    font-weight:300;
+    font-size:clamp(30px,3vw,44px);
+    line-height:1.22;letter-spacing:-.022em;
+    margin-bottom:32px;
+    max-width: 22ch;
+  }
+  .about-body{
+    font-size:17px;line-height:1.78;
+    color:var(--ink-70);
+    margin-bottom:22px;
+    max-width: 56ch;
+    font-weight:400;
+  }
+  .about-creds{
+    margin-top:48px;
+    border-top:1px solid var(--rule);
+    padding-top:16px;
+  }
+  .cred{
+    display:grid;grid-template-columns: 140px 1fr;
+    gap:24px;
+    padding:18px 0;
+    border-bottom:1px solid var(--rule);
+    align-items:baseline;
+  }
+  .cred-year{
+    font-family:var(--label);
+    font-size:11px;color:var(--ink-55);letter-spacing:.22em;text-transform:uppercase;font-weight:500;
+    direction:ltr;text-align:right;
+  }
+  .cred-place{
+    font-family:var(--serif);font-size:22px;letter-spacing:-.015em;
+    font-weight:500;
+  }
+
+  /* ---------- TRACKS (מסלולים) ---------- */
+  .tracks-grid{
+    display:grid;grid-template-columns:repeat(3,1fr);
+    gap:24px;
+  }
+  .track{
+    border:1px solid var(--rule);
+    border-radius:6px;
+    padding:36px 32px 32px;
+    background:var(--paper);
+    display:flex;flex-direction:column;
+    gap:18px;
+    position:relative;
+    min-height: 540px;
+  }
+  .track-featured{
+    background:var(--ink);color:var(--paper);
+    border-color:var(--ink);
+  }
+  .track-badge{
+    position:absolute;top:-12px;right:32px;
+    background:var(--paper);color:var(--ink);
+    border:1px solid var(--ink);
+    font-family:var(--label);
+    font-size:10px;letter-spacing:.22em;text-transform:uppercase;font-weight:500;
+    padding:7px 14px;border-radius:999px;
+  }
+  .track-num{
+    font-family:var(--label);
+    font-size:11px;letter-spacing:.22em;text-transform:uppercase;font-weight:500;
+    color:var(--ink-55);
+    direction:ltr;text-align:right;
+  }
+  .track-featured .track-num{color:rgba(250,250,250,.6)}
+  .track-name{
+    font-family:var(--serif);font-weight:400;
+    font-size:42px;line-height:1;letter-spacing:-.025em;
+  }
+  .track-desc{
+    font-size:14px;color:var(--ink-70);
+    line-height:1.55;
+  }
+  .track-featured .track-desc{color:rgba(250,250,250,.7)}
+  .track-menu{
+    list-style:none;margin-top:8px;
+    padding-top:18px;
+    border-top:1px solid var(--rule);
+  }
+  .track-featured .track-menu{border-color:rgba(250,250,250,.18)}
+  .track-menu li{
+    font-size:16px;line-height:1.45;
+    padding:10px 0;
+    color:var(--ink);
+    font-family:var(--serif);
+    font-weight:400;letter-spacing:-.005em;
+  }
+  .track-featured .track-menu li{color:var(--paper)}
+  .track-price{
+    margin-top:auto;
+    padding-top:18px;
+    font-family:var(--label);
+    font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--ink-70);font-weight:500;
+    border-top:1px solid var(--rule);
+  }
+  .track-featured .track-price{color:rgba(250,250,250,.7);border-color:rgba(250,250,250,.18)}
+  .track-price span{
+    font-family:var(--accent);font-size:36px;color:var(--ink);font-style:italic;font-weight:500;
+    margin-inline:8px;letter-spacing:-.01em;
+  }
+  .track-featured .track-price span{color:var(--paper)}
+  .track-cta{
+    margin-top:12px;
+    display:inline-flex;align-items:center;gap:10px;
+    font-family:var(--label);
+    font-size:11px;letter-spacing:.22em;text-transform:uppercase;font-weight:500;
+    border-bottom:1px solid var(--ink);
+    padding-bottom:4px;
+    width:fit-content;
+  }
+  .track-featured .track-cta{color:var(--paper);border-color:var(--paper)}
+
+  @media (max-width: 900px){
+    .about-grid, .tracks-grid{grid-template-columns:1fr}
+  }
+
+  /* ---------- FOOTER (simplified) ---------- */
+  footer{
+    border-top:1px solid var(--rule);
+    padding: 80px 0 40px;
+  }
+  .footer-grid{display:grid;grid-template-columns: 2fr 1fr;gap:60px}
+  .foot-brand{font-family:var(--serif);font-size:58px;letter-spacing:-.025em;line-height:1;font-weight:400}
+  .foot-tag{margin-top:18px;color:var(--ink-70);max-width:32ch;font-size:16px;line-height:1.6}
+  .foot-col h5{
+    font-family:var(--label);
+    font-size:11px;letter-spacing:.24em;text-transform:uppercase;
+    color:var(--ink-70);margin-bottom:20px;font-weight:500;
+  }
+  .foot-col a{display:block;padding:7px 0;font-size:15px}
+  .foot-base{
+    margin-top:80px;padding-top:24px;border-top:1px solid var(--rule);
+    display:flex;justify-content:space-between;
+    font-family:var(--label);
+    font-size:10px;color:var(--ink-55);letter-spacing:.22em;text-transform:uppercase;font-weight:500;
+  }
+
+  /* annotations panel */
+  /* ---------- GALLERY (slow horizontal scroll) ---------- */
+  .gallery-section{
+    padding: clamp(80px,8vw,140px) 0;
+    overflow:hidden;
+    background:var(--paper);
+    border-top:1px solid var(--rule);
+    border-bottom:1px solid var(--rule);
+  }
+  .gallery-head{
+    display:flex;justify-content:space-between;align-items:end;
+    margin-bottom: clamp(40px,5vw,72px);
+    padding: 0 var(--pad-x);
+    max-width: var(--max);
+    margin-inline: auto;
+    gap:40px;
+  }
+  .gallery-head h3{
+    font-family:var(--serif);font-weight:400;
+    font-size: clamp(40px, 4.5vw, 72px);
+    line-height:1;letter-spacing:-.028em;
+    max-width:14ch;
+  }
+  .gallery-head h3 em{font-family:var(--accent);font-style:italic;font-weight:400;letter-spacing:-.02em}
+  .gallery-head p{
+    font-size:17px;color:var(--ink-70);max-width:38ch;line-height:1.6;
+  }
+  .gallery-marquee{
+    overflow:hidden;
+    position:relative;
+    cursor:grab;
+  }
+  .gallery-marquee.dragging{cursor:grabbing}
+  .gallery-track{
+    display:flex;
+    gap:24px;
+    width:max-content;
+    animation: galleryScroll 80s linear infinite;
+    will-change: transform;
+    padding: 0 12px;
+  }
+  .gallery-marquee:hover .gallery-track{animation-play-state: paused}
+  @keyframes galleryScroll{
+    from{transform:translateX(0)}
+    to{transform:translateX(50%)}
+  }
+  .gallery-item{
+    flex-shrink:0;
+    width: 420px;
+    height: 540px;
+    background:
+      repeating-linear-gradient(135deg,
+        var(--paper-2) 0 14px,
+        #DDDDDD 14px 15px);
+    border-radius:4px;
+    position:relative;
+    overflow:hidden;
+    border:1px solid var(--rule);
+    transition: transform .6s ease;
+  }
+  .gallery-item:hover{transform: scale(1.02)}
+  .gallery-item.tall{height:620px;width:380px}
+  .gallery-item.wide{width:540px;height:480px}
+  .gallery-item.square{width:480px;height:480px}
+  .gallery-item .visual-tag{
+    position:absolute;left:14px;bottom:14px;
+    background:var(--paper);padding:6px 10px;border-radius:3px;
+    font-family:var(--label);font-size:9px;letter-spacing:.22em;text-transform:uppercase;font-weight:500;
+    color:var(--ink-70);direction:ltr;
+  }
+
+  /* ---------- SCROLL REVEAL ---------- */
+  .reveal{
+    opacity:0;
+    transform: translateY(40px);
+    transition: opacity .9s cubic-bezier(.2,.7,.2,1), transform .9s cubic-bezier(.2,.7,.2,1);
+  }
+  .reveal.in{opacity:1;transform:none}
+
+  @media (max-width: 900px){
+    .gallery-item{width:280px;height:380px}
+    .gallery-item.tall{width:240px;height:420px}
+    .gallery-item.wide{width:340px;height:340px}
+    .gallery-item.square{width:300px;height:300px}
+    .gallery-head{flex-direction:column;align-items:flex-start}
+  }
+
+  /* original panel styles */
+  .design-notes{
+    position:fixed;left:18px;bottom:18px;z-index:50;
+    background:var(--ink);color:var(--paper);
+    padding:14px 22px;border-radius:999px;
+    font-family:var(--label);
+    font-size:11px;letter-spacing:.22em;text-transform:uppercase;
+    font-weight:500;cursor:pointer;
+    box-shadow:0 8px 24px rgba(14,14,14,.25);
+  }
+  .design-notes:hover{opacity:.9}
+  .notes-panel{
+    position:fixed;left:18px;bottom:70px;z-index:50;
+    width:380px;max-width:calc(100vw - 36px);
+    background:var(--paper);
+    border:1px solid var(--rule);
+    border-radius:8px;
+    padding:24px;
+    box-shadow:0 20px 50px rgba(14,14,14,.18);
+    display:none;
+  }
+  .notes-panel.open{display:block}
+  .notes-panel h4{
+    font-family:var(--serif);font-size:28px;letter-spacing:-.02em;margin-bottom:6px;font-weight:400;
+  }
+  .notes-panel .sub{font-family:var(--label);font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--ink-70);margin-bottom:18px;font-weight:500}
+  .swatches{display:flex;gap:8px;margin-bottom:14px}
+  .sw{flex:1;height:42px;border-radius:3px;display:flex;align-items:end;padding:6px 8px;font-family:var(--label);font-size:9px;letter-spacing:.15em;direction:ltr}
+  .notes-panel ul{list-style:none;margin:10px 0 0}
+  .notes-panel li{font-size:14px;padding:4px 0;color:var(--ink-70);line-height:1.5}
+  .notes-panel li b{color:var(--ink);font-weight:600}
+
+  @media (max-width: 900px){
+    .testimonials-grid, .testimonials-row{grid-template-columns:1fr; }
+    .testimonials-row{grid-template-columns: 1fr 1fr}
+    .t-tile.featured{min-height:auto;aspect-ratio:4/5}
+    .hero-content, .section-head, .booking-grid, .footer-grid{grid-template-columns:1fr}
+    .process-grid{grid-template-columns:1fr 1fr}
+    .host-stats{grid-template-columns:1fr}
+    .stat{border-left:0;border-bottom:1px solid rgba(250,250,250,.12);padding-bottom:32px;margin-bottom:32px}
+    .nav-links{display:none}
+  }
+</style>
+</head>
+<body>
+
+<!-- =================== NAV =================== -->
+<nav class="nav">
+  <div class="wrap nav-inner">
+    <div class="brand">Nuovo<span class="dot"></span></div>
+    <div class="nav-links">
+      <a href="#about">מי אני</a>
+      <a href="#how">איך זה עובד</a>
+      <a href="#tracks">מסלולים</a>
+    </div>
+    <div style="display:flex;align-items:center;gap:22px">
+      <div class="lang"><b>HE</b><span>·</span><span>EN</span></div>
+      <a href="#book" class="nav-cta">ליצירת קשר</a>
+    </div>
+  </div>
+</nav>
+
+<!-- =================== HERO (image background + text overlay) =================== -->
+<header class="hero">
+  <div class="hero-image-tag">/hero — chef plating at client's home, full bleed</div>
+  <div class="wrap">
+    <div class="eyebrow">שף פרטי · אצלך בבית</div>
+  </div>
+  <div class="wrap">
+    <div class="hero-content">
+      <h1 class="headline">האירוח הכי טוב<br/><em>הוא בבית.</em></h1>
+      <div>
+        <p class="hero-lede">שף. תפריט שנתפר סביב השולחן שלך. אירוע שאתם מארחים בלי להרים מחבת. אנחנו מביאים את המסעדה - המפתחות נשארים אצלכם.</p>
+        <div class="hero-ctas">
+          <a href="#book" class="btn-primary">
+            להזמנה
+            <span class="arrow">←</span>
+          </a>
+          <a href="#how" class="btn-text">איך זה עובד</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- =================== STATS BAR =================== -->
+<section class="section" style="padding-top:0;padding-bottom:clamp(40px,5vw,80px)">
+  <div class="wrap">
+    <div class="hero-meta">
+      <div><b>14</b>שנה של ניסיון</div>
+      <div><b>+2,400</b>אירועים שאירחנו</div>
+      <div><b>4.96</b>דירוג ממוצע מאורחים</div>
+      <div><b>0</b>כלים שנשאר לשטוף</div>
+    </div>
+  </div>
+</section>
+
+<!-- =================== MARQUEE SLOGAN =================== -->
+<section class="marquee" aria-hidden="true" style="font-family: Assistant">
+  <div class="marquee-track">
+    <span style="font-family: Assistant; justify-content: flex-end">מבושל כאן. נאהב כאן.<span class="dot"></span>שולחן לאנשים שלך.<span class="dot"></span>מגיעים. מארחים. נהנים.<span class="dot"></span>מבושל כאן. נאהב כאן.<span class="dot"></span>שולחן לאנשים שלך.<span class="dot"></span>מגיעים. מארחים. נהנים.<span class="dot"></span></span>
+    <span>מבושל כאן. נאהב כאן.<span class="dot"></span>שולחן לאנשים שלך.<span class="dot"></span>מגיעים. מארחים. נהנים.<span class="dot"></span>מבושל כאן. נאהב כאן.<span class="dot"></span>שולחן לאנשים שלך.<span class="dot"></span>מגיעים. מארחים. נהנים.<span class="dot"></span></span>
+  </div>
+</section>
+
+</section>
+
+<!-- =================== GALLERY (slow horizontal scroll) =================== -->
+<section class="gallery-section">
+  <div class="gallery-head reveal">
+    <h3>אירועים<br/><em>שהיו.</em></h3>
+    <p>מטבחים של לקוחות, מנות לאור נר, רגעים שאנשים מסתכלים אחד על השני. מה שקורה כשהמטבח הופך לבמה.</p>
+  </div>
+
+  <div class="gallery-marquee" id="gallery1">
+    <div class="gallery-track">
+      <div class="gallery-item tall"><span class="visual-tag">/01 — plating</span></div>
+      <div class="gallery-item wide"><span class="visual-tag">/02 — dining room</span></div>
+      <div class="gallery-item"><span class="visual-tag">/03 — the chef</span></div>
+      <div class="gallery-item square"><span class="visual-tag">/04 — detail, sauce</span></div>
+      <div class="gallery-item tall"><span class="visual-tag">/05 — host pours</span></div>
+      <div class="gallery-item wide"><span class="visual-tag">/06 — table candles</span></div>
+      <div class="gallery-item"><span class="visual-tag">/07 — market produce</span></div>
+      <div class="gallery-item square"><span class="visual-tag">/08 — dessert</span></div>
+      <div class="gallery-item tall"><span class="visual-tag">/01 — plating</span></div>
+      <div class="gallery-item wide"><span class="visual-tag">/02 — dining room</span></div>
+      <div class="gallery-item"><span class="visual-tag">/03 — the chef</span></div>
+      <div class="gallery-item square"><span class="visual-tag">/04 — detail, sauce</span></div>
+      <div class="gallery-item tall"><span class="visual-tag">/05 — host pours</span></div>
+      <div class="gallery-item wide"><span class="visual-tag">/06 — table candles</span></div>
+      <div class="gallery-item"><span class="visual-tag">/07 — market produce</span></div>
+      <div class="gallery-item square"><span class="visual-tag">/08 — dessert</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- =================== ABOUT / מי אני =================== -->
+<section id="about" class="section">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <div class="section-num"> מי אני</div>
+        <h2 class="section-title">השף<br/><em>שמגיע אליכם.</em></h2>
+      </div>
+      <p class="section-lede">שנים של ניסיון במטבחים, מאות אירועים - ויחס אישי שמרגישים מהרגע הראשון.</p>
+    </div>
+
+    <div class="about-grid">
+      <div class="about-portrait">
+        <div class="visual-tag">/portrait — chef, 4:5</div>
+      </div>
+      <div class="about-copy" style="font-family: Noto Sans">
+        <p class="about-lead">”לקחתי את הארוחה הכי משעממת<br/>והפכתי אותה לניסוי טעמים.“</p>
+        <p class="about-body">מגיל צעיר האוכל היה חלק ממני. כשנכנסתי לעולם הכושר, הייתי צריך לאכול ”נכון“ - ומשם התחיל הקסם. לקחתי את הארוחה הכי משעממת והפכתי אותה לניסוי טעמים.</p>
+        <p class="about-body">אחרי השחרור מהצבא, מצאתי את עצמי בתוך מטבח של מסעדת שף - ומהר מאוד נמשכתי לעולם הבצקים. עבדתי סביב השעון, ובמקביל התבשל לי רעיון.</p>
+        <p class="about-body">עזבתי הכל, טסתי לאיטליה, ובפינה קטנה בנאפולי הבנתי מי אני. שם נולד השם   - Nuovo. התחדשות באיטלקית, פתיחת דלת חדשה.</p>
+        <p class="about-body">מאז לא הפסקתי לנסוע, ללמוד ולספוג. עברתי ממטבח למטבח, הכרתי פרודוקטים איכותיים במקור שלהם, וקיבלתי השראות קולינריות ממדינות וסגנונות שונים - כל אחת הוסיפה שכבה נוספת לשפה שלי.</p>
+        <p class="about-body">מאז המשכתי לחקור, להעביר סדנאות והתמחויות, ולעבוד לצד שפים כמו מושיק רות.</p>
+        <p class="about-body" style="color:var(--ink);font-style:italic;font-family:var(--serif);font-size:24px;font-weight:300;line-height:1.45;letter-spacing:-.015em;max-width:42ch;">כשאני מגיע לאירוע שלך - אני מביא איתי את כל הדרך הזו. כל פרט, כל טעם, כל תשוקה.</p>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =================== SECTION 2 — PROCESS =================== -->
+<section id="how" class="section">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <div class="section-num">/ 02 — האירוע</div>
+        <h2 class="section-title">ארבעה שלבים.<br/><em>לילה אחד בלתי נשכח.</em></h2>
+      </div>
+      <p class="section-lede">בלי שיחות טעימה, בלי טופס משעמם. בוחרים מסלול תאריך ואנחנו דואגים לכל השאר - מהבצק הראשון ועד הכוס האחרונה במקומה.</p>
+    </div>
+
+    <div class="process-grid">
+      <div class="step">
+        <div class="step-icon">i</div>
+        <div class="step-num"> הזמנה</div>
+        <div class="step-title">תאריך,<br/>שף,<br/>אווירה.</div>
+        <p class="step-body">בוחרים תאריך. כותבים כמה כיסאות, אלרגיות, ואם האירוע שקט או רעשני. שתי דקות, לא יותר.</p>
+      </div>
+      <div class="step">
+        <div class="step-icon">ii</div>
+        <div class="step-num"> תפריט</div>
+        <div class="step-title">תפריט<br/>שלא<br/>כתבתם.</div>
+        <p class="step-body">השף שולח הצעת ארבע מנות מהשוק של השבוע. אישור בלחיצה, החלפה של כל מנה לפי הטעם שלכם.</p>
+      </div>
+      <div class="step">
+        <div class="step-icon">iii</div>
+        <div class="step-num"> בישול</div>
+        <div class="step-title">הוא מבשל.<br/>אתם<br/>מוזגים יין.</div>
+        <p class="step-body">השף מגיע 90 דקות לפני, עם הכל איתו. אתם מקבלים את האורחים בדלת; המטבח מסתדר לבדו.</p>
+      </div>
+      <div class="step">
+        <div class="step-icon">iv</div>
+        <div class="step-num"> שקט</div>
+        <div class="step-title">מטבח<br/>נקי יותר<br/>ממה שהיה.</div>
+        <p class="step-body">כלים שטופים, משטחים מנוגבים, שאריות במקרר עם תיוג. מתעוררים לאותו מטבח — בלי החרדה.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =================== SECTION 3 — TESTIMONIALS =================== -->
+<section class="host section">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <div class="section-num">
+</div>
+        <h2 class="section-title">המארחים<br/><em>מספרים.</em></h2>
+      </div>
+      <p class="section-lede">לחץ לנגן להשמעת הסאונד של האירוע. מה שהמארחים אמרו בעצמם, במטבח שלהם, אחרי שהאורחים הלכו.</p>
+    </div>
+
+    <!-- main grid: featured video + side cards -->
+    <div class="testimonials-grid">
+      <div class="t-tile featured video-placeholder" data-video="" data-name="משפחת מ." data-meta="יום הולדת, רמת גן · 14 אורחים">
+        <div class="t-badge">▶ video · with sound</div>
+        <div class="play-button" aria-label="הפעל וידאו"></div>
+        <div class="t-overlay">
+          <div class="t-name">”הדבר הטוב ביותר זה שלא הייתי במטבח כל הערב.“</div>
+          <div class="t-meta">משפחת מ. · יום הולדת, רמת גן · 14 אורחים</div>
+        </div>
+      </div>
+
+      <div class="testimonials-side">
+        <div class="t-tile quote">
+          <div>
+            <div style="font-size:14px;letter-spacing:.15em;direction:ltr;margin-bottom:14px">★★★★★</div>
+            <p class="t-quote-text">”הלכתי לישון אחרי עשר ימי שההורים שלי מדברים על התה של מיכל.“</p>
+          </div>
+          <div class="t-quote-foot">
+            <div class="t-quote-avatar"></div>
+            <div>
+              <div class="t-quote-name">דנה ו.</div>
+              <div class="t-quote-meta">ארוחת שישי, רמת השרון</div>
+            </div>
+            <div class="t-quote-rating"></div>
+          </div>
+        </div>
+
+        <div class="t-tile video-placeholder" data-video="" data-name="איטן ומיכל" data-meta="הצעת נישואין · 22 אורחים">
+          <div class="t-badge">▶ video</div>
+          <div class="play-button" aria-label="הפעל וידאו"></div>
+          <div class="t-overlay">
+            <div class="t-name">איטן ומיכל</div>
+            <div class="t-meta">הצעת נישואין · 22 אורחים</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- second row: 4 smaller cards -->
+    <div class="testimonials-row">
+      <div class="t-tile video-placeholder" data-video="" data-name="רותם ב." data-meta="ברית מצוה · 8 אורחים">
+        <div class="t-badge">▶ short</div>
+        <div class="play-button" aria-label="הפעל וידאו"></div>
+        <div class="t-overlay">
+          <div class="t-name">רותם ב.</div>
+          <div class="t-meta">ברית מצוה · 8 אורחים</div>
+        </div>
+      </div>
+
+      <div class="t-tile quote">
+        <div>
+          <div style="font-size:14px;letter-spacing:.15em;direction:ltr;margin-bottom:14px">★★★★★</div>
+          <p class="t-quote-text" style="font-size:20px">”קמה מהדברים שמשתנים את המשמעות של ”שף לאירוע“. זה אחד מהם.“</p>
+        </div>
+        <div class="t-quote-foot">
+          <div class="t-quote-avatar"></div>
+          <div>
+            <div class="t-quote-name">עמית ל.</div>
+            <div class="t-quote-meta">אירוע עסקי, הרצליה</div>
+          </div>
+          <div class="t-quote-rating"></div>
+        </div>
+      </div>
+
+      <div class="t-tile video-placeholder" data-video="" data-name="אליעור ס." data-meta="יום הולדת 40, לוד·80">
+        <div class="t-badge">▶ short</div>
+        <div class="play-button" aria-label="הפעל וידאו"></div>
+        <div class="t-overlay">
+          <div class="t-name">אליעור ס.</div>
+          <div class="t-meta">יום הולדת 40 · לוד 80</div>
+        </div>
+      </div>
+
+      <div class="t-tile quote">
+        <div>
+          <div style="font-size:14px;letter-spacing:.15em;direction:ltr;margin-bottom:14px">★★★★★</div>
+          <p class="t-quote-text" style="font-size:20px">”הזמנו את נובו לליל הולדת שלי. האורחים עדיין מדברים על המנות.“</p>
+        </div>
+        <div class="t-quote-foot">
+          <div class="t-quote-avatar"></div>
+          <div>
+            <div class="t-quote-name">מיכל א.</div>
+            <div class="t-quote-meta">יום הולדת לאשתו</div>
+          </div>
+          <div class="t-quote-rating"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Video lightbox -->
+<div class="video-lightbox" id="videoLightbox" role="dialog" aria-modal="true">
+  <div class="close" id="videoClose" aria-label="סגור">×</div>
+  <video id="lightboxVideo" controls playsinline></video>
+</div>
+
+<!-- =================== TRACKS / מסלולים =================== -->
+<section id="tracks" class="section">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <div class="section-num">/ 04 — מסלולים</div>
+        <h2 class="section-title">שלושה מסלולים.<br/><em>שף אחד.</em></h2>
+      </div>
+      <p class="section-lede">שלוש דרכים שונות לארח. בוחרים את הסגנון, ואנחנו בונים את התפריט מסביב לאירוע, השוק והאורחים. אפשר להוסיף מנות, להחליף, להתאים — נחזור איתכם על הכול.</p>
+    </div>
+
+    <div class="tracks-grid">
+      <div class="track">
+        <div class="track-num">01</div>
+        <div class="track-name">בופה</div>
+        <div class="track-desc">מינימום 20 אורחים · אירוע גדול · ללא הגשה אישית</div>
+        <ul class="track-menu">
+          <li>תפריט בופה רחב — האורחים מגישים לעצמם</li>
+          <li>הקמת הבופה והסטיילינג</li>
+          <li>הזנה ותחזוקה לאורך האירוע</li>
+          <li>פינוי וניקיון מלא אחרי</li>
+          <li>המתאים ביותר לאירועים גדולים — חתונות קטנות, ימי הולדת, אירועי חברה</li>
+        </ul>
+        <div class="track-price"><span style="font-family: var(--display); font-size: 22px; font-style: italic">הכי משתלם לאירועים גדולים</span></div>
+        <a href="#book" class="track-cta" data-track="בופה — מינימום 20 אורחים" data-min-budget="0">להזמין ←</a>
+      </div>
+
+      <div class="track track-featured">
+        <div class="track-badge">הכי מבוקש</div>
+        <div class="track-num">02</div>
+        <div class="track-name">אירוע שף</div>
+        <div class="track-desc">השף בבית · הגשה אישית · ניתן להוסיף מנות</div>
+        <ul class="track-menu">
+          <li>שף ראשי במטבח שלכם — בישול חי</li>
+          <li>תפריט קבוע של מנות · אפשר להרחיב</li>
+          <li><em>תוספות בתשלום:</em> מנת דגים, מנת בשר, מנה ראשונה, קינוח מורחב</li>
+          <li>מצרכים טריים מהשוק</li>
+          <li>הגשה אישית לכל אורח</li>
+          <li>ניקיון מלא אחרי</li>
+        </ul>
+        <div class="track-price"><span style="font-family: var(--display); font-size: 22px; font-style: italic; color:var(--paper)">החוויה האישית. המסלול שאנשים זוכרים.</span></div>
+        <a href="#book" class="track-cta" data-track="אירוע שף — בבית, הגשה אישית" data-min-budget="500">להזמין ←</a>
+      </div>
+
+      <div class="track">
+        <div class="track-num">03</div>
+        <div class="track-name">מנות ביס</div>
+        <div class="track-desc">קוקטייל יוקרתי · מנות אצבע · אירוע עמידה</div>
+        <ul class="track-menu">
+          <li>מבחר רחב של מנות ביס וקנפה</li>
+          <li>הגשה אישית במגשי כסף לאורחים</li>
+          <li>סטיילינג ועיצוב הגשה</li>
+          <li>מתאים לקוקטיילים, אירועי השקה, חגיגות יוקרה</li>
+          <li>מינימום 15 אורחים</li>
+          <li>ניקיון מלא אחרי</li>
+        </ul>
+        <div class="track-price"><span style="font-family: var(--display); font-size: 22px; font-style: italic">חוויה יוקרתית · אירוע עומד</span></div>
+        <a href="#book" class="track-cta" data-track="מנות ביס — קוקטייל, מינימום 15 אורחים" data-min-budget="700">להזמין ←</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =================== SECTION 4 — BOOKING =================== -->
+<section id="book" class="section" style="background:var(--paper)">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <div class="section-num">/ 05 — הזמנה</div>
+        <h2 class="section-title">ספרו לנו<br/><em>על הערב.</em></h2>
+      </div>
+      <p class="section-lede">לפני שנחזור אליכם, אנחנו רוצים להבין את האירוע — לא טופס בירוקרטי, סיפור קצר. ככל שתשתפו יותר, השף יוכל להציע תפריט מדויק יותר ולחזור עם הצעה אמיתית, לא רק שאלות.</p>
+    </div>
+
+    <div class="booking-grid">
+      <div>
+        <div class="booking-headline" style="font-size:clamp(40px,4.5vw,68px);max-width:14ch">פחות שיחות.<br/><em>יותר תכנון.</em></div>
+        <p style="margin-top:32px;font-size:17px;line-height:1.7;color:var(--ink-70);max-width:34ch">השף לא יתקשר לשאול שאלות. הוא יחזור אליכם עם הצעת תפריט מותאמת — אחרי שקרא את מה שכתבתם.</p>
+
+        <ul style="list-style:none;margin-top:36px;padding-top:24px;border-top:1px solid var(--rule);display:flex;flex-direction:column;gap:14px;font-size:15px;color:var(--ink-70);line-height:1.5">
+          <li style="display:flex;gap:14px;align-items:baseline"><span style="font-family:var(--accent);font-style:italic;color:var(--ink);font-size:20px;min-width:24px">i</span><span>הטופס נשלח ישירות לדור — לא מוקד שיחות.</span></li>
+          <li style="display:flex;gap:14px;align-items:baseline"><span style="font-family:var(--accent);font-style:italic;color:var(--ink);font-size:20px;min-width:24px">ii</span><span>נחזור תוך 24 שעות, במייל או בוואטסאפ — איך שתבחרו.</span></li>
+          <li style="display:flex;gap:14px;align-items:baseline"><span style="font-family:var(--accent);font-style:italic;color:var(--ink);font-size:20px;min-width:24px">iii</span><span>אין כרטיס אשראי. סוגרים אחרי שראיתם את התפריט.</span></li>
+        </ul>
+      </div>
+
+      <form id="bookingForm" class="booking-form">
+
+        <!-- ============== SECTION 01 — האירוע ============== -->
+        <div class="form-section">
+          <div class="form-section-head">
+            <div class="form-section-num">01</div>
+            <div class="form-section-title">האירוע</div>
+          </div>
+
+          <div class="field">
+            <label>מסלול</label>
+            <select name="track" data-required>
+              <option value="">— בחרו מסלול —</option>
+              <option>אירוע שף — בבית, הגשה אישית</option>
+              <option>בופה — מינימום 20 אורחים</option>
+              <option>מנות ביס — קוקטייל, מינימום 15 אורחים</option>
+              <option>עוד לא יודע — תייעצו לי</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label>שעה של היום</label>
+            <div class="segmented" data-segmented="time">
+              <div class="seg" data-value="צהריים">צהריים</div>
+              <div class="seg" data-value="ערב מוקדם">ערב מוקדם</div>
+              <div class="seg" data-value="ערב מאוחר">ערב מאוחר</div>
+            </div>
+          </div>
+
+          <div class="field-row">
+            <div class="field">
+              <label>תאריך</label>
+              <input type="text" name="date" data-required placeholder="שבת, 13 ביוני" />
+            </div>
+            <div class="field">
+              <label>אורחים</label>
+              <input type="text" name="guests" data-required placeholder="6" />
+            </div>
+          </div>
+
+          <div class="field">
+            <label>שכונה / עיר</label>
+            <input type="text" name="location" data-required placeholder="תל אביב צפון, רמת השרון, חיפה…" />
+          </div>
+        </div>
+
+        <!-- ============== SECTION 02 — הסיפור ============== -->
+        <div class="form-section">
+          <div class="form-section-head">
+            <div class="form-section-num">02</div>
+            <div class="form-section-title">הסיפור</div>
+          </div>
+          <p class="form-section-hint">החלק הכי חשוב. אוהד (השף) קורא כל מילה - וזה מה שמאפשר לו להגיע מוכן, עם תפריט שמתאים בדיוק לערב שלכם, בלי שיחות מקדימות.</p>
+
+          <div class="field">
+            <label>סוג האירוע</label>
+            <div class="chip-row" data-chips="occasion">
+              <button type="button" class="chip">יום הולדת</button>
+              <button type="button" class="chip">יום נישואין</button>
+              <button type="button" class="chip">הצעת נישואין</button>
+              <button type="button" class="chip">ארוחה משפחתית</button>
+              <button type="button" class="chip">אירוע עסקי</button>
+              <button type="button" class="chip">חברים</button>
+              <button type="button" class="chip">סתם בא לי</button>
+            </div>
+          </div>
+
+          <div class="field">
+            <label>האווירה שאתם מדמיינים</label>
+            <div class="chip-row" data-chips="vibe">
+              <button type="button" class="chip">אינטימי, שקט</button>
+              <button type="button" class="chip">חגיגי, רעשני</button>
+              <button type="button" class="chip">קליל, צוחקים הרבה</button>
+              <button type="button" class="chip">מהודר, רומנטי</button>
+              <button type="button" class="chip">כמו בבית של סבתא</button>
+            </div>
+          </div>
+
+          <div class="field">
+            <label>ספרו לנו על הערב — מי האנשים, מה החגיגה, מה תרצו שיקרה</label>
+            <textarea name="story" rows="6" placeholder="לדוגמה: אנחנו זוג, חוגגים 5 שנים יחד, מזמינים שמונה חברים הכי קרובים. אנחנו אוהבים אוכל איטלקי, אבל אנה הצמחונית והיא לא אוכלת גלוטן. רוצים שזה יהיה ערב שלא נשכח — לאו דווקא ארוך, אבל איכותי."></textarea>
+            <div class="field-helper">ככל שתספרו יותר — <em>הכי חשוב מה האירוע, מי האורחים, מה אתם רוצים שירגישו</em> — כך התפריט שנחזור איתו יהיה מדויק.</div>
+          </div>
+
+          <div class="field">
+            <label>טווח תקציב לאדם</label>
+            <div class="chip-row" data-chips="budget" data-single>
+              <button type="button" class="chip" data-min="300">₪300–500</button>
+              <button type="button" class="chip" data-min="500">₪500–700</button>
+              <button type="button" class="chip" data-min="700">₪700–1,000</button>
+              <button type="button" class="chip" data-min="1000">₪1,000+</button>
+              <button type="button" class="chip" data-min="0">לא בטוח</button>
+            </div>
+            <div class="field-helper" id="budgetHint" style="display:none"></div>
+          </div>
+        </div>
+
+        <!-- ============== SECTION 03 — פרטים שעוזרים ============== -->
+        <div class="form-section">
+          <div class="form-section-head">
+            <div class="form-section-num">03</div>
+            <div class="form-section-title">פרטים שעוזרים</div>
+          </div>
+          <p class="form-section-hint">לא חובה, אבל חוסך לכם שיחה אחרי.</p>
+
+          <div class="field">
+            <label>אלרגיות / דיאטות בקבוצה</label>
+            <div class="chip-row" data-chips="diet">
+              <button type="button" class="chip">צמחוני</button>
+              <button type="button" class="chip">טבעוני</button>
+              <button type="button" class="chip">ללא גלוטן</button>
+              <button type="button" class="chip">ללא חלב</button>
+              <button type="button" class="chip">כשר</button>
+              <button type="button" class="chip">אגוזים</button>
+              <button type="button" class="chip">פירות ים</button>
+              <button type="button" class="chip">הכל אוכלים</button>
+            </div>
+          </div>
+
+          <div class="field">
+            <label>שתייה</label>
+            <div class="chip-row" data-chips="drinks">
+              <button type="button" class="chip">יין מלווה (אנחנו נתאים)</button>
+              <button type="button" class="chip">קוקטיילים</button>
+              <button type="button" class="chip">יש לנו כבר משלנו</button>
+              <button type="button" class="chip">בלי אלכוהול</button>
+            </div>
+          </div>
+
+          <div class="field">
+            <label>משהו עוד שכדאי לדור לדעת?</label>
+            <textarea name="extra" rows="3" placeholder="ילדים שאוכלים איתנו, מטבח קטן, שכנים רגישים, הפתעה לאחד האורחים…" style="min-height:90px"></textarea>
+          </div>
+        </div>
+
+        <!-- ============== SECTION 04 — איך נחזור ============== -->
+        <div class="form-section">
+          <div class="form-section-head">
+            <div class="form-section-num">04</div>
+            <div class="form-section-title">איך נחזור אליכם</div>
+          </div>
+
+          <div class="field-row">
+            <div class="field">
+              <label>שם מלא</label>
+              <input type="text" name="name" data-required placeholder="דנה כהן" />
+            </div>
+            <div class="field">
+              <label>טלפון</label>
+              <input type="tel" name="phone" data-required placeholder="050-000-0000" style="direction:ltr;text-align:right" />
+            </div>
+          </div>
+
+          <div class="field">
+            <label>מייל</label>
+            <input type="email" name="email" placeholder="dana@example.com" style="direction:ltr;text-align:right" />
+          </div>
+
+          <div class="field">
+            <label>איך הכי נוח לכם שנחזור</label>
+            <div class="segmented" data-segmented="channel" style="grid-template-columns:repeat(3,1fr)">
+              <div class="seg" data-value="וואטסאפ">וואטסאפ</div>
+              <div class="seg" data-value="טלפון">שיחת טלפון</div>
+              <div class="seg" data-value="מייל">מייל</div>
+            </div>
+          </div>
+
+          <div class="field">
+            <label>שעות נוחות</label>
+            <div class="segmented" data-segmented="hours" style="grid-template-columns:repeat(3,1fr)">
+              <div class="seg" data-value="בוקר">בוקר</div>
+              <div class="seg" data-value="צהריים">צהריים</div>
+              <div class="seg" data-value="ערב">ערב</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ============== COMPLETION METER ============== -->
+        <div class="meter" id="meter">
+          <div class="meter-head">
+            <span>השלמות הסיפור</span>
+            <span class="pct" id="meterPct">0%</span>
+          </div>
+          <div class="meter-bar"><div class="meter-fill" id="meterFill"></div></div>
+          <div class="meter-note" id="meterNote">התחילו למלא — <em>כל פרט נוסף עוזר לדור להגיע מוכן.</em></div>
+        </div>
+
+        <button type="submit" class="submit" style="margin-top:24px">שליחה לדור &nbsp;·&nbsp; חוזרים תוך 24 שעות</button>
+        <div class="booking-fine">ללא כרטיס אשראי · ללא התחייבות · רק אחרי שראיתם את התפריט</div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- =================== FOOTER =================== -->
+<footer>
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <p class="foot-tag" style="font-size:22px;line-height:1.5;max-width:34ch;color:var(--ink)">שף פרטי, במטבח שלכם, לאנשים שאתם כבר אוהבים להאכיל.</p>
+      </div>
+      <div class="foot-col">
+        <h5>יצירת קשר</h5>
+        <a href="https://instagram.com/" target="_blank" rel="noopener">
+          <span style="display:inline-flex;align-items:center;gap:10px">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".8" fill="currentColor"/></svg>
+            @nuovo.chef
+          </span>
+        </a>
+        <a href="mailto:hello@nuovo.co.il" style="direction:ltr;text-align:right;display:block">hello@nuovo.co.il</a>
+        <a href="tel:+972500000000" style="direction:ltr;text-align:right;display:block">+972 50 000 0000</a>
+      </div>
+    </div>
+    <div class="foot-base">
+      <div>© Nuovo studio · תשפ״ו</div>
+      <div>תל אביב · ירושלים · חיפה</div>
+    </div>
+  </div>
+</footer>
+
+<!-- =================== DESIGN NOTES PANEL =================== -->
+<button class="design-notes" onclick="document.querySelector('.notes-panel').classList.toggle('open')">הערות עיצוב</button>
+<aside class="notes-panel">
+  <h4>שולחן — כיוון עיצובי</h4>
+  <div class="sub">לוקסוס נגיש · קלאסי · שחור־לבן</div>
+
+  <div class="sub" style="margin-bottom:8px">פלטה</div>
+  <div class="swatches">
+    <div class="sw" style="background:#FAFAFA;color:#0A0A0A;border:1px solid #eee">#FAFAFA</div>
+    <div class="sw" style="background:#EEEEEE;color:#0A0A0A">#EEEEEE</div>
+    <div class="sw" style="background:#0A0A0A;color:#FAFAFA">#0A0A0A</div>
+  </div>
+
+  <div class="sub" style="margin:14px 0 6px">טיפוגרפיה</div>
+  <ul>
+    <li><b>Frank Ruhl Libre</b> — כותרות בעברית</li>
+    <li><b>Cormorant Garamond</b> — נטוי לטיני · המותג</li>
+    <li><b>Josefin Sans</b> — תוויות, נווט, כפתורים (UPPERCASE)</li>
+    <li><b>Assistant</b> — גוף הטקסט</li>
+  </ul>
+
+  <div class="sub" style="margin:14px 0 6px">סלוגנים</div>
+  <ul>
+    <li><b>מבושל כאן. נאהב כאן.</b> — מקומי</li>
+    <li><b>שולחן לאנשים שלך.</b> — אינטימי</li>
+    <li><b>מגיעים. מארחים. נהנים.</b> — קל</li>
+  </ul>
+
+  <div class="sub" style="margin:14px 0 6px">מבנה העמוד</div>
+  <ul>
+    <li><b>01</b> פתיחה — כותרת + CTA</li>
+    <li><b>02</b> תהליך — הזמנה / תפריט / בישול / שקט</li>
+    <li><b>03</b> חוויית המארח</li>
+    <li><b>04</b> הזמנה — שלושה אירועים + טופס</li>
+  </ul>
+</aside>
+
+<script>
+  // Video lightbox
+  (function(){
+    const lightbox = document.getElementById('videoLightbox');
+    const video = document.getElementById('lightboxVideo');
+    const closeBtn = document.getElementById('videoClose');
+    if(!lightbox) return;
+    document.querySelectorAll('.t-tile[data-video]').forEach(tile => {
+      tile.style.cursor = 'pointer';
+      tile.addEventListener('click', () => {
+        const src = tile.getAttribute('data-video');
+        if(src){
+          video.src = src;
+          video.muted = false;
+          video.play().catch(()=>{});
+        }
+        lightbox.classList.add('open');
+      });
+    });
+    function closeLightbox(){
+      lightbox.classList.remove('open');
+      video.pause();
+      video.removeAttribute('src');
+      video.load();
+    }
+    closeBtn.addEventListener('click', closeLightbox);
+    lightbox.addEventListener('click', (e) => {
+      if(e.target === lightbox) closeLightbox();
+    });
+    document.addEventListener('keydown', (e) => {
+      if(e.key === 'Escape') closeLightbox();
+    });
+  })();
+  // Scroll reveal
+  (function(){
+    const selectors = '.reveal, .about-portrait, .host-card, .track, .step, .stat, .booking-form, .section-title, .booking-headline';
+    const els = document.querySelectorAll(selectors);
+    els.forEach(el => el.classList.add('reveal'));
+    if(!('IntersectionObserver' in window)){
+      els.forEach(el => el.classList.add('in'));
+      return;
+    }
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if(entry.isIntersecting){
+          entry.target.classList.add('in');
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+    els.forEach(el => io.observe(el));
+  })();
+
+  // Hero parallax
+  (function(){
+    const hero = document.querySelector('.hero');
+    if(!hero) return;
+    let ticking = false;
+    window.addEventListener('scroll', () => {
+      if(!ticking){
+        window.requestAnimationFrame(() => {
+          const y = window.scrollY;
+          if(y < window.innerHeight){
+            hero.style.backgroundPositionY = (y * 0.35) + 'px';
+          }
+          ticking = false;
+        });
+        ticking = true;
+      }
+    }, { passive:true });
+  })();
+
+  // Booking form — chips, segmented, completion meter, submit summary
+  (function(){
+    const form = document.getElementById('bookingForm');
+    if(!form) return;
+
+    // Chip groups (multi-select by default; single-select if [data-single] is set)
+    form.querySelectorAll('[data-chips]').forEach(group => {
+      const single = group.hasAttribute('data-single');
+      group.addEventListener('click', e => {
+        const chip = e.target.closest('.chip');
+        if(!chip) return;
+        e.preventDefault();
+        if(chip.classList.contains('disabled')) return;
+        if(single){
+          group.querySelectorAll('.chip').forEach(c => c.classList.remove('active'));
+          chip.classList.add('active');
+        } else {
+          chip.classList.toggle('active');
+        }
+        updateMeter();
+      });
+    });
+
+    // Segmented controls (single-select)
+    form.querySelectorAll('[data-segmented]').forEach(group => {
+      group.addEventListener('click', e => {
+        const seg = e.target.closest('.seg');
+        if(!seg) return;
+        group.querySelectorAll('.seg').forEach(s => s.classList.remove('active'));
+        seg.classList.add('active');
+        updateMeter();
+      });
+    });
+
+    // Inputs & textareas drive the meter too
+    form.addEventListener('input', updateMeter);
+
+    // Track → budget gating.
+    // Each track has a minimum sensible price-per-person. We disable any budget
+    // chip whose ceiling is below the track's floor — e.g. choosing "הלילה הארוך"
+    // hides the ₪300–500 and ₪500–700 chips so the customer can't pair a
+    // 7-course chef's-choice menu with an unrealistic budget.
+    const trackMinima = {
+      'בופה — מינימום 20 אורחים':              0,
+      'אירוע שף — בבית, הגשה אישית':           500,
+      'מנות ביס — קוקטייל, מינימום 15 אורחים': 700,
+      'עוד לא יודע — תייעצו לי':               0
+    };
+
+    // Each budget chip's UPPER end. If upper <= track floor, it's not realistic.
+    const chipCeil = {
+      '300': 500,    // ₪300–500
+      '500': 700,    // ₪500–700
+      '700': 1000,   // ₪700–1,000
+      '1000': 9999,  // ₪1,000+
+      '0': 9999      // "לא בטוח" — always available
+    };
+
+    const budgetGroup = form.querySelector('[data-chips="budget"]');
+    const budgetHint  = document.getElementById('budgetHint');
+    const trackSelect = form.querySelector('[name="track"]');
+
+    function applyTrackConstraint(trackValue){
+      const floor = trackMinima[trackValue] ?? 0;
+      let anyDisabled = false;
+
+      budgetGroup.querySelectorAll('.chip').forEach(chip => {
+        const min = chip.getAttribute('data-min') || '0';
+        const ceil = chipCeil[min] ?? 9999;
+        const disabled = ceil <= floor;
+        chip.classList.toggle('disabled', disabled);
+        if(disabled){
+          anyDisabled = true;
+          if(chip.classList.contains('active')) chip.classList.remove('active');
+        }
+      });
+
+      if(anyDisabled){
+        budgetHint.style.display = 'block';
+        budgetHint.innerHTML = '<em>מסלול זה</em> מתחיל ב־₪' + floor + ' לאדם — סוננו אפשרויות נמוכות יותר.';
+      } else {
+        budgetHint.style.display = 'none';
+      }
+    }
+
+    // Hook the track <select>
+    if(trackSelect){
+      trackSelect.addEventListener('change', () => {
+        applyTrackConstraint(trackSelect.value);
+        updateMeter();
+      });
+    }
+
+    // Hook the track-cards "להזמין" buttons → preselect track + scroll + flash
+    document.querySelectorAll('.track-cta[data-track]').forEach(cta => {
+      cta.addEventListener('click', e => {
+        const value = cta.getAttribute('data-track');
+        // Match against the existing <option> textContent so we don't need ids
+        const opt = [...trackSelect.options].find(o => o.value === value || o.textContent.trim() === value);
+        if(opt){
+          trackSelect.value = opt.value || opt.textContent;
+          // Briefly highlight the select so the customer sees what happened
+          trackSelect.style.transition = 'background .25s, border-color .25s';
+          trackSelect.style.background = 'var(--cream)';
+          trackSelect.style.borderColor = 'var(--ink)';
+          setTimeout(() => {
+            trackSelect.style.background = '';
+            trackSelect.style.borderColor = '';
+          }, 1200);
+        }
+        applyTrackConstraint(value);
+        updateMeter();
+        // Native #book anchor still scrolls
+      });
+    });
+
+    // Completion meter — weighted scoring.
+    // The "story" textarea is the lead-quality signal — weighted heavily.
+    function updateMeter(){
+      let score = 0;
+      const max = 100;
+
+      // Essentials (40 pts)
+      if(form.querySelector('[name="track"]')?.value) score += 6;
+      if(form.querySelector('[data-segmented="time"] .active')) score += 4;
+      if(form.querySelector('[name="date"]')?.value.trim()) score += 8;
+      if(form.querySelector('[name="guests"]')?.value.trim()) score += 6;
+      if(form.querySelector('[name="location"]')?.value.trim()) score += 6;
+      if(form.querySelector('[name="name"]')?.value.trim()) score += 5;
+      if(form.querySelector('[name="phone"]')?.value.trim()) score += 5;
+
+      // Context (30 pts)
+      if(form.querySelector('[data-chips="occasion"] .active')) score += 6;
+      if(form.querySelector('[data-chips="vibe"] .active')) score += 6;
+      if(form.querySelector('[data-chips="budget"] .active')) score += 10;
+      if(form.querySelector('[data-chips="diet"] .active')) score += 4;
+      if(form.querySelector('[data-chips="drinks"] .active')) score += 4;
+
+      // Story — the hot-lead signal (30 pts, scales with detail)
+      const story = (form.querySelector('[name="story"]')?.value || '').trim();
+      if(story.length > 0)   score += 5;
+      if(story.length > 40)  score += 5;
+      if(story.length > 120) score += 8;
+      if(story.length > 220) score += 7;
+      if(story.length > 350) score += 5;
+
+      // Extras
+      const extra = (form.querySelector('[name="extra"]')?.value || '').trim();
+      if(extra.length > 20) score += 3;
+      if(form.querySelector('[name="email"]')?.value.trim()) score += 2;
+      if(form.querySelector('[data-segmented="channel"] .active')) score += 2;
+      if(form.querySelector('[data-segmented="hours"] .active')) score += 2;
+
+      const pct = Math.min(max, score);
+      document.getElementById('meterFill').style.width = pct + '%';
+      document.getElementById('meterPct').textContent = pct + '%';
+
+      const note = document.getElementById('meterNote');
+      if(pct < 25){
+        note.innerHTML = 'התחילו למלא — <em>כל פרט נוסף עוזר לדור להגיע מוכן.</em>';
+      } else if(pct < 55){
+        note.innerHTML = '<em>טוב.</em> עוד כמה פרטים על האווירה והאורחים — והתפריט יהיה הרבה יותר מדויק.';
+      } else if(pct < 80){
+        note.innerHTML = '<em>מצוין.</em> כבר יש לדור תמונה ברורה. עוד שני דברים והתפריט יהיה תפור עליכם.';
+      } else {
+        note.innerHTML = '<em>מושלם.</em> דור יחזור אליכם עם הצעת תפריט אמיתית — לא שאלות.';
+      }
+    }
+    updateMeter();
+
+    // Submit — collect everything and show a friendly confirmation
+    form.addEventListener('submit', e => {
+      e.preventDefault();
+      const btn = form.querySelector('.submit');
+      btn.textContent = 'נשלח — דור יחזור אליכם תוך 24 שעות';
+      btn.style.opacity = '.7';
+      btn.disabled = true;
+
+      // (In production: collect chip selections + form data into a payload,
+      // POST to your endpoint, append the completion % as a lead-score signal.)
+    });
+  })();
+
+  // Gallery drag
+  (function(){
+    const m = document.getElementById('gallery1');
+    if(!m) return;
+    const t = m.querySelector('.gallery-track');
+    let isDown = false, startX = 0, manualOffset = 0;
+    m.addEventListener('mousedown', (e) => {
+      isDown = true;
+      m.classList.add('dragging');
+      startX = e.pageX;
+    });
+    window.addEventListener('mouseup', () => {
+      if(!isDown) return;
+      isDown = false;
+      m.classList.remove('dragging');
+    });
+    window.addEventListener('mousemove', (e) => {
+      if(!isDown) return;
+      const walk = (e.pageX - startX);
+      manualOffset += walk;
+      t.style.transform = `translateX(${manualOffset}px)`;
+      t.style.animation = 'none';
+      startX = e.pageX;
+    });
+  })();
+</script>
+
+</body>
+</html>

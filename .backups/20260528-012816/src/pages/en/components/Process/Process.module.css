@@ -1,0 +1,59 @@
+.section{padding-top:clamp(90px,10vw,160px); padding-bottom:clamp(90px,10vw,160px)}
+.wrap{
+  max-width:var(--max);
+  margin:0 auto;
+  padding-left:var(--pad-x);
+  padding-right:var(--pad-x);
+}
+.head{
+  display:grid;grid-template-columns:1fr 1.6fr;gap:60px;
+  margin-bottom: clamp(60px, 7vw, 100px);
+  align-items:end;
+}
+.num{
+  font-family:"SF Mono", ui-monospace, Menlo, monospace;
+  font-size:13px;color:var(--clay-deep);letter-spacing:.1em;
+}
+.title{
+  font-family:var(--serif);font-weight:500;
+  font-size:clamp(44px,5.4vw,84px);
+  line-height:1;letter-spacing:-.02em;
+  margin-top:18px;
+}
+.lede{
+  font-size:18px;line-height:1.55;color:var(--espresso-60);
+  max-width: 46ch;justify-self:end;
+}
+.grid{
+  display:grid;grid-template-columns:repeat(4, 1fr);
+  border-top:1px solid var(--espresso);
+}
+.step{
+  border-right:1px solid var(--rule);
+  padding:36px 28px 40px 0;
+  display:flex;flex-direction:column;gap:18px;
+  min-height: 360px;
+}
+.step:last-child{border-right:0}
+.stepNum{
+  font-family:"SF Mono", ui-monospace, monospace;
+  font-size:12px;letter-spacing:.1em;color:var(--clay-deep);
+}
+.stepTitle{
+  font-family:var(--serif);font-weight:500;
+  font-size:42px;letter-spacing:-.015em;line-height:1.05;
+}
+.stepBody{
+  font-size:15px;line-height:1.55;color:var(--espresso-60);
+  margin-top:auto;max-width:32ch;
+}
+.stepIcon{
+  width:46px;height:46px;border:1px solid var(--espresso);border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-family:var(--serif);font-style:italic;font-size:22px;
+}
+
+@media (max-width: 900px){
+  .head{grid-template-columns:1fr}
+  .grid{grid-template-columns:1fr 1fr}
+}

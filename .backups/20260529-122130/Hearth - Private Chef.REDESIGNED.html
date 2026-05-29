@@ -1,0 +1,717 @@
+ג<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Hearth — Private Chef</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ivory:#F5EEE3;
+    --ivory-2:#ECE3D3;
+    --paper:#FBF7EF;
+    --clay:#B5573B;
+    --clay-deep:#8E4127;
+    --espresso:#1C1510;
+    --ink:#0C0907;
+    --espresso-60:rgba(28,21,16,.6);
+    --espresso-30:rgba(28,21,16,.16);
+    --rule:rgba(28,21,16,.1);
+    --rule-strong:rgba(12,9,7,.9);
+
+    --serif:"Cormorant Garamond", Georgia, serif;
+    --sans:"DM Sans", system-ui, sans-serif;
+
+    --pad-x: clamp(24px, 5vw, 96px);
+    --max: 1320px;
+    --ease: cubic-bezier(.2,.7,.2,1);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{background:var(--ivory);color:var(--espresso);font-family:var(--sans);-webkit-font-smoothing:antialiased;font-synthesis:none;text-rendering:optimizeLegibility}
+  body{font-size:16px;line-height:1.5;letter-spacing:-.004em}
+  img{display:block;max-width:100%}
+  a{color:inherit;text-decoration:none}
+  button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+  ::selection{background:var(--clay);color:var(--ivory)}
+
+  .wrap{max-width:var(--max);margin:0 auto;padding-left:var(--pad-x);padding-right:var(--pad-x)}
+
+  /* ---------- NAV ---------- */
+  .nav{
+    position:sticky;top:0;z-index:10;
+    background:rgba(245,238,227,.82);
+    backdrop-filter:saturate(140%) blur(12px);
+    -webkit-backdrop-filter:saturate(140%) blur(12px);
+    border-bottom:1px solid var(--rule);
+  }
+  .nav-inner{
+    display:flex;align-items:center;justify-content:space-between;
+    height:74px;
+  }
+  .brand{
+    font-family:var(--serif);
+    font-weight:600;
+    font-size:28px;
+    letter-spacing:-.02em;
+    color:var(--ink);
+    display:flex;align-items:baseline;gap:7px;
+  }
+  .brand .dot{width:6px;height:6px;border-radius:50%;background:var(--clay);display:inline-block;transform:translateY(-2px)}
+  .nav-links{
+    display:flex;gap:40px;
+    font-size:12px;letter-spacing:.16em;text-transform:uppercase;
+    color:var(--espresso-60);font-weight:500;
+  }
+  .nav-links a{position:relative;padding:4px 0;transition:color .18s var(--ease)}
+  .nav-links a::after{
+    content:"";position:absolute;left:0;right:0;bottom:0;height:1px;
+    background:var(--ink);transform:scaleX(0);transform-origin:right center;
+    transition:transform .2s var(--ease);
+  }
+  .nav-links a:hover{color:var(--ink)}
+  .nav-links a:hover::after{transform:scaleX(1);transform-origin:left center}
+  .nav-cta{
+    font-size:12px;letter-spacing:.16em;text-transform:uppercase;font-weight:600;
+    padding:12px 22px;border:1px solid var(--ink);border-radius:2px;
+    transition:background .18s var(--ease), color .18s var(--ease);
+  }
+  .nav-cta:hover{background:var(--ink);color:var(--ivory)}
+
+  /* ---------- HERO ---------- */
+  .hero{
+    padding-top: clamp(56px, 8vw, 128px);
+    padding-bottom: clamp(60px, 7vw, 110px);
+  }
+  .hero-grid{
+    display:grid;
+    grid-template-columns: 1.08fr .92fr;
+    gap: clamp(40px, 5vw, 88px);
+    align-items:end;
+  }
+  .eyebrow{
+    font-size:11px;letter-spacing:.28em;text-transform:uppercase;
+    color:var(--clay-deep);font-weight:600;
+    display:flex;align-items:center;gap:14px;
+  }
+  .eyebrow::before{content:"";width:34px;height:1px;background:var(--clay-deep)}
+  h1.headline{
+    font-family:var(--serif);
+    font-weight:500;
+    font-size: clamp(56px, 8.6vw, 140px);
+    line-height:.9;
+    letter-spacing:-.04em;
+    margin-top:26px;
+    color:var(--ink);
+  }
+  h1.headline em{
+    font-style:normal;font-weight:400;color:var(--clay);
+  }
+  .hero-lede{
+    margin-top:34px;
+    font-size:18px;line-height:1.6;
+    color:var(--espresso-60);
+    max-width: 40ch;
+  }
+  .hero-ctas{
+    margin-top:42px;
+    display:flex;align-items:center;gap:24px;flex-wrap:wrap;
+  }
+  .btn-primary{
+    background:var(--ink);color:var(--ivory);
+    padding:18px 28px;border-radius:2px;
+    font-size:13px;letter-spacing:.12em;text-transform:uppercase;font-weight:600;
+    display:inline-flex;align-items:center;gap:14px;
+    transition:transform .18s var(--ease), background .18s var(--ease);
+  }
+  .btn-primary:hover{background:var(--clay-deep);transform:translateY(-2px)}
+  .btn-primary .arrow{
+    width:20px;height:20px;border-radius:50%;background:var(--clay);
+    display:inline-flex;align-items:center;justify-content:center;
+    font-size:11px;transition:transform .18s var(--ease);
+  }
+  .btn-primary:hover .arrow{transform:translateX(3px)}
+  .btn-text{
+    font-size:13px;letter-spacing:.1em;text-transform:uppercase;font-weight:600;
+    color:var(--ink);
+    border-bottom:1px solid var(--ink);padding-bottom:5px;
+    transition:opacity .18s var(--ease);
+  }
+  .btn-text:hover{opacity:.55}
+
+  .hero-visual{
+    position:relative;
+    aspect-ratio: 4/5;
+    border-radius:3px;
+    overflow:hidden;
+    background:
+      repeating-linear-gradient(135deg,
+        var(--ivory-2) 0 14px,
+        #E2D6C0 14px 15px);
+    border:1px solid var(--rule);
+  }
+  .visual-tag{
+    position:absolute;left:16px;bottom:16px;
+    font-family: "SF Mono", ui-monospace, Menlo, monospace;
+    font-size:10px; letter-spacing:.04em;
+    color:var(--espresso-60);
+    background:var(--paper);padding:7px 11px;border-radius:2px;
+    border:1px solid var(--rule);
+  }
+  .hero-meta{
+    display:flex;justify-content:space-between;align-items:end;gap:24px;
+    margin-top:56px;
+    border-top:1px solid var(--rule-strong);
+    padding-top:24px;
+    font-size:12px;letter-spacing:.06em;color:var(--espresso-60);text-transform:uppercase;
+  }
+  .hero-meta b{color:var(--ink);font-weight:500;display:block;font-size:30px;font-family:var(--serif);margin-bottom:6px;letter-spacing:-.02em;text-transform:none}
+
+  /* ---------- MARQUEE SLOGAN ---------- */
+  .marquee{
+    border-top:1px solid var(--rule-strong);
+    border-bottom:1px solid var(--rule-strong);
+    overflow:hidden;
+    background:var(--ivory);
+  }
+  .marquee-track{
+    display:flex;gap:56px;
+    padding:22px 0;
+    white-space:nowrap;
+    font-family:var(--serif);font-style:italic;font-weight:500;
+    font-size:30px;letter-spacing:-.01em;
+    color:var(--ink);
+    animation: slide 44s linear infinite;
+  }
+  .marquee-track span{display:inline-flex;align-items:center;gap:56px}
+  .marquee-track .dot{
+    width:6px;height:6px;border-radius:50%;background:var(--clay);
+    display:inline-block;
+  }
+  @keyframes slide{
+    from{transform:translateX(0)}
+    to{transform:translateX(-50%)}
+  }
+
+  /* ---------- SECTION HEADER ---------- */
+  .section{padding-top:clamp(88px,9vw,150px); padding-bottom:clamp(88px,9vw,150px)}
+  .section-head{
+    display:grid;grid-template-columns:1fr 1.55fr;gap:56px;
+    margin-bottom: clamp(56px, 6vw, 92px);
+    align-items:end;
+  }
+  .section-num{
+    font-family:"SF Mono", ui-monospace, Menlo, monospace;
+    font-size:12px;color:var(--clay-deep);letter-spacing:.12em;text-transform:uppercase;
+  }
+  .section-title{
+    font-family:var(--serif);font-weight:500;
+    font-size:clamp(44px,5.6vw,88px);
+    line-height:.98;letter-spacing:-.03em;
+    margin-top:18px;color:var(--ink);
+  }
+  .section-lede{
+    font-size:17px;line-height:1.6;color:var(--espresso-60);
+    max-width: 46ch;justify-self:end;
+  }
+
+  /* ---------- PROCESS (Sec 2) ---------- */
+  .process-grid{
+    display:grid;grid-template-columns:repeat(4, 1fr);
+    border-top:1px solid var(--rule-strong);
+  }
+  .step{
+    border-right:1px solid var(--rule);
+    padding:34px 28px 38px 0;
+    display:flex;flex-direction:column;gap:18px;
+    min-height: 360px;
+    transition:background .2s var(--ease);
+  }
+  .step:last-child{border-right:0}
+  .step:hover{background:var(--paper)}
+  .step-num{
+    font-family:"SF Mono", ui-monospace, monospace;
+    font-size:11px;letter-spacing:.12em;color:var(--clay-deep);text-transform:uppercase;
+  }
+  .step-title{
+    font-family:var(--serif);font-weight:500;
+    font-size:40px;letter-spacing:-.025em;line-height:1.04;color:var(--ink);
+  }
+  .step-body{
+    font-size:14px;line-height:1.6;color:var(--espresso-60);
+    margin-top:auto;max-width:32ch;
+  }
+  .step-icon{
+    width:44px;height:44px;border:1px solid var(--ink);border-radius:50%;
+    display:flex;align-items:center;justify-content:center;
+    font-family:var(--serif);font-style:italic;font-size:20px;color:var(--ink);
+  }
+
+  /* ---------- HOST EXPERIENCE (Sec 3) ---------- */
+  .host{
+    background:var(--ink);color:var(--ivory);
+  }
+  .host .section-title{color:var(--ivory)}
+  .host .section-lede{color:rgba(245,238,227,.62)}
+  .host .section-num{color:#E69A7C}
+  .host-layout{
+    display:grid;grid-template-columns: 1.1fr .9fr;
+    gap: clamp(40px,6vw,96px);
+    align-items:center;
+  }
+  .host-quote{
+    font-family:var(--serif);font-style:italic;
+    font-size:clamp(36px,3.8vw,58px);
+    line-height:1.1;letter-spacing:-.02em;
+    font-weight:400;color:var(--ivory);
+  }
+  .host-quote .clay{color:#E69A7C}
+  .host-byline{
+    margin-top:34px;
+    display:flex;align-items:center;gap:18px;
+    font-size:12px;letter-spacing:.16em;text-transform:uppercase;
+    color:rgba(245,238,227,.55);
+  }
+  .byline-dash{width:30px;height:1px;background:rgba(245,238,227,.4)}
+
+  .host-card{
+    aspect-ratio: 4/5;border-radius:3px;overflow:hidden;
+    background:
+      repeating-linear-gradient(135deg,
+        #2a211c 0 14px,
+        #33271f 14px 15px);
+    border:1px solid rgba(245,238,227,.12);
+    position:relative;
+  }
+  .host-card .visual-tag{
+    background:#2a211c;color:rgba(245,238,227,.7);border-color:rgba(245,238,227,.14);
+  }
+
+  .host-stats{
+    margin-top:80px;
+    display:grid;grid-template-columns:repeat(3,1fr);
+    border-top:1px solid rgba(245,238,227,.22);
+  }
+  .stat{
+    padding:34px 0 0;
+    border-right:1px solid rgba(245,238,227,.12);
+    padding-right:32px;
+  }
+  .stat:last-child{border-right:0}
+  .stat-num{
+    font-family:var(--serif);font-size:60px;letter-spacing:-.03em;
+    color:#E69A7C;line-height:1;
+  }
+  .stat-label{
+    margin-top:14px;
+    font-size:13px;color:rgba(245,238,227,.7);max-width:30ch;line-height:1.55;
+  }
+
+  /* ---------- BOOKING (Sec 4) ---------- */
+  .booking-grid{
+    display:grid;grid-template-columns:1.05fr .95fr;
+    gap: clamp(40px,6vw,96px);
+    align-items:start;
+  }
+  .booking-headline{
+    font-family:var(--serif);font-weight:500;
+    font-size:clamp(56px,7.2vw,112px);
+    line-height:.92;letter-spacing:-.035em;color:var(--ink);
+  }
+  .booking-headline em{font-style:italic;color:var(--clay)}
+  .booking-form{
+    background:var(--paper);
+    border-radius:4px;
+    padding: clamp(28px,3.5vw,48px);
+    border:1px solid var(--rule);
+  }
+  .field{margin-bottom:22px}
+  .field label{
+    display:block;
+    font-size:11px;letter-spacing:.14em;text-transform:uppercase;
+    color:var(--espresso-60);margin-bottom:10px;font-weight:600;
+  }
+  .field input, .field select{
+    width:100%;background:transparent;border:0;border-bottom:1px solid var(--espresso-30);
+    padding:10px 0 14px;font:inherit;color:var(--ink);font-size:18px;
+    font-family:var(--serif);
+    transition:border-color .18s var(--ease);
+  }
+  .field input:focus, .field select:focus{outline:none;border-color:var(--ink)}
+  .field input::placeholder{color:var(--espresso-30)}
+  .field-row{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+  .submit{
+    width:100%;background:var(--clay);color:var(--ivory);
+    padding:20px;border-radius:2px;margin-top:12px;
+    font-size:13px;letter-spacing:.12em;text-transform:uppercase;font-weight:600;
+    transition:background .18s var(--ease), transform .18s var(--ease);
+  }
+  .submit:hover{background:var(--clay-deep);transform:translateY(-2px)}
+  .booking-fine{
+    margin-top:16px;text-align:center;
+    font-size:12px;color:var(--espresso-60);
+  }
+
+  .booking-list{
+    margin-top:48px;
+    border-top:1px solid var(--rule-strong);
+  }
+  .booking-list-row{
+    display:grid;grid-template-columns:.5fr 1fr 1fr auto;
+    align-items:center;gap:28px;
+    padding:22px 0;
+    border-bottom:1px solid var(--rule);
+    font-size:15px;
+    transition:padding-left .2s var(--ease);
+  }
+  .booking-list-row:hover{padding-left:10px}
+  .booking-list-row .num{
+    font-family:"SF Mono",monospace;font-size:11px;color:var(--clay-deep);letter-spacing:.12em;
+  }
+  .booking-list-row .name{font-family:var(--serif);font-size:22px;letter-spacing:-.02em;color:var(--ink)}
+  .booking-list-row .detail{color:var(--espresso-60)}
+  .booking-list-row .price{font-family:var(--serif);font-size:22px;color:var(--ink)}
+
+  /* ---------- FOOTER ---------- */
+  footer{
+    border-top:1px solid var(--rule-strong);
+    padding: 76px 0 36px;
+  }
+  .footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:40px}
+  .foot-brand{font-family:var(--serif);font-size:52px;letter-spacing:-.03em;line-height:1;color:var(--ink)}
+  .foot-tag{margin-top:18px;color:var(--espresso-60);max-width:30ch;font-size:15px;line-height:1.55}
+  .foot-col h5{
+    font-size:11px;letter-spacing:.16em;text-transform:uppercase;
+    color:var(--espresso-60);margin-bottom:18px;font-weight:600;
+  }
+  .foot-col a{display:block;padding:6px 0;font-size:15px;color:var(--espresso-60);transition:color .18s var(--ease)}
+  .foot-col a:hover{color:var(--ink)}
+  .foot-base{
+    margin-top:76px;padding-top:24px;border-top:1px solid var(--rule);
+    display:flex;justify-content:space-between;
+    font-size:11px;color:var(--espresso-60);letter-spacing:.1em;text-transform:uppercase;
+  }
+
+  /* annotations panel */
+  .design-notes{
+    position:fixed;right:18px;bottom:18px;z-index:50;
+    background:var(--ink);color:var(--ivory);
+    padding:13px 18px;border-radius:2px;
+    font-size:11px;letter-spacing:.14em;text-transform:uppercase;
+    font-weight:600;cursor:pointer;
+    box-shadow:0 10px 30px rgba(12,9,7,.28);
+    transition:background .18s var(--ease), transform .18s var(--ease);
+  }
+  .design-notes:hover{background:var(--clay-deep);transform:translateY(-2px)}
+  .notes-panel{
+    position:fixed;right:18px;bottom:66px;z-index:50;
+    width:380px;max-width:calc(100vw - 36px);
+    background:var(--paper);
+    border:1px solid var(--rule);
+    border-radius:6px;
+    padding:24px;
+    box-shadow:0 24px 60px rgba(12,9,7,.2);
+    display:none;
+  }
+  .notes-panel.open{display:block}
+  .notes-panel h4{
+    font-family:var(--serif);font-size:24px;letter-spacing:-.02em;margin-bottom:6px;color:var(--ink);
+  }
+  .notes-panel .sub{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--espresso-60);margin-bottom:18px}
+  .swatches{display:flex;gap:8px;margin-bottom:14px}
+  .sw{flex:1;height:42px;border-radius:3px;display:flex;align-items:end;padding:6px 8px;font-size:10px;font-family:"SF Mono",monospace}
+  .notes-panel ul{list-style:none;margin:10px 0 0}
+  .notes-panel li{font-size:13px;padding:4px 0;color:var(--espresso-60)}
+  .notes-panel li b{color:var(--ink);font-weight:600}
+
+  @media (max-width: 900px){
+    .hero-grid, .section-head, .host-layout, .booking-grid, .footer-grid{grid-template-columns:1fr}
+    .process-grid{grid-template-columns:1fr 1fr}
+    .host-stats{grid-template-columns:1fr}
+    .stat{border-right:0;border-bottom:1px solid rgba(245,238,227,.12);padding-bottom:32px;margin-bottom:32px}
+    .nav-links{display:none}
+  }
+</style>
+</head>
+<body>
+
+<!-- =================== NAV =================== -->
+<nav class="nav">
+  <div class="wrap nav-inner">
+    <div class="brand">Hearth<span class="dot"></span></div>
+    <div class="nav-links">
+      <a href="#">The Evening</a>
+      <a href="#">Chefs</a>
+      <a href="#">Menus</a>
+      <a href="#">Journal</a>
+    </div>
+    <a href="#book" class="nav-cta">Reserve</a>
+  </div>
+</nav>
+
+<!-- =================== HERO =================== -->
+<header class="hero">
+  <div class="wrap">
+    <div class="hero-grid">
+      <div>
+        <div class="eyebrow">Private Chef · At Home</div>
+        <h1 class="headline">Your kitchen<br/>is the <em>destination.</em></h1>
+        <p class="hero-lede">A chef. A menu shaped around your table. An evening you host without lifting a pan. We bring the restaurant; you keep the keys.</p>
+        <div class="hero-ctas">
+          <a href="#book" class="btn-primary">
+            Reserve an evening
+            <span class="arrow">→</span>
+          </a>
+          <a href="#how" class="btn-text">How it works</a>
+        </div>
+      </div>
+      <div>
+        <div class="hero-visual">
+          <div class="visual-tag">/hero — chef plating at client's island, warm light, 4:5</div>
+        </div>
+      </div>
+    </div>
+    <div class="hero-meta">
+      <div><b>14</b>Chefs in your neighborhood</div>
+      <div><b>2,400+</b>Evenings hosted at home</div>
+      <div><b>4.96</b>Average guest rating</div>
+      <div><b>0</b>Dishes left for you to wash</div>
+    </div>
+  </div>
+</header>
+
+<!-- =================== MARQUEE SLOGAN =================== -->
+<section class="marquee" aria-hidden="true">
+  <div class="marquee-track">
+    <span>Cooked here. Loved here.<span class="dot"></span>A table for your people.<span class="dot"></span>Arrive. Host. Enjoy.<span class="dot"></span>Cooked here. Loved here.<span class="dot"></span>A table for your people.<span class="dot"></span>Arrive. Host. Enjoy.<span class="dot"></span></span>
+    <span>Cooked here. Loved here.<span class="dot"></span>A table for your people.<span class="dot"></span>Arrive. Host. Enjoy.<span class="dot"></span>Cooked here. Loved here.<span class="dot"></span>A table for your people.<span class="dot"></span>Arrive. Host. Enjoy.<span class="dot"></span></span>
+  </div>
+</section>
+
+<!-- =================== SECTION 2 — PROCESS =================== -->
+<section id="how" class="section">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <div class="section-num">/ 01 — The evening</div>
+        <h2 class="section-title">Four steps.<br/>One unforgettable night.</h2>
+      </div>
+      <p class="section-lede">No tasting calls, no clipboard. You choose a chef, we handle the rest — from the first sourdough to the last glass back in the cupboard.</p>
+    </div>
+
+    <div class="process-grid">
+      <div class="step">
+        <div class="step-icon">i</div>
+        <div class="step-num">01 / Book</div>
+        <div class="step-title">A date,<br/>a chef,<br/>a vibe.</div>
+        <p class="step-body">Pick a Friday. Tell us how many seats, any allergies, and whether it's quiet or boisterous. Two minutes.</p>
+      </div>
+      <div class="step">
+        <div class="step-icon">ii</div>
+        <div class="step-num">02 / Menu</div>
+        <div class="step-title">A menu<br/>you didn't<br/>write.</div>
+        <p class="step-body">Your chef sends a four-course proposal sourced from this week's market. Approve in a tap, swap anything you'd like.</p>
+      </div>
+      <div class="step">
+        <div class="step-icon">iii</div>
+        <div class="step-num">03 / Cook</div>
+        <div class="step-title">They cook.<br/>You pour<br/>the wine.</div>
+        <p class="step-body">Chef arrives 90 minutes ahead with everything in tow. You greet your guests; the kitchen handles itself.</p>
+      </div>
+      <div class="step">
+        <div class="step-icon">iv</div>
+        <div class="step-num">04 / Quiet</div>
+        <div class="step-title">A kitchen<br/>cleaner<br/>than before.</div>
+        <p class="step-body">Dishes washed, surfaces wiped, leftovers labeled in the fridge. You wake up to the same kitchen — minus the dread.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =================== SECTION 3 — HOST EXPERIENCE =================== -->
+<section class="host section">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <div class="section-num">/ 02 — The host</div>
+        <h2 class="section-title">You sit down<br/>for your own party.</h2>
+      </div>
+      <p class="section-lede">Most "experiences" make the host run the show. Hearth flips it — the chef is the staff, the kitchen is the stage, and you're a guest at your own table.</p>
+    </div>
+
+    <div class="host-layout">
+      <div>
+        <div class="host-quote">
+          "I haven't sat down at my <span class="clay">own</span> dinner in eleven years.<br/>Last Saturday I did. Twice."
+        </div>
+        <div class="host-byline">
+          <span class="byline-dash"></span>
+          <span>Maya R. · Hosted six, Brooklyn</span>
+        </div>
+      </div>
+      <div class="host-card">
+        <div class="visual-tag">/host — wide shot, dining room, candles lit, 4:5</div>
+      </div>
+    </div>
+
+    <div class="host-stats">
+      <div class="stat">
+        <div class="stat-num">0&nbsp;hrs</div>
+        <div class="stat-label">Time you spend prepping, plating, or apologizing for the kitchen.</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">90&nbsp;min</div>
+        <div class="stat-label">From chef's first knock to first course on the table.</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">1&nbsp;mile</div>
+        <div class="stat-label">Average distance from your chef. Local hands, local markets.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =================== SECTION 4 — BOOKING =================== -->
+<section id="book" class="section" style="background:var(--ivory)">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <div class="section-num">/ 03 — Reserve</div>
+        <h2 class="section-title">Open<br/>your kitchen.</h2>
+      </div>
+      <p class="section-lede">Tell us when. We'll match you with two chefs nearby, free, within the hour. No commitment until you say go.</p>
+    </div>
+
+    <div class="booking-grid">
+      <div>
+        <div class="booking-headline">Saturday,<br/>seven sharp,<br/><em>your place.</em></div>
+        <div class="booking-list">
+          <div class="booking-list-row">
+            <div class="num">01</div>
+            <div class="name">The Weeknight</div>
+            <div class="detail">3 courses · up to 6 guests</div>
+            <div class="price">from $95/pp</div>
+          </div>
+          <div class="booking-list-row">
+            <div class="num">02</div>
+            <div class="name">The Table</div>
+            <div class="detail">4 courses · pairings · up to 10</div>
+            <div class="price">from $165/pp</div>
+          </div>
+          <div class="booking-list-row">
+            <div class="num">03</div>
+            <div class="name">The Long Night</div>
+            <div class="detail">7 courses · chef's choice · up to 14</div>
+            <div class="price">from $245/pp</div>
+          </div>
+        </div>
+      </div>
+
+      <form class="booking-form" onsubmit="event.preventDefault();this.querySelector('.submit').textContent='Sent — we\\'ll be in touch'">
+        <div class="field">
+          <label>The evening</label>
+          <select>
+            <option>The Table — 4 courses, pairings</option>
+            <option>The Weeknight — 3 courses</option>
+            <option>The Long Night — 7 courses</option>
+          </select>
+        </div>
+        <div class="field-row">
+          <div class="field">
+            <label>Date</label>
+            <input type="text" value="Sat, 13 June" />
+          </div>
+          <div class="field">
+            <label>Guests</label>
+            <input type="text" value="6" />
+          </div>
+        </div>
+        <div class="field">
+          <label>Postcode</label>
+          <input type="text" placeholder="So we can match a local chef" />
+        </div>
+        <div class="field">
+          <label>The occasion (optional)</label>
+          <input type="text" placeholder="A birthday, a Tuesday, an apology…" />
+        </div>
+        <button type="submit" class="submit">Match me with a chef &nbsp;·&nbsp; free</button>
+        <div class="booking-fine">No card needed. You confirm after you've seen the menu.</div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- =================== FOOTER =================== -->
+<footer>
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <div class="foot-brand">Hearth<span style="color:var(--clay)">.</span></div>
+        <p class="foot-tag">A private chef, in your kitchen, for the people you already love feeding.</p>
+      </div>
+      <div class="foot-col">
+        <h5>The Evening</h5>
+        <a href="#">How it works</a>
+        <a href="#">Menus</a>
+        <a href="#">Pricing</a>
+        <a href="#">Gift an evening</a>
+      </div>
+      <div class="foot-col">
+        <h5>Chefs</h5>
+        <a href="#">Meet the chefs</a>
+        <a href="#">Become a chef</a>
+        <a href="#">Our standards</a>
+      </div>
+      <div class="foot-col">
+        <h5>Hearth</h5>
+        <a href="#">Journal</a>
+        <a href="#">Press</a>
+        <a href="#">Contact</a>
+      </div>
+    </div>
+    <div class="foot-base">
+      <div>© Hearth Studio, MMXXVI</div>
+      <div>Brooklyn · Los Angeles · Lisbon</div>
+    </div>
+  </div>
+</footer>
+
+<!-- =================== DESIGN NOTES PANEL =================== -->
+<button class="design-notes" onclick="document.querySelector('.notes-panel').classList.toggle('open')">Design notes</button>
+<aside class="notes-panel">
+  <h4>Hearth — visual direction</h4>
+  <div class="sub">Accessible luxury · warm · editorial</div>
+
+  <div class="sub" style="margin-bottom:8px">Palette</div>
+  <div class="swatches">
+    <div class="sw" style="background:#F4EDE2;color:#2A211C">#F4EDE2</div>
+    <div class="sw" style="background:#B5573B;color:#F4EDE2">#B5573B</div>
+    <div class="sw" style="background:#2A211C;color:#F4EDE2">#2A211C</div>
+  </div>
+
+  <div class="sub" style="margin:14px 0 6px">Type</div>
+  <ul>
+    <li><b>Cormorant Garamond</b> — display & quotes</li>
+    <li><b>Manrope</b> — UI, body, micro</li>
+    <li>Italic clay accents do the emotional lifting</li>
+  </ul>
+
+  <div class="sub" style="margin:14px 0 6px">Microcopy slogans</div>
+  <ul>
+    <li><b>Cooked here. Loved here.</b> — local</li>
+    <li><b>A table for your people.</b> — intimate</li>
+    <li><b>Arrive. Host. Enjoy.</b> — effortless</li>
+  </ul>
+
+  <div class="sub" style="margin:14px 0 6px">Page flow</div>
+  <ul>
+    <li><b>01</b> Hero — headline + reserve CTA</li>
+    <li><b>02</b> Process — Book / Menu / Cook / Quiet</li>
+    <li><b>03</b> Host experience — guest at your own table</li>
+    <li><b>04</b> Booking — three evenings + form</li>
+  </ul>
+</aside>
+
+</body>
+</html>

@@ -1,0 +1,147 @@
+.tiers{
+  margin-top:18px;
+  display:flex;flex-direction:column;gap:14px;
+}
+.intro{
+  font-size:14px;color:var(--ink-70);line-height:1.6;
+  padding:14px 16px;
+  background:var(--paper);
+  border:1px dashed var(--ink-30);
+  border-radius:6px;
+}
+.intro em{font-family:var(--accent);font-style:italic;color:var(--ink)}
+
+.tier{
+  background:var(--paper);
+  border:1px solid var(--ink-30);
+  border-radius:8px;
+  padding:20px 22px;
+}
+.tierBase{background:#fff}
+.tierExt{background:#fbfbfb}
+.tierFish{
+  background: linear-gradient(180deg, #0e0e0e 0%, #050505 100%);
+  color:var(--paper);
+  border-color:#0a0a0a;
+}
+.tierFish .colTitle,
+.tierFish .list,
+.tierFish .helper{color:var(--paper)}
+.tierFish .tierName{color:var(--paper)}
+.tierFish .tierBadge{
+  background:var(--paper);color:var(--ink);
+}
+
+.tierHead{
+  display:flex;align-items:center;gap:12px;
+  margin-bottom:14px;
+}
+.tierBadge{
+  font-family:var(--label);
+  font-size:10px;letter-spacing:.22em;text-transform:uppercase;font-weight:500;
+  padding:5px 10px;border-radius:999px;
+  background:var(--ink);color:var(--paper);
+}
+.tierName{
+  font-family:var(--serif);
+  font-size:19px;font-weight:400;letter-spacing:-.012em;
+  color:var(--ink);
+  flex:1;
+}
+.remove{
+  background:transparent;border:1px solid currentColor;
+  color:inherit;opacity:.55;
+  width:28px;height:28px;border-radius:999px;
+  font-size:18px;line-height:1;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  transition:opacity .2s;
+}
+.remove:hover{opacity:1}
+
+.cols{
+  display:grid;grid-template-columns:1fr 1fr;gap:24px;
+}
+@media (max-width:600px){
+  .cols{grid-template-columns:1fr}
+}
+.colTitle{
+  font-family:var(--label);
+  font-size:11px;letter-spacing:.2em;text-transform:uppercase;font-weight:500;
+  color:var(--ink-70);margin-bottom:10px;
+}
+.list{
+  list-style:none;padding:0;margin:0;
+  display:flex;flex-direction:column;gap:8px;
+  font-size:15px;color:var(--ink);line-height:1.5;
+}
+.list li{
+  padding-right:14px;position:relative;
+}
+.list li::before{
+  content:'·';
+  position:absolute;right:0;top:-2px;
+  font-size:18px;color:var(--ink-55);
+}
+
+.chipRow{
+  display:flex;flex-wrap:wrap;gap:8px;
+  margin-bottom:10px;
+}
+.chip{
+  font-family:var(--label);
+  font-size:11px;letter-spacing:.18em;text-transform:uppercase;font-weight:500;
+  padding:11px 16px;
+  border:1px solid var(--ink-30);
+  border-radius:999px;
+  background:transparent;color:var(--ink-70);
+  cursor:pointer;
+  transition: transform .2s ease, background .2s, color .2s, border-color .2s;
+}
+.chip:hover{border-color:var(--ink);color:var(--ink);transform:translateY(-1px)}
+.chipActive{
+  background:var(--ink);color:var(--paper);border-color:var(--ink);
+}
+.chipActive:hover{color:var(--paper)}
+.chipDim{opacity:.4}
+
+.helper{
+  font-size:13px;color:var(--ink-55);line-height:1.5;margin-top:8px;
+}
+.helper em{font-family:var(--accent);font-style:italic;color:var(--ink)}
+
+.addBtn{
+  position:relative;
+  display:flex;flex-direction:column;align-items:flex-start;
+  gap:4px;
+  width:100%;
+  padding:18px 22px;
+  background:var(--paper);
+  border:1px dashed var(--ink-30);
+  border-radius:8px;
+  cursor:pointer;
+  text-align:right;
+  transition: border-color .2s, transform .2s, background .2s;
+}
+.addBtn:hover{border-color:var(--ink);transform:translateY(-1px)}
+.addBtnLabel{
+  font-family:var(--serif);
+  font-size:18px;font-weight:400;color:var(--ink);
+}
+.addBtnSub{
+  font-family:var(--label);
+  font-size:10px;letter-spacing:.22em;text-transform:uppercase;font-weight:500;
+  color:var(--ink-55);
+}
+.addBtnPlus{
+  position:absolute;
+  left:22px;top:50%;transform:translateY(-50%);
+  width:36px;height:36px;border-radius:999px;
+  background:var(--ink);color:var(--paper);
+  display:flex;align-items:center;justify-content:center;
+  font-size:22px;line-height:1;
+}
+.addBtnDark{
+  background:linear-gradient(180deg, #fafafa 0%, #f1f1f1 100%);
+  border-style:solid;border-color:#0a0a0a;
+}
+.addBtnDark .addBtnLabel{font-family:var(--accent);font-style:italic;font-size:22px}

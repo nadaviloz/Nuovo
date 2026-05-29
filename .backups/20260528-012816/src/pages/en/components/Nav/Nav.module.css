@@ -1,0 +1,49 @@
+.nav{
+  position:sticky;top:0;z-index:10;
+  background:var(--ivory);
+  border-bottom:1px solid var(--rule);
+  transition: box-shadow .25s ease;
+}
+.scrolled{
+  box-shadow: 0 10px 30px rgba(42,33,28,.08);
+}
+.navInner{
+  display:flex;align-items:center;justify-content:space-between;
+  height:84px;
+  max-width:var(--max);
+  margin:0 auto;
+  padding-left:var(--pad-x);
+  padding-right:var(--pad-x);
+}
+.brand{
+  font-family:var(--serif);
+  font-weight:500;
+  font-size:30px;
+  letter-spacing:-.01em;
+  display:flex;align-items:baseline;gap:8px;
+}
+.dot{width:7px;height:7px;border-radius:50%;background:var(--clay);display:inline-block;transform:translateY(-2px)}
+.navLinks{
+  display:flex;gap:42px;
+  font-size:13px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--espresso-60);font-weight:500;
+}
+.navLinks a:hover{color:var(--espresso)}
+.right{display:flex;align-items:center;gap:22px}
+.lang{
+  font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--espresso-60);
+  display:flex;gap:8px;font-weight:500;
+}
+.lang button{padding:0;font:inherit;color:inherit;letter-spacing:inherit}
+.lang .active{color:var(--espresso);font-weight:600}
+.navCta{
+  font-size:13px;letter-spacing:.14em;text-transform:uppercase;font-weight:600;
+  padding:14px 22px;border:1px solid var(--espresso);border-radius:999px;
+  transition:background .2s, color .2s;
+  display:inline-block;
+}
+.navCta:hover{background:var(--espresso);color:var(--ivory)}
+
+@media (max-width: 900px){
+  .navLinks{display:none}
+}
