@@ -21,19 +21,13 @@
   --pad-x: clamp(24px, 5vw, 96px);
   --max: 1440px;
 
-  background-color: var(--paper);
+  background-color: #E8E8EB !important; /* Cool, non-yellow, architectural grey */
   background-image:
-    linear-gradient(rgba(0,0,0,0.06) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(0,0,0,0.06) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(0,0,0,0.60) 0%, rgba(0,0,0,0) 17%),
-    linear-gradient(to top, rgba(0,0,0,0.60) 0%, rgba(0,0,0,0) 17%),
-    linear-gradient(to right, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0) 13%),
-    linear-gradient(to left, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0) 13%),
-    radial-gradient(ellipse at center, rgba(0,0,0,0) 28%, rgba(0,0,0,0.50) 72%, rgba(0,0,0,0.92) 100%);
-  background-size: 64px 64px, 64px 64px, 100% 100%, 100% 100%, 100% 100%, 100% 100%, 100% 100%;
-  background-position: top left, top left, center, center, center, center, center;
-  background-repeat: repeat, repeat, no-repeat, no-repeat, no-repeat, no-repeat, no-repeat;
-  background-attachment: fixed;
+    /* Perfect 1px circles (not squares), using a neutral cool-grey fill */
+    url("data:image/svg+xml,%3Csvg width='32' height='32' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='1' cy='1' r='0.5' fill='%23B0B0B7'/%3E%3C/svg%3E") !important;
+  background-size: 32px 32px !important;
+  background-position: 0 0 !important;
+  background-attachment: fixed !important;
   color:var(--ink);
   font-family:var(--sans);
   font-synthesis:none;
