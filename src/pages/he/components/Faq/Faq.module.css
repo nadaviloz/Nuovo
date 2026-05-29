@@ -1,5 +1,5 @@
 .host{
-  background:var(--paper);
+  background:transparent;
   padding-top:clamp(70px,8vw,130px);
   padding-bottom:clamp(70px,8vw,130px);
 }

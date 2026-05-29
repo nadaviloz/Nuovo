@@ -1,7 +1,7 @@
 .section{
   padding-top:clamp(90px,10vw,160px);
   padding-bottom:clamp(90px,10vw,160px);
-  background:var(--paper);
+  background:transparent;
 }
 .wrap{
   max-width:var(--max);
