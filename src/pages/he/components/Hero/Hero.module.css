@@ -4,14 +4,12 @@
   min-height: 100vh;
   background-color:#0E0E0E;
   background-image:
-    linear-gradient(rgba(255,255,255,.045) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255,255,255,.045) 1px, transparent 1px),
     radial-gradient(120% 70% at 70% 20%, rgba(8,8,8,0) 0%, rgba(8,8,8,.45) 58%, rgba(8,8,8,.86) 100%),
     linear-gradient(180deg, rgba(8,8,8,.25) 0%, rgba(8,8,8,.55) 55%, rgba(8,8,8,.97) 100%),
     url('/assets/hero-new.jpg');
-  background-size: 62px 62px, 62px 62px, cover, cover, cover;
-  background-position: center, center, center, center, center 30%;
-  background-repeat: repeat, repeat, no-repeat, no-repeat, no-repeat;
+  background-size: cover, cover, cover;
+  background-position: center, center, center 30%;
+  background-repeat: no-repeat, no-repeat, no-repeat;
   padding-top: clamp(40px, 6vw, 80px);
   padding-bottom: clamp(48px, 6vw, 88px);
   color: var(--paper);
