@@ -94,6 +94,25 @@
 @media (max-width: 900px){
   .grid.multi{ grid-template-columns: repeat(2, minmax(0, 1fr)); justify-content:stretch }
 }
-@media (max-width: 480px){
-  .grid.multi{ grid-template-columns: minmax(0, 320px); justify-content:start }
+@media (max-width: 640px){
+  .grid, .grid.multi{
+    display: flex;
+    grid-template-columns: none;
+    flex-direction: row;
+    align-items: stretch;
+    gap: 12px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    margin-inline: calc(var(--pad-x) * -1);
+    padding-inline: var(--pad-x);
+    padding-bottom: 8px;
+    justify-content: flex-start;
+  }
+  .grid::-webkit-scrollbar, .grid.multi::-webkit-scrollbar{ display: none }
+  .card{
+    flex: 0 0 70%;
+    scroll-snap-align: center;
+  }
 }
