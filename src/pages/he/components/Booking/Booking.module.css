@@ -113,13 +113,13 @@
   padding:24px;border-radius:999px;margin-top:24px;
   font-family:var(--label);
   font-size:12px;letter-spacing:.26em;text-transform:uppercase;font-weight:500;
-  transition: transform .35s cubic-bezier(.2,.7,.2,1), box-shadow .35s ease, letter-spacing .35s ease;
+  transition: transform .3s ease, box-shadow .3s ease, letter-spacing .3s ease;
   box-shadow: 0 10px 24px rgba(14,14,14,.22);
 }
 .submit:hover{
-  transform: translateY(-2px);
+  transform: translateY(-3px);
   letter-spacing:.3em;
-  box-shadow: 0 18px 40px rgba(14,14,14,.32);
+  box-shadow: 0 20px 48px rgba(181,87,59,.32), 0 0 0 1px rgba(14,14,14,.06);
 }
 .submit[disabled]{opacity:.7;cursor:default;transform:none;box-shadow:none}
 .fine{

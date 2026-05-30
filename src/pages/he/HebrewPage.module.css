@@ -3,6 +3,8 @@
   --paper-pure:#FFFFFF;
   --paper-2:#EEEEEE;
   --ink:#0A0A0A;
+  --clay:#B5573B;
+  --clay-soft:rgba(181,87,59,.18);
   --ink-70:rgba(10,10,10,.7);
   --ink-55:rgba(10,10,10,.55);
   --ink-30:rgba(10,10,10,.2);
@@ -21,11 +23,11 @@
   --pad-x: clamp(24px, 5vw, 96px);
   --max: 1440px;
 
-  background-color: #E8E8EB !important; /* Cool, non-yellow, architectural grey */
+  background-color: #DCDCE0 !important; /* Darker, concrete industrial grey to stop washout */
   background-image:
-    /* Perfect 1px circles (not squares), using a neutral cool-grey fill */
-    url("data:image/svg+xml,%3Csvg width='32' height='32' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='1' cy='1' r='0.5' fill='%23B0B0B7'/%3E%3C/svg%3E") !important;
-  background-size: 32px 32px !important;
+    /* Heavy micro-noise for a highly visible rough/grindy texture */
+    url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.15'/%3E%3C/svg%3E") !important;
+  background-size: 200px 200px !important;
   background-position: 0 0 !important;
   background-attachment: fixed !important;
   color:var(--ink);
@@ -45,4 +47,50 @@
   margin:0 auto;
   padding-left:var(--pad-x);
   padding-right:var(--pad-x);
+}
+
+/* --- Cinematic section transition: dark wipe + clay accent sweep --- */
+.wipe{
+  position:fixed; inset:0;
+  z-index:90;
+  pointer-events:none;
+  overflow:hidden;
+}
+.wipePanel{
+  position:absolute; inset:0;
+  background: linear-gradient(180deg, #0a0a0f 0%, #050507 100%);
+  transform: translateY(100%);
+  will-change: transform;
+}
+.wipeLine{
+  position:absolute; left:0; right:0; top:0;
+  height:2px;
+  background: linear-gradient(90deg, rgba(181,87,59,0), #B5573B 50%, rgba(181,87,59,0));
+  box-shadow: 0 0 18px rgba(181,87,59,.7);
+  transform: scaleX(0);
+  transform-origin: right center;
+  will-change: transform;
+}
+.wipeRun .wipePanel{
+  animation: wipePanel 950ms cubic-bezier(.77,0,.18,1) both;
+}
+.wipeRun .wipeLine{
+  animation: wipeLine 950ms cubic-bezier(.77,0,.18,1) both;
+}
+@keyframes wipePanel{
+  0%   { transform: translateY(100%); }
+  42%  { transform: translateY(0%);   }
+  58%  { transform: translateY(0%);   }
+  100% { transform: translateY(-100%); }
+}
+@keyframes wipeLine{
+  0%   { transform: scaleX(0); transform-origin: right center; opacity:0; }
+  20%  { opacity:1; }
+  50%  { transform: scaleX(1); transform-origin: right center; opacity:1; }
+  51%  { transform: scaleX(1); transform-origin: left  center; }
+  80%  { opacity:1; }
+  100% { transform: scaleX(0); transform-origin: left  center; opacity:0; }
+}
+@media (prefers-reduced-motion: reduce){
+  .wipePanel, .wipeLine{ animation:none !important; }
 }
