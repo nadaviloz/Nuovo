@@ -44,8 +44,8 @@
     width:min(86vw,420px);
     left:0; right:auto;
     bottom:clamp(8px,4vw,36px);
-    transform:translate(-48%,18%);
-    opacity:.8;
+    transform:translate(-58%,18%);
+    opacity:.88;
   }
 }
 .head{
