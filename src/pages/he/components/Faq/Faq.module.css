@@ -35,16 +35,16 @@
   opacity:.95;
 }
 @media (max-width:900px){
-  /* Keep the dish on phones too — centered low behind the questions as a soft
-     splash, fully visible (not cut) and out of the way of the text. Matches the
-     Process / Tracks mobile peek treatment. */
+  /* On phones the dish anchors to the bottom edge and bleeds partly off the
+     page, so only a soft crescent peeks up below the questions — an editorial
+     splash that stays clear of the text instead of floating behind it. */
   .peek{
     display:block;
-    width:min(74vw,360px);
+    width:min(64vw,300px);
     left:50%; right:auto;
-    bottom:-2%;
-    transform:translate(-50%,0);
-    opacity:.5;
+    bottom:0;
+    transform:translate(-50%,42%);
+    opacity:.45;
   }
 }
 .head{
