@@ -157,4 +157,23 @@
 @media (max-width: 900px){
   .head{grid-template-columns:1fr}
   .grid{grid-template-columns:1fr 1fr}
+  /* The single threaded rail only reaches the first row, so on the 2×2 mobile
+     grid the bottom row (III, IV) had no line. Replace it with a per-step
+     hairline through each icon so every row reads the same. */
+  .grid::before{ display:none; }
+  .step::before{
+    content:"";
+    position:absolute;
+    /* icon vertical centre: step padding-top (72px) + half the 58px icon */
+    top: calc(72px + 29px);
+    left:0; right:0;
+    height:1px;
+    background: linear-gradient(90deg,
+      transparent 0%,
+      rgba(107,68,35,.45) 26%,
+      rgba(139,94,60,.45) 50%,
+      rgba(74,46,18,.45) 74%,
+      transparent 100%);
+    pointer-events:none;
+  }
 }
