@@ -331,33 +331,23 @@
   .track:hover{ transform: translateY(-8px) }
 }
 
-/* ── Mobile: horizontal snap-carousel with peeking partial cards ─── */
+/* ── Mobile: full-width vertical stack so every menu is visible ─── */
 @media (max-width: 900px){
   .head{ grid-template-columns: 1fr }
   .grid{
-    display: flex;
-    grid-template-columns: none;
-    /* full-width carousel (grid now sits directly in the section) */
+    display: grid;
+    grid-template-columns: 1fr;
     width: auto;
     margin-inline: 0;
-    margin-top: 0;
-    gap: 16px;
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: none;
+    margin-top: clamp(36px, 9vw, 56px);
+    gap: 18px;
     padding-inline: var(--pad-x);
-    padding-bottom: 22px;
   }
-  .grid::-webkit-scrollbar{ display: none }
   .track,
   .track:nth-child(n){
-    flex: 0 0 78%;
-    min-width: 280px;
     transform: translateY(0);
-    scroll-snap-align: center;
-    padding: 28px 24px 26px;
-    min-height: 440px;
+    padding: 30px 26px 28px;
+    min-height: 0;
   }
   .track:hover,
   .track:nth-child(n):hover{ transform: translateY(-6px) }

@@ -13,10 +13,11 @@ export default function Process() {
       {/* Plated dish peeking off the right edge — background splash, same
           radial-mask treatment as the menu & FAQ sections. */}
       <img
-        src="/assets/process-plate.png"
+        src="/assets/flower-table-cutout.png"
         alt=""
         aria-hidden="true"
         className={styles.peek}
+        data-parallax
         loading="lazy"
       />
       <div className={styles.wrap}>

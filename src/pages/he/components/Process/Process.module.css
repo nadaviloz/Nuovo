@@ -20,14 +20,21 @@
   z-index:0;
   pointer-events:none;
   height:auto;
-  width:clamp(300px,24vw,440px);
-  bottom:7%;
+  width:clamp(420px,34vw,640px);
+  bottom:-8%;
   right:0;
-  /* bleed off the right edge only — rounded bottom stays clear of the section
-     edge so there's no straight-cut seam. */
-  transform:translate(24%,0);
-  filter: drop-shadow(0 22px 48px rgba(30,26,20,.16));
-  opacity:.97;
+  /* Transparent cutout: push the plate hard into the bottom-right corner so the
+     straight cut edge bleeds off the page, leaving only a clean porcelain
+     crescent as an editorial splash. */
+  transform:translate(50%,0) rotate(-1.5deg);
+  border-radius:50%;
+  filter:
+    brightness(.96)
+    contrast(1.06)
+    saturate(.94)
+    drop-shadow(0 34px 58px rgba(32,24,16,.18))
+    drop-shadow(0 8px 18px rgba(107,68,35,.10));
+  opacity:.88;
 }
 @media (max-width:900px){
   .peek{ display:none; }
