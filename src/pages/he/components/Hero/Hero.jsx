@@ -27,7 +27,7 @@ export default function Hero() {
           <p className={styles.lede}>שף. תפריט שנתפר סביב השולחן שלך. אירוע שאתם מארחים בלי להרים מחבת. אנחנו מביאים את המסעדה - המפתחות נשארים אצלכם.</p>
           <div className={styles.ctas}>
             <a href="#book" className={styles.btnPrimary}>
-              להזמנה
+              לתיאום אירוע
               <span className={styles.arrow}>←</span>
             </a>
             <a href="#how" className={styles.btnText}>איך זה עובד</a>
