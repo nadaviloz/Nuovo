@@ -203,19 +203,14 @@
 }
 
 @media (max-width: 900px){
-  /* Mobile redesign: light surface, hero image up top, headline + stacked CTAs below.
-     Scoped to mobile only — desktop keeps the dark cinematic layout. */
+  /* Mobile redesign: dark surface (matches testimonials), image-as-card on top,
+     headline + stacked CTAs below. PC animations (Ken Burns, word reveal, lede
+     fade) are preserved by NOT overriding them here. */
   .hero{
-    --ink:#111111;
-    --paper:#ffffff;
-    --muted:#5b5b66;
     --brand:#2563eb;
     min-height:0;
     display:block;
-    background-color:#ffffff;
-    background-image:none;
-    background-attachment:scroll;
-    color:var(--ink);
+    /* background-color + noise/grid textures inherited from base .hero rule (matches testimonials). */
     padding: 20px 20px 48px;
     overflow:visible;
   }
@@ -234,7 +229,8 @@
     gap:20px;
   }
 
-  /* Image becomes a contained card at the top instead of a full-bleed background. */
+  /* Image becomes a contained card at the top instead of a full-bleed background.
+     Ken Burns animation from .photoLayer base rule keeps running. */
   .photoFrame{
     position:relative;
     inset:auto;
@@ -243,25 +239,23 @@
     aspect-ratio: 4 / 5;
     border-radius:22px;
     overflow:hidden;
-    box-shadow: 0 12px 32px rgba(15,23,42,.10), 0 0 0 1px rgba(15,23,42,.06);
+    box-shadow:
+      0 0 0 1px rgba(255,255,255,.08),
+      0 24px 60px rgba(0,0,0,.55);
   }
   .photoLayer{
-    background-position: center 28%;
+    background-position: center 22%;
     background-size: cover;
-    transform: scale(1.02);
-    animation:none;
   }
+  /* No heavy gradient overlay needed since text now sits BELOW the photo. */
   .photoLayer::after{ display:none; }
 
   .eyebrow{
     order:2;
     position:static; transform:none;
     justify-content:center;
-    color:var(--brand);
-    font-weight:600;
     margin:8px 0 0;
   }
-  .eyebrow::before{ background:var(--brand); }
 
   .headline{
     order:3;
@@ -269,14 +263,9 @@
     text-align:center;
     max-width:none;
     margin:0;
-    color:var(--ink);
-    text-shadow:none;
-    font-size:clamp(30px, 8.5vw, 42px);
+    font-size:clamp(30px, 8.5vw, 44px);
     line-height:1.1;
     letter-spacing:-.02em;
-  }
-  .headline em{
-    color:#9aa0ad;
   }
 
   .lede{
@@ -288,10 +277,6 @@
     padding:0 4px;
     font-size:16px;
     line-height:1.65;
-    color:var(--muted);
-    font-weight:400;
-    opacity:1;
-    transform:none;
   }
 
   .ctas{
@@ -313,12 +298,12 @@
     border-radius:10px;
     font-size:15px;
     letter-spacing:.08em;
-    box-shadow: 0 8px 20px rgba(37,99,235,.28);
+    box-shadow: 0 10px 24px rgba(37,99,235,.32);
     justify-content:center;
   }
   .btnPrimary:hover{
     background:#1d4ed8;
-    box-shadow: 0 12px 26px rgba(37,99,235,.35);
+    box-shadow: 0 14px 30px rgba(37,99,235,.42);
   }
   .arrow{
     width:auto; height:auto;
@@ -327,11 +312,11 @@
     font-size:18px;
   }
 
-  /* Secondary: outline / ghost with dark border + dark text on white. */
+  /* Secondary: outline / ghost with light border + light text on dark. */
   .btnText{
-    background:#ffffff;
-    color:var(--ink);
-    border:1.5px solid rgba(17,17,17,.85);
+    background:transparent;
+    color:var(--paper);
+    border:1.5px solid rgba(255,255,255,.55);
     border-radius:10px;
     padding:16px 24px;
     font-size:14px;
@@ -339,8 +324,8 @@
     justify-content:center;
   }
   .btnText:hover{
-    background:rgba(17,17,17,.04);
-    border-color:#111111;
+    background:rgba(255,255,255,.06);
+    border-color:#ffffff;
     box-shadow:none;
   }
 }
