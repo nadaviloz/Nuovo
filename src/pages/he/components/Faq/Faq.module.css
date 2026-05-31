@@ -35,17 +35,17 @@
   opacity:.95;
 }
 @media (max-width:900px){
-  /* On phones the questions list is long, so the dish gets its own clean
-     closing area below the last question — centered and fully visible as a
-     deliberate footer plate, never floating behind the text. */
-  .host{ padding-bottom: clamp(170px, 52vw, 280px); }
+  /* On phones the dish hugs the bottom-left edge and bleeds ~half off the page,
+     so only a soft crescent of the plate shows as an editorial splash — the
+     same off-the-edge treatment as desktop, never a full plate dropped in. */
+  .host{ padding-bottom: clamp(120px, 34vw, 200px); }
   .peek{
     display:block;
-    width:min(56vw,250px);
-    left:50%; right:auto;
-    bottom:clamp(26px,7vw,52px);
-    transform:translate(-50%,0);
-    opacity:.92;
+    width:min(86vw,420px);
+    left:0; right:auto;
+    bottom:clamp(8px,4vw,36px);
+    transform:translate(-48%,18%);
+    opacity:.8;
   }
 }
 .head{
