@@ -1,9 +1,36 @@
-.section{padding-top:clamp(90px,10vw,160px); padding-bottom:clamp(90px,10vw,160px)}
+.section{
+  padding-top:clamp(90px,10vw,160px); padding-bottom:clamp(90px,10vw,160px);
+  position:relative;
+  overflow:hidden;
+  isolation:isolate;
+}
 .wrap{
   max-width:var(--max);
   margin:0 auto;
   padding-left:var(--pad-x);
   padding-right:var(--pad-x);
+  position:relative;
+  z-index:1;
+}
+/* Plated dish bleeding off the right edge as a background splash — soft round
+   vignette dissolves the photo edge into the section, warm drop-shadow fuses
+   it to the surface. Same treatment as the menu & FAQ sections. */
+.peek{
+  position:absolute;
+  z-index:0;
+  pointer-events:none;
+  height:auto;
+  width:clamp(300px,24vw,440px);
+  bottom:7%;
+  right:0;
+  /* bleed off the right edge only — rounded bottom stays clear of the section
+     edge so there's no straight-cut seam. */
+  transform:translate(24%,0);
+  filter: drop-shadow(0 22px 48px rgba(30,26,20,.16));
+  opacity:.97;
+}
+@media (max-width:900px){
+  .peek{ display:none; }
 }
 .head{
   display:grid;grid-template-columns:1fr 1.6fr;gap:60px;

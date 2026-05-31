@@ -2,7 +2,6 @@ import { useEffect, useRef } from 'react'
 import styles from './HebrewPage.module.css'
 import Nav from './components/Nav/Nav.jsx'
 import Hero from './components/Hero/Hero.jsx'
-import Gallery from './components/Gallery/Gallery.jsx'
 import About from './components/About/About.jsx'
 import Process from './components/Process/Process.jsx'
 import Tracks from './components/Tracks/Tracks.jsx'
@@ -218,7 +217,6 @@ export default function HebrewPage() {
       <ScrollProgress />
       <Nav />
       <Hero />
-      <Gallery />
       <About />
       <Process />
       <Tracks />

@@ -2,12 +2,40 @@
   background:transparent;
   padding-top:clamp(70px,8vw,130px);
   padding-bottom:clamp(70px,8vw,130px);
+  position:relative;
+  overflow:hidden;
+  isolation:isolate;
 }
 .wrap{
   max-width:var(--max);
   margin:0 auto;
   padding-left:var(--pad-x);
   padding-right:var(--pad-x);
+  position:relative;
+  z-index:1;
+}
+/* Plated dish bleeding off the left edge as a background splash. A soft round
+   vignette dissolves the photo's dark slate edge into the section, and a warm
+   drop-shadow fuses it to the surface — matching the menu peek treatment. */
+.peek{
+  position:absolute;
+  z-index:0;
+  pointer-events:none;
+  height:auto;
+  width:clamp(380px,32vw,600px);
+  bottom:7%;
+  left:0;
+  transform:translate(-46%,16%);
+  border-radius:50%;
+  -webkit-mask-image:radial-gradient(circle at 50% 50%, #000 55%, transparent 72%);
+          mask-image:radial-gradient(circle at 50% 50%, #000 55%, transparent 72%);
+  filter:
+    drop-shadow(0 30px 60px rgba(120,50,10,.20))
+    drop-shadow(0 8px 20px rgba(120,50,10,.12));
+  opacity:.95;
+}
+@media (max-width:900px){
+  .peek{ display:none; }
 }
 .head{
   display:grid;grid-template-columns:1fr 1.6fr;gap:60px;

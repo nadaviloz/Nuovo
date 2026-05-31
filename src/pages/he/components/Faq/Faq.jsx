@@ -44,6 +44,16 @@ export default function Faq() {
   const [openIdx, setOpenIdx] = useState(-1)
   return (
     <section id="faq" className={styles.host}>
+      {/* Plated dish peeking off the left edge — an organic splash of colour
+          fused into the background with a soft radial mask, the same treatment
+          as the menu section. */}
+      <img
+        src="/assets/faq-plate.jpg"
+        alt=""
+        aria-hidden="true"
+        className={styles.peek}
+        loading="lazy"
+      />
       <div className={styles.wrap}>
         <div className={styles.head}>
           <div>

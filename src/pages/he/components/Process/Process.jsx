@@ -10,6 +10,15 @@ const steps = [
 export default function Process() {
   return (
     <section id="how" className={styles.section}>
+      {/* Plated dish peeking off the right edge — background splash, same
+          radial-mask treatment as the menu & FAQ sections. */}
+      <img
+        src="/assets/process-plate.png"
+        alt=""
+        aria-hidden="true"
+        className={styles.peek}
+        loading="lazy"
+      />
       <div className={styles.wrap}>
         <div className={styles.head}>
           <div>
