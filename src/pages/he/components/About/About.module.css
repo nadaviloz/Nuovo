@@ -1,4 +1,7 @@
-.section{padding-top:clamp(90px,10vw,160px); padding-bottom:clamp(90px,10vw,160px)}
+.section{
+  padding-top:clamp(120px,12vw,200px);
+  padding-bottom:clamp(120px,12vw,200px);
+}
 .wrap{
   max-width:var(--max);
   margin:0 auto;
@@ -27,14 +30,18 @@
   max-width: 50ch;justify-self:start;
 }
 .grid{
-  display:grid;grid-template-columns: .85fr 1.15fr;
-  gap: clamp(40px,6vw,96px);
+  display:grid;grid-template-columns: .9fr 1.1fr;
+  gap: clamp(48px,7vw,120px);
   align-items:start;
+  position:relative;
 }
+/* Pull the portrait up slightly so it breaks the grid line — a small,
+   deliberate asymmetry that makes the layout feel composed by hand. */
 .portrait{
   aspect-ratio: 4/5;
-  border-radius:6px;
+  border-radius:10px;
   overflow:hidden;
+  margin-top: clamp(-32px, -3vw, 0px);
   /* Solid dark fill matches the photo's dark background, so any sub-pixel
      seam at the edges (e.g., from the PNG's built-in padding) blends in
      instead of revealing a light placeholder pattern. */

@@ -5,9 +5,9 @@
 }
 .fill{
   height:100%;
-  background: linear-gradient(90deg, rgba(126,200,255,0), #7EC8FF 40%, #7EC8FF);
+  background: linear-gradient(90deg, rgba(107,68,35,0), #6B4423 35%, #8B5E3C 70%, #4A2E12);
   width:0;
   transform-origin: right center;
-  box-shadow: 0 0 12px rgba(126,200,255,.55);
+  box-shadow: 0 0 8px rgba(107,68,35,.30);
   transition: width .08s linear;
 }

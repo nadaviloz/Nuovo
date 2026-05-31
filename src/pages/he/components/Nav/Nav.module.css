@@ -1,5 +1,5 @@
 .nav{
-  --clay:#7EC8FF;
+  --clay:#6B4423;
   position:sticky;top:0;z-index:10;
   background:rgba(14,14,14,.78);
   backdrop-filter: blur(16px) saturate(140%);
@@ -72,7 +72,7 @@
 .navCta:hover{
   background:var(--paper);color:var(--ink);border-color:var(--paper);
   transform: translateY(-3px);
-  box-shadow: 0 14px 34px rgba(126,200,255,.35), 0 0 0 1px rgba(255,255,255,.18);
+  box-shadow: 0 14px 34px rgba(107,68,35,.30), 0 0 0 1px rgba(255,255,255,.18);
 }
 .right{display:flex;align-items:center;gap:22px}
 .lang{

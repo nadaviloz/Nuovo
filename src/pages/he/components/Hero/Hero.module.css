@@ -1,5 +1,5 @@
 .hero{
-  --clay:#7EC8FF;
+  --clay:#6B4423;
   position:relative;
   min-height: 100vh;
   /* Same texture as the testimonials section — fractal noise + faint grid lines on near-black. */
@@ -38,7 +38,7 @@
     url('/assets/hero-new.jpg') no-repeat center 22% / cover;
   transform: scale(1.18);
   transform-origin: center 38%;
-  animation: heroKenBurns 16s ease-out forwards;
+  animation: heroKenBurns 14s ease-in-out infinite alternate;
   will-change: transform;
 }
 @keyframes heroKenBurns{
@@ -58,6 +58,28 @@
 }
 /* Stage var on .hero so the photoFrame can compute its inset. */
 .hero{ --frame-inset: clamp(18px, 2.2vw, 36px); }
+
+/* Seam into the dim-white Gallery below: the bottom edge melts from the dark
+   hero up into the page's off-white so there's no hard black→white line.
+   Sits above the photo (z 2) but below the headline/CTAs (z 3). */
+.hero::after{
+  content:"";
+  position:absolute;
+  left:0; right:0; bottom:0;
+  height: clamp(55px, 7vh, 95px);
+  z-index:2;
+  pointer-events:none;
+  /* Eased melt — stays soft, gathers to the solid off-white near the bottom,
+     so the photo dissolves into the page with no hard band. */
+  background: linear-gradient(180deg,
+    rgba(216,212,207,0) 0%,
+    rgba(216,212,207,.05) 34%,
+    rgba(216,212,207,.16) 54%,
+    rgba(216,212,207,.36) 70%,
+    rgba(216,212,207,.64) 84%,
+    rgba(216,212,207,.88) 93%,
+    var(--paper) 100%);
+}
 .wrap{
   max-width:var(--max);
   margin:0 auto;
@@ -76,7 +98,13 @@
   display:flex;align-items:center;justify-content:flex-end;gap:24px;
   padding: 6px 4px;
 }
-.eyebrow::before{content:"";width:44px;height:1px;background:var(--clay)}
+.eyebrow::before{
+  content:"";
+  width:64px;
+  height:1px;
+  background: linear-gradient(90deg, transparent 0%, #6B4423 38%, #4A2E12 70%, transparent 100%);
+  border-radius:2px;
+}
 .content{
   direction:rtl;
   text-align:center;
@@ -169,7 +197,7 @@
   gap: 16px;
 }
 .btnPrimary{
-  background:#fff;color:var(--ink);
+  background:var(--paper);color:var(--ink);
   padding:26px 44px;border-radius:6px;
   font-family:var(--label);
   font-size:14px;letter-spacing:.24em;text-transform:uppercase;font-weight:600;
@@ -179,7 +207,7 @@
 }
 .btnPrimary:hover{
   transform: translateY(-3px);
-  box-shadow: 0 18px 48px rgba(126,200,255,.45), 0 0 0 1px rgba(255,255,255,.18);
+  box-shadow: 0 18px 48px rgba(107,68,35,.38), 0 0 0 1px rgba(255,255,255,.18);
 }
 .btnPrimary:hover .arrow{ transform: translateX(-4px) }
 .arrow{
@@ -199,7 +227,7 @@
 .btnText:hover{
   background:rgba(255,255,255,.08); border-color:#fff;
   transform:translateY(-3px);
-  box-shadow: 0 14px 36px rgba(126,200,255,.28), 0 0 0 1px rgba(255,255,255,.14);
+  box-shadow: 0 14px 36px rgba(107,68,35,.24), 0 0 0 1px rgba(255,255,255,.14);
 }
 
 @media (max-width: 900px){
@@ -246,6 +274,8 @@
   .photoLayer{
     background-position: center 22%;
     background-size: cover;
+    /* Looping Ken Burns so the photo stays alive past the initial 16s play. */
+    animation: heroKenBurns 14s ease-in-out infinite alternate;
   }
   /* No heavy gradient overlay needed since text now sits BELOW the photo. */
   .photoLayer::after{ display:none; }

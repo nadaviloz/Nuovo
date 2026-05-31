@@ -131,14 +131,16 @@ export default function Booking() {
         </div>
 
         <div className={styles.grid}>
-          <div>
+          <div className={styles.intro}>
             <div className={styles.headline}>פחות שיחות<br/><em>יותר תכנון</em></div>
-            <p className={styles.sideText}>השף לא יתקשר לשאול שאלות. הוא יחזור אליכם עם הצעת תפריט מותאמת - אחרי שקרא את מה שכתבתם.</p>
-            <ul className={styles.sideList}>
-              <li><span className={styles.marker}>i</span><span>הטופס נשלח ישירות לאוהד - לא מוקד שיחות.</span></li>
-              <li><span className={styles.marker}>ii</span><span>נחזור תוך 24 שעות, במייל או בוואטסאפ - איך שתבחרו.</span></li>
-              <li><span className={styles.marker}>iii</span><span>אין כרטיס אשראי. סוגרים אחרי שראיתם את התפריט.</span></li>
-            </ul>
+            <div className={styles.introAside}>
+              <p className={styles.sideText}>השף לא יתקשר לשאול שאלות. הוא יחזור אליכם עם הצעת תפריט מותאמת - אחרי שקרא את מה שכתבתם.</p>
+              <ul className={styles.sideList}>
+                <li><span className={styles.marker}>i</span><span>הטופס נשלח ישירות לאוהד - לא מוקד שיחות.</span></li>
+                <li><span className={styles.marker}>ii</span><span>נחזור תוך 24 שעות, במייל או בוואטסאפ - איך שתבחרו.</span></li>
+                <li><span className={styles.marker}>iii</span><span>אין כרטיס אשראי. סוגרים אחרי שראיתם את התפריט.</span></li>
+              </ul>
+            </div>
           </div>
 
           <form className={styles.form} onSubmit={onSubmit}>

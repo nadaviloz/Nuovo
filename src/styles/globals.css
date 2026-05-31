@@ -35,20 +35,28 @@ html{scroll-behavior:smooth}
   content:"";
   display:inline-block;
   vertical-align: middle;
-  width: 22px;
+  width: 28px;
   height: 1px;
-  background: #7EC8FF;
+  background: linear-gradient(90deg, transparent, #6B4423 60%, #4A2E12);
   margin-inline-end: 10px;
   transform: translateY(-1px);
 }
-/* Subtle clay underline under the italic emphasis in section titles. */
-[class*="_title_"] em,
-[class*="_head_"] h3 em{
-  background-image: linear-gradient(180deg, transparent 92%, rgba(126,200,255,.55) 92%, rgba(126,200,255,.55) 96%, transparent 96%);
-  background-repeat: no-repeat;
-  background-size: 100% 100%;
-  padding-bottom: .04em;
+/* Section title hierarchy — tighter letter-spacing and a touch more weight on
+   the largest headings so big copy reads as deliberate, dramatic editorial.
+   Per-component .title rules inherit by default; this raises the floor. */
+section [class*="_title_"],
+section [class*="_headline_"],
+header [class*="_title_"]{
+  font-weight: 400;
+  letter-spacing: -.042em;
 }
+section [class*="_title_"] em,
+section [class*="_headline_"] em,
+header [class*="_title_"] em{
+  font-weight: 500;
+  letter-spacing: -.034em;
+}
+
 
 /* ──────────────────────────────────────────────────────────────────────────
    Editorial clip-path headline reveal.

@@ -1,67 +1,102 @@
 import styles from './Tracks.module.css'
 
-function TrackCard({ className, children }) {
-  return <div className={className}>{children}</div>
-}
+const packages = [
+  {
+    num: '01',
+    name: 'Classic Menu',
+    min: 'מינימום 35 סועדים',
+    desc: "תפריט בופה עשיר עם דגש על מנות אירוח קלילות הכולל פוקצ'ות ולחמים, מנות ראשונות, סלטים טריים, ומנות מהטאבון.",
+    price: '170'
+  },
+  {
+    num: '02',
+    name: 'Farina Menu',
+    min: 'מינימום 30 סועדים',
+    desc: "תפריט בופה עשיר המשלב מנות פסטות בעבודת יד, פוקצ'ות, מנות ראשונות, סלטים טריים ומנות מהטאבון.",
+    price: '190'
+  },
+  {
+    num: '03',
+    name: 'Premium Menu',
+    min: 'מינימום 25 סועדים',
+    desc: "תפריט בופה עשיר המשלב מנות דגים יחד עם מגוון מנות פסטות בעבודת יד, פוקצ'ות, מנות ראשונות, סלטים טריים ומנות טאבון.",
+    price: '230'
+  },
+  {
+    num: '04',
+    name: 'Finger Food',
+    min: 'החל מ-30 ועד 50 סועדים',
+    desc: 'תפריט עם דגש על מנות פינגר פוד וטאפסים המאפשרות לטעום מגוון רחב של מנות מפוצצות בטעמים.',
+    price: '190'
+  },
+  {
+    num: '05',
+    name: 'All Fish Menu',
+    min: 'מינימום 20 סועדים',
+    desc: 'תפריט שכולו ארוחת דגים, עם דגים מכל הסוגים: נאים, מבושלים, מהטאבון, מטוגנים, ראשונות דגים ועוד מגוון של מנות דגים.',
+    price: '300'
+  }
+]
 
 export default function Tracks() {
   return (
     <section id="tracks" className={styles.section}>
+      {/* Peeking hero plates — organic splashes of color bleeding off
+          opposing edges of the section. Tomato on the left at mid-height,
+          fish-salad on the bottom-right for editorial counter-balance. */}
+      <img
+        src="/assets/tomato.jpg"
+        alt=""
+        aria-hidden="true"
+        className={`${styles.peek} ${styles.peekLeft}`}
+        data-parallax
+        loading="lazy"
+      />
+      <img
+        src="/assets/fish-salad.jpg"
+        alt=""
+        aria-hidden="true"
+        className={`${styles.peek} ${styles.peekRight}`}
+        data-parallax
+        loading="lazy"
+      />
+
       <div className={styles.wrap}>
         <div className={styles.head}>
           <div>
             <div className={styles.num}>/ 04 - מסלולים</div>
-            <h2 className={styles.title}>שלושה מסלולים<br/><em>שף אחד</em></h2>
+            <h2 className={styles.title}>חמישה מסלולים<br/><em>שף אחד</em></h2>
           </div>
-          <p className={styles.lede}>שלוש דרכים שונות לארח. בוחרים את הסגנון, ואנחנו בונים את התפריט מסביב לאירוע, השוק והאורחים. אפשר להוסיף מנות, להחליף, להתאים - נחזור איתכם על הכול.</p>
+          <p className={styles.lede}>חמש דרכים שונות לארח. בוחרים את הסגנון, ואנחנו בונים את התפריט מסביב לאירוע, השוק והאורחים. אפשר להוסיף מנות, להחליף, להתאים — נחזור איתכם על הכול.</p>
         </div>
+      </div>
 
-        <div className={styles.grid}>
-          <TrackCard className={styles.track}>
-            <div className={styles.tNum}>01</div>
-            <div className={styles.tName}>בופה</div>
-            <div className={styles.tDesc}>מינימום 20 אורחים · אירוע גדול · ללא הגשה אישית</div>
-            <ul className={styles.menu}>
-              <li>תפריט בופה רחב - האורחים מגישים לעצמם</li>
-              <li>הקמת הבופה והסטיילינג</li>
-              <li>הזנה ותחזוקה לאורך האירוע</li>
-              <li>פינוי וניקיון מלא אחרי</li>
-              <li>המתאים ביותר לאירועים גדולים - חתונות קטנות, ימי הולדת, אירועי חברה</li>
-            </ul>
-            <div className={styles.price}><span>הכי משתלם לאירועים גדולים</span></div>
-          </TrackCard>
+      <div className={styles.grid}>
+          {packages.map((p, i) => (
+            <article
+              key={p.num}
+              className={styles.track}
+              style={{ '--i': i }}
+            >
+              <header className={styles.tHead}>
+                <div className={styles.tNum}>{p.num}</div>
+                <div className={styles.tName}>{p.name}</div>
+              </header>
 
-          <TrackCard className={`${styles.track} ${styles.featured}`}>
-            <div className={styles.badge}>הכי מבוקש</div>
-            <div className={styles.tNum}>02</div>
-            <div className={styles.tName}>אירוע שף</div>
-            <div className={styles.tDesc}>השף בבית · הגשה אישית · ניתן להוסיף מנות</div>
-            <ul className={styles.menu}>
-              <li>שף ראשי במטבח שלכם - בישול חי</li>
-              <li>תפריט קבוע של מנות · אפשר להרחיב</li>
-              <li><em>תוספות בתשלום:</em> מנת דגים, מנת בשר, מנה ראשונה, קינוח מורחב</li>
-              <li>מצרכים טריים מהשוק</li>
-              <li>הגשה אישית לכל אורח</li>
-              <li>ניקיון מלא אחרי</li>
-            </ul>
-            <div className={styles.price}><span style={{color:'var(--paper)'}}>החוויה האישית. המסלול שאנשים זוכרים.</span></div>
-          </TrackCard>
+              <p className={styles.tDesc}>{p.desc}</p>
 
-          <TrackCard className={styles.track}>
-            <div className={styles.tNum}>03</div>
-            <div className={styles.tName}>מנות ביס</div>
-            <div className={styles.tDesc}>אירוע יוקרתי · מנות אצבע · אירוע עמידה</div>
-            <ul className={styles.menu}>
-              <li>מבחר רחב של מנות ביס וקנפה</li>
-              <li>הגשה אישית במגשי כסף לאורחים</li>
-              <li>סטיילינג ועיצוב הגשה</li>
-              <li>מתאים לאירועי השקה, חגיגות יוקרה ואירועי עמידה</li>
-              <li>מינימום 15 אורחים</li>
-              <li>ניקיון מלא אחרי</li>
-            </ul>
-            <div className={styles.price}><span>חוויה יוקרתית · אירוע עומד</span></div>
-          </TrackCard>
-        </div>
+              <div className={styles.tFoot}>
+                <div className={styles.tMeta}>
+                  <span className={styles.tMin}>{p.min}</span>
+                  <div className={styles.tPriceWrap}>
+                    <span className={styles.tPrice}>{p.price}<span className={styles.tCurrency}>₪</span></span>
+                    <span className={styles.tPriceSuffix}>לסועד</span>
+                  </div>
+                </div>
+                <a href="#book" className={styles.cta}>לתיאום אירוע</a>
+              </div>
+            </article>
+          ))}
       </div>
     </section>
   )

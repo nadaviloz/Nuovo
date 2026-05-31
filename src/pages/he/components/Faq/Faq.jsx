@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import styles from './Faq.module.css'
 
 const items = [
@@ -40,6 +41,7 @@ function Chevron() {
 }
 
 export default function Faq() {
+  const [openIdx, setOpenIdx] = useState(-1)
   return (
     <section id="faq" className={styles.host}>
       <div className={styles.wrap}>
@@ -52,15 +54,25 @@ export default function Faq() {
         </div>
 
         <div className={styles.list}>
-          {items.map((it, i) => (
-            <details key={i} className={styles.item}>
-              <summary className={styles.summary}>
-                <span className={styles.q}>{it.q}</span>
-                <Chevron />
-              </summary>
-              <div className={styles.answer}>{it.a}</div>
-            </details>
-          ))}
+          {items.map((it, i) => {
+            const isOpen = openIdx === i
+            return (
+              <div key={i} className={`${styles.item} ${isOpen ? styles.itemOpen : ''}`}>
+                <button
+                  type="button"
+                  className={styles.summary}
+                  aria-expanded={isOpen}
+                  onClick={() => setOpenIdx(isOpen ? -1 : i)}
+                >
+                  <span className={styles.q}>{it.q}</span>
+                  <Chevron />
+                </button>
+                <div className={styles.answerWrap}>
+                  <div className={styles.answer}>{it.a}</div>
+                </div>
+              </div>
+            )
+          })}
         </div>
       </div>
     </section>

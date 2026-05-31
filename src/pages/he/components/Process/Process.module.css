@@ -26,24 +26,44 @@
   font-size:19px;line-height:1.7;color:var(--ink-70);
   max-width: 50ch;justify-self:start;
 }
+/* Classic-chef rail: a faint warm-copper hairline threads through the
+   numeral row; icon nodes sit on top of it. No column dividers — light + space. */
 .grid{
   display:grid;grid-template-columns:repeat(4, 1fr);
-  border-top:1px solid var(--ink);
+  position:relative;
+  column-gap: 8px;
+  padding-top: 28px;
+}
+.grid::before{
+  content:"";
+  position:absolute;
+  top: calc(28px + 72px + 28px);
+  left: 6%; right: 6%;
+  height: 1px;
+  background: linear-gradient(90deg,
+    transparent 0%,
+    rgba(107,68,35,0) 4%,
+    rgba(107,68,35,.45) 18%,
+    rgba(139,94,60,.45) 50%,
+    rgba(74,46,18,.45) 82%,
+    rgba(74,46,18,0) 96%,
+    transparent 100%);
+  pointer-events:none;
+  z-index:0;
 }
 .step{
-  border-left:1px solid var(--rule);
-  padding:40px 0 44px 28px;
-  display:flex;flex-direction:column;gap:18px;
-  min-height: 400px;
-  transition: background .4s ease, padding .4s ease;
+  padding:72px 28px 44px 28px;
+  display:flex;flex-direction:column;gap:20px;
+  min-height: 420px;
+  position:relative;
+  z-index:1;
+  transition: transform .6s cubic-bezier(.22,1,.36,1);
 }
-.step:last-child{border-left:0}
-.step:hover{ background: linear-gradient(180deg, rgba(126,200,255,.04), rgba(126,200,255,0)); }
-.step:hover .stepIcon{ background: var(--clay, #7EC8FF); color:var(--paper); border-color: var(--clay, #7EC8FF); transform: rotate(-6deg) }
+.step:hover{ transform: translateY(-4px); }
 .step:hover .stepTitle{ letter-spacing: -.025em }
 .stepNum{
   font-family:var(--label);
-  font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--ink-70);font-weight:500;
+  font-size:15px;letter-spacing:.18em;color:var(--ink-70);font-weight:500;
   direction:ltr;text-align:right;
 }
 .stepTitle{
@@ -52,15 +72,43 @@
   transition: letter-spacing .4s ease;
 }
 .stepBody{
-  font-size:15.5px;line-height:1.7;color:var(--ink-70);
+  font-size:16.5px;line-height:1.7;color:var(--ink-70);
   margin-top:auto;max-width:32ch;
 }
+/* Classic-chef node — porcelain wash with a warm copper inner ring.
+   On hover the node fills with copper gradient; glow is restrained. */
 .stepIcon{
-  width:54px;height:54px;border:1px solid var(--ink);border-radius:50%;
+  width:58px;height:58px;border-radius:50%;border:0;
   display:flex;align-items:center;justify-content:center;
-  font-family:var(--accent);font-style:normal;font-size:24px;font-weight:500;
+  font-family:var(--accent);font-style:normal;font-size:22px;font-weight:600;
   direction:ltr;
-  transition: background .4s ease, color .4s ease, transform .5s cubic-bezier(.2,.7,.2,1);
+  position:relative;
+  background:
+    radial-gradient(circle at 30% 25%, rgba(255,255,255,.18), rgba(255,255,255,0) 60%),
+    linear-gradient(160deg, rgba(107,68,35,.08), rgba(74,46,18,.05));
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  color: var(--ink);
+  box-shadow:
+    inset 0 0 0 1px rgba(107,68,35,.35),
+    inset 0 1px 0 rgba(255,255,255,.35),
+    0 4px 16px rgba(10,10,10,.06),
+    0 0 0 6px rgba(107,68,35,0);
+  transition:
+    background .6s cubic-bezier(.22,1,.36,1),
+    color .6s cubic-bezier(.22,1,.36,1),
+    box-shadow .6s cubic-bezier(.22,1,.36,1),
+    transform .6s cubic-bezier(.22,1,.36,1);
+}
+.step:hover .stepIcon{
+  background: var(--clay-grad, linear-gradient(135deg,#6B4423 0%,#8B5E3C 55%,#4A2E12 100%));
+  color: #ffffff;
+  transform: scale(1.06);
+  box-shadow:
+    inset 0 0 0 1px rgba(255,255,255,.40),
+    inset 0 1px 0 rgba(255,255,255,.45),
+    0 8px 22px rgba(107,68,35,.22),
+    0 0 0 6px rgba(107,68,35,.08);
 }
 
 @media (max-width: 900px){

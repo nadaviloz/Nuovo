@@ -52,7 +52,7 @@ export default function HebrewPage() {
   useEffect(() => {
     document.title = 'שולחן - שף פרטי'
     const prevBg = document.body.style.background
-    document.body.style.background = '#FAFAFA'
+    document.body.style.background = '#DAD7D1'
     return () => { document.body.style.background = prevBg }
   }, [])
 
@@ -204,12 +204,6 @@ export default function HebrewPage() {
       e.preventDefault()
 
       const top = target.getBoundingClientRect().top + window.scrollY - 80
-      const wipe = wipeRef.current
-      if (wipe && !reduce) {
-        wipe.classList.remove(styles.wipeRun)
-        void wipe.offsetWidth
-        wipe.classList.add(styles.wipeRun)
-      }
       scrollTo(top, 1000)
     }
     document.addEventListener('click', onClick)
