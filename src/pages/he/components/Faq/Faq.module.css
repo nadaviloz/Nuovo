@@ -35,7 +35,17 @@
   opacity:.95;
 }
 @media (max-width:900px){
-  .peek{ display:none; }
+  /* Keep the dish on phones too — centered low behind the questions as a soft
+     splash, fully visible (not cut) and out of the way of the text. Matches the
+     Process / Tracks mobile peek treatment. */
+  .peek{
+    display:block;
+    width:min(74vw,360px);
+    left:50%; right:auto;
+    bottom:-2%;
+    transform:translate(-50%,0);
+    opacity:.5;
+  }
 }
 .head{
   display:grid;grid-template-columns:1fr 1.6fr;gap:60px;
