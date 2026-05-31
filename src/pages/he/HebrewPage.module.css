@@ -3,8 +3,8 @@
   --paper-pure:#FFFFFF;
   --paper-2:#EEEEEE;
   --ink:#0A0A0A;
-  --clay:#B5573B;
-  --clay-soft:rgba(181,87,59,.18);
+  --clay:#7EC8FF;
+  --clay-soft:rgba(126,200,255,.18);
   --ink-70:rgba(10,10,10,.7);
   --ink-55:rgba(10,10,10,.55);
   --ink-30:rgba(10,10,10,.2);
@@ -49,48 +49,38 @@
   padding-right:var(--pad-x);
 }
 
-/* --- Cinematic section transition: dark wipe + clay accent sweep --- */
+/* --- Page transition: a single hairline that sweeps across viewport center.
+       No panels, no dimming — editorial silence. --- */
 .wipe{
-  position:fixed; inset:0;
-  z-index:90;
+  position:fixed;
+  left:0; right:0;
+  top:50%;
+  height:0;
+  z-index:1000;
   pointer-events:none;
-  overflow:hidden;
-}
-.wipePanel{
-  position:absolute; inset:0;
-  background: linear-gradient(180deg, #0a0a0f 0%, #050507 100%);
-  transform: translateY(100%);
-  will-change: transform;
 }
 .wipeLine{
-  position:absolute; left:0; right:0; top:0;
-  height:2px;
-  background: linear-gradient(90deg, rgba(181,87,59,0), #B5573B 50%, rgba(181,87,59,0));
-  box-shadow: 0 0 18px rgba(181,87,59,.7);
+  position:absolute;
+  left:0; right:0; top:0;
+  height:1px;
+  background: linear-gradient(90deg, rgba(126,200,255,0) 0%, #7EC8FF 18%, #7EC8FF 82%, rgba(126,200,255,0) 100%);
+  box-shadow: 0 0 24px rgba(126,200,255,.55);
   transform: scaleX(0);
   transform-origin: right center;
   will-change: transform;
-}
-.wipeRun .wipePanel{
-  animation: wipePanel 950ms cubic-bezier(.77,0,.18,1) both;
+  opacity: 0;
 }
 .wipeRun .wipeLine{
-  animation: wipeLine 950ms cubic-bezier(.77,0,.18,1) both;
+  animation: heLineSweep var(--page-wipe-duration, 1100ms) var(--page-wipe-ease, cubic-bezier(.77,0,.18,1)) both;
 }
-@keyframes wipePanel{
-  0%   { transform: translateY(100%); }
-  42%  { transform: translateY(0%);   }
-  58%  { transform: translateY(0%);   }
-  100% { transform: translateY(-100%); }
-}
-@keyframes wipeLine{
-  0%   { transform: scaleX(0); transform-origin: right center; opacity:0; }
-  20%  { opacity:1; }
-  50%  { transform: scaleX(1); transform-origin: right center; opacity:1; }
+@keyframes heLineSweep{
+  0%   { transform: scaleX(0); transform-origin: right center; opacity: 0; }
+  18%  { opacity: 1; }
+  50%  { transform: scaleX(1); transform-origin: right center; opacity: 1; }
   51%  { transform: scaleX(1); transform-origin: left  center; }
-  80%  { opacity:1; }
-  100% { transform: scaleX(0); transform-origin: left  center; opacity:0; }
+  82%  { opacity: 1; }
+  100% { transform: scaleX(0); transform-origin: left  center; opacity: 0; }
 }
 @media (prefers-reduced-motion: reduce){
-  .wipePanel, .wipeLine{ animation:none !important; }
+  .wipeLine{ animation:none !important; }
 }

@@ -2,7 +2,7 @@ import styles from './StatsBar.module.css'
 import useCountUp from '../../hooks/useCountUp.js'
 
 function Stat({ value, decimals = 0, prefix = '', children }) {
-  const { ref, display } = useCountUp(value, { decimals, duration: 1800 })
+  const { ref, display } = useCountUp(value, { decimals, duration: 1500 })
   return (
     <div ref={ref}>
       <b>{prefix}{display}</b>{children}

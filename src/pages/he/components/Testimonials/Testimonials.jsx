@@ -82,7 +82,7 @@ export default function Testimonials() {
         <div className={styles.head}>
           <div>
             <div className={styles.num}>/ ישר מהוואטסאפ</div>
-            <h2 className={styles.title}>המארחים<br/><em>מספרים.</em></h2>
+            <h2 className={styles.title}>המארחים<br/><em>מספרים</em></h2>
           </div>
           <p className={styles.lede}>ההודעות שמגיעות יום אחרי האירוע — מה שהמארחים כתבו בעצמם, במילים שלהם, אחרי שהאורחים הלכו והבית נשאר נקי.</p>
         </div>

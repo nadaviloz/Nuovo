@@ -4,20 +4,14 @@ function TrackCard({ className, children }) {
   return <div className={className}>{children}</div>
 }
 
-export default function Tracks({ onSelectTrack }) {
-  const select = (value) => () => {
-    onSelectTrack?.(value)
-    const el = document.getElementById('book')
-    if (el) el.scrollIntoView({ behavior: 'smooth' })
-  }
-
+export default function Tracks() {
   return (
     <section id="tracks" className={styles.section}>
       <div className={styles.wrap}>
         <div className={styles.head}>
           <div>
             <div className={styles.num}>/ 04 - מסלולים</div>
-            <h2 className={styles.title}>שלושה מסלולים.<br/><em>שף אחד.</em></h2>
+            <h2 className={styles.title}>שלושה מסלולים<br/><em>שף אחד</em></h2>
           </div>
           <p className={styles.lede}>שלוש דרכים שונות לארח. בוחרים את הסגנון, ואנחנו בונים את התפריט מסביב לאירוע, השוק והאורחים. אפשר להוסיף מנות, להחליף, להתאים - נחזור איתכם על הכול.</p>
         </div>
@@ -35,7 +29,6 @@ export default function Tracks({ onSelectTrack }) {
               <li>המתאים ביותר לאירועים גדולים - חתונות קטנות, ימי הולדת, אירועי חברה</li>
             </ul>
             <div className={styles.price}><span>הכי משתלם לאירועים גדולים</span></div>
-            <a href="#book" className={styles.cta} onClick={select('בופה - מינימום 20 אורחים')}>להזמין ←</a>
           </TrackCard>
 
           <TrackCard className={`${styles.track} ${styles.featured}`}>
@@ -52,7 +45,6 @@ export default function Tracks({ onSelectTrack }) {
               <li>ניקיון מלא אחרי</li>
             </ul>
             <div className={styles.price}><span style={{color:'var(--paper)'}}>החוויה האישית. המסלול שאנשים זוכרים.</span></div>
-            <a href="#book" className={styles.cta} onClick={select('אירוע שף - בבית, הגשה אישית')}>להזמין ←</a>
           </TrackCard>
 
           <TrackCard className={styles.track}>
@@ -68,7 +60,6 @@ export default function Tracks({ onSelectTrack }) {
               <li>ניקיון מלא אחרי</li>
             </ul>
             <div className={styles.price}><span>חוויה יוקרתית · אירוע עומד</span></div>
-            <a href="#book" className={styles.cta} onClick={select('מנות ביס - מינימום 15 אורחים')}>להזמין ←</a>
           </TrackCard>
         </div>
       </div>

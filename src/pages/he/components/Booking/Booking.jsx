@@ -1,59 +1,5 @@
-import { useMemo, useState, useEffect, useRef, forwardRef, useImperativeHandle } from 'react'
+import { useMemo, useState, useEffect } from 'react'
 import styles from './Booking.module.css'
-import Reels from '../Reels/Reels.jsx'
-import MenuTiers from '../MenuTiers/MenuTiers.jsx'
-
-const CHEF_TRACK = 'אירוע שף - בבית, הגשה אישית'
-
-function TableDesignMedia() {
-  const videoRef = useRef(null)
-  const [playing, setPlaying] = useState(false)
-
-  const toggle = () => {
-    const v = videoRef.current
-    if (!v) return
-    if (v.paused) {
-      v.play().then(() => setPlaying(true)).catch(() => {})
-    } else {
-      v.pause()
-      setPlaying(false)
-    }
-  }
-
-  const reset = () => {
-    const v = videoRef.current
-    if (v) v.currentTime = 0
-    setPlaying(false)
-  }
-
-  return (
-    <div className={`${styles.tdMedia} ${playing ? styles.tdPlaying : ''}`} onClick={toggle}>
-      <video
-        ref={videoRef}
-        className={styles.tdVideo}
-        src="/uploads/table-design-1.mp4"
-        poster="/uploads/table-design-1.jpg"
-        muted
-        playsInline
-        preload="metadata"
-        onEnded={reset}
-      />
-      {!playing && <img className={styles.tdPoster} src="/uploads/table-design-1.jpg" alt="עיצוב שולחן יוקרתי" />}
-      <button type="button" className={styles.tdPlay} onClick={(e) => { e.stopPropagation(); toggle() }} aria-label={playing ? 'עצור' : 'נגן'}>
-        {playing ? (
-          <svg viewBox="0 0 16 16" width="16" height="16" aria-hidden="true">
-            <rect x="3" y="2.5" width="3.2" height="11" rx="1" fill="currentColor"/>
-            <rect x="9.8" y="2.5" width="3.2" height="11" rx="1" fill="currentColor"/>
-          </svg>
-        ) : (
-          <svg viewBox="0 0 16 16" width="16" height="16" aria-hidden="true">
-            <path d="M4 2.5 L13 8 L4 13.5 Z" fill="currentColor"/>
-          </svg>
-        )}
-      </button>
-    </div>
-  )
-}
 
 const trackOptions = [
   '',
@@ -86,7 +32,7 @@ const timeSegs = ['צהריים','ערב מוקדם','ערב מאוחר']
 const channelSegs = ['וואטסאפ','טלפון','מייל']
 const hourSegs = ['בוקר','צהריים','ערב']
 
-const Booking = forwardRef(function Booking(_, ref) {
+export default function Booking() {
   const [values, setValues] = useState({
     track: '',
     date: '',
@@ -105,24 +51,10 @@ const Booking = forwardRef(function Booking(_, ref) {
   const [vibe, setVibe] = useState([])
   const [budget, setBudget] = useState(null)
   const [diet, setDiet] = useState([])
-  const [menuTiers, setMenuTiers] = useState({ basics: [], pastas: [], fishes: [] })
-  const [tableDesign, setTableDesign] = useState(false)
-  const [tableDesignConfirmed, setTableDesignConfirmed] = useState(false)
-  const [tableDesignHadConfirm, setTableDesignHadConfirm] = useState(false)
   const [submitted, setSubmitted] = useState(false)
   const [openSection, setOpenSection] = useState(0)
   const toggleSection = (idx) => setOpenSection(prev => prev === idx ? -1 : idx)
   const sectionAttrs = (idx) => ({ 'data-collapsed': openSection === idx ? 'false' : 'true' })
-
-  const removeTableDesign = () => { setTableDesign(false); setTableDesignConfirmed(false); setTableDesignHadConfirm(false) }
-  const confirmTableDesign = () => { setTableDesignConfirmed(true); setTableDesignHadConfirm(true) }
-  const cancelTableDesign = () => { if (tableDesignHadConfirm) setTableDesignConfirmed(true); else removeTableDesign() }
-
-  useImperativeHandle(ref, () => ({
-    setTrack(value) {
-      setValues((v) => ({ ...v, track: value }))
-    }
-  }))
 
   const set = (key) => (e) => setValues((v) => ({ ...v, [key]: e.target.value }))
 
@@ -166,10 +98,9 @@ const Booking = forwardRef(function Booking(_, ref) {
     if (values.email.trim()) score += 2
     if (channel) score += 2
     if (hours) score += 2
-    if (tableDesignConfirmed) score += 3
 
     return Math.min(100, score)
-  }, [values, time, channel, hours, occasion, vibe, budget, diet, tableDesignConfirmed])
+  }, [values, time, channel, hours, occasion, vibe, budget, diet])
 
   const note = pct < 25
     ? <>התחילו למלא - <em>כל פרט נוסף עוזר לאוהד להגיע מוכן.</em></>
@@ -193,22 +124,21 @@ const Booking = forwardRef(function Booking(_, ref) {
       <div className={styles.wrap}>
         <div className={styles.head}>
           <div>
-            <div className={styles.num}>/ 05 - הזמנה</div>
-            <h2 className={styles.title}>ספרו לנו<br/><em>על הערב.</em></h2>
+            <div className={styles.num}>/ 06 - הזמנה</div>
+            <h2 className={styles.title}>ספרו לנו<br/><em>על הערב</em></h2>
           </div>
           <p className={styles.lede}>לפני שנחזור אליכם, אנחנו רוצים להבין את האירוע - לא טופס בירוקרטי, סיפור קצר. ככל שתשתפו יותר, השף יוכל להציע תפריט מדויק יותר ולחזור עם הצעה אמיתית, לא רק שאלות.</p>
         </div>
 
         <div className={styles.grid}>
           <div>
-            <div className={styles.headline}>פחות שיחות.<br/><em>יותר תכנון.</em></div>
+            <div className={styles.headline}>פחות שיחות<br/><em>יותר תכנון</em></div>
             <p className={styles.sideText}>השף לא יתקשר לשאול שאלות. הוא יחזור אליכם עם הצעת תפריט מותאמת - אחרי שקרא את מה שכתבתם.</p>
             <ul className={styles.sideList}>
               <li><span className={styles.marker}>i</span><span>הטופס נשלח ישירות לאוהד - לא מוקד שיחות.</span></li>
               <li><span className={styles.marker}>ii</span><span>נחזור תוך 24 שעות, במייל או בוואטסאפ - איך שתבחרו.</span></li>
               <li><span className={styles.marker}>iii</span><span>אין כרטיס אשראי. סוגרים אחרי שראיתם את התפריט.</span></li>
             </ul>
-            <Reels />
           </div>
 
           <form className={styles.form} onSubmit={onSubmit}>
@@ -224,9 +154,6 @@ const Booking = forwardRef(function Booking(_, ref) {
                   <option value="">- בחרו מסלול -</option>
                   {trackOptions.slice(1).map(o => <option key={o}>{o}</option>)}
                 </select>
-                {values.track === CHEF_TRACK && (
-                  <MenuTiers value={menuTiers} onChange={setMenuTiers} guests={values.guests} />
-                )}
               </div>
               <div className={styles.field}>
                 <label>שעה של היום</label>
@@ -250,61 +177,6 @@ const Booking = forwardRef(function Booking(_, ref) {
                 <label>שכונה / עיר</label>
                 <input type="text" value={values.location} onChange={set('location')} placeholder="תל אביב צפון, רמת השרון, חיפה…" />
               </div>
-            </div>
-
-            {/* שדרוג - עיצוב שולחן ואווירה יוקרתית (תוספת לכל מסלול) */}
-            <div className={styles.formSection}>
-              {!tableDesign ? (
-                <button type="button" className={styles.upgrade} onClick={() => setTableDesign(true)}>
-                  <span className={styles.upgradeThumb}>
-                    <img src="/uploads/table-design-1.jpg" alt="עיצוב שולחן יוקרתי" />
-                  </span>
-                  <span className={styles.upgradeText}>
-                    <span className={styles.upgradeEyebrow}>שדרוג בתשלום · לכל מסלול</span>
-                    <span className={styles.upgradeTitle}>עיצוב שולחן ואווירה יוקרתית</span>
-                    <span className={styles.upgradeSub}>כלים מהודרים · עיצוב שולחן · נרות ופרחים · הקמה ופירוק</span>
-                  </span>
-                  <span className={styles.upgradePlus}>+</span>
-                </button>
-              ) : tableDesignConfirmed ? (
-                <div className={styles.upgradeSummary}>
-                  <div className={styles.upgradeSummaryHead}>
-                    <div className={styles.upgradeSummaryTitle}>
-                      <span className={styles.upgradeSummaryCheck}>
-                        <svg viewBox="0 0 24 24" width="13" height="13" aria-hidden="true"><path fill="none" stroke="currentColor" strokeWidth="2.6" strokeLinecap="round" strokeLinejoin="round" d="M5 12l4 4 10-10"/></svg>
-                      </span>
-                      עיצוב שולחן ואווירה יוקרתית · נוסף
-                    </div>
-                    <div className={styles.upgradeSummaryActions}>
-                      <button type="button" className={styles.upgradeSummaryEdit} onClick={() => setTableDesignConfirmed(false)}>ערוך</button>
-                      <button type="button" className={styles.upgradeSummaryRemove} onClick={removeTableDesign}>הסר</button>
-                    </div>
-                  </div>
-                  <div className={styles.upgradeSummarySub}>כלים מהודרים · עיצוב שולחן · פרחים ונרות · בתשלום, לפי היקף האירוע</div>
-                </div>
-              ) : (
-                <div className={styles.upgradeOpen}>
-                  <button type="button" className={styles.upgradeRemove} onClick={cancelTableDesign} aria-label="ביטול">×</button>
-                  <div className={styles.upgradeOpenHead}>
-                    <div className={styles.upgradeEyebrow}>שדרוג בתשלום · לכל מסלול</div>
-                    <div className={styles.upgradeOpenTitle}>עיצוב שולחן ואווירה יוקרתית</div>
-                  </div>
-                  <TableDesignMedia />
-                  <p className={styles.upgradeDesc}>
-                    הופכים את השולחן לחלק מהחוויה - <em>כלים מהודרים, מפות פשתן, פרחים טריים ונרות.</em> אנחנו מביאים, מקימים ומפרקים. לכם נשארת רק האווירה.
-                  </p>
-                  <ul className={styles.upgradeList}>
-                    <li>כלים וסכו"ם מהודרים</li>
-                    <li>עיצוב שולחן, מפות וראנר</li>
-                    <li>סידורי פרחים ונרות</li>
-                    <li>הקמה מלאה ופירוק אחרי</li>
-                  </ul>
-                  <div className={styles.upgradeNote}>תוספת בתשלום - <em>נתאים הצעה לפי היקף האירוע ומספר האורחים.</em></div>
-                  <button type="button" className={styles.upgradeConfirm} onClick={confirmTableDesign}>
-                    אישור - הוסיפו לאירוע
-                  </button>
-                </div>
-              )}
             </div>
 
             {/* Section 02 - הסיפור */}
@@ -444,6 +316,4 @@ const Booking = forwardRef(function Booking(_, ref) {
       </div>
     </section>
   )
-})
-
-export default Booking
+}

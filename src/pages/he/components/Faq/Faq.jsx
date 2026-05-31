@@ -46,7 +46,7 @@ export default function Faq() {
         <div className={styles.head}>
           <div>
             <div className={styles.num}>/ שאלות נפוצות</div>
-            <h2 className={styles.title}>לפני שמזמינים<br/><em>כדאי לדעת.</em></h2>
+            <h2 className={styles.title}>לפני שמזמינים<br/><em>כדאי לדעת</em></h2>
           </div>
           <p className={styles.lede}>כל מה שחשוב לדעת לפני האירוע. לא מצאתם תשובה? כתבו לנו בוואטסאפ ונחזור אליכם.</p>
         </div>

@@ -38,8 +38,8 @@
   transition: background .4s ease, padding .4s ease;
 }
 .step:last-child{border-left:0}
-.step:hover{ background: linear-gradient(180deg, rgba(181,87,59,.04), rgba(181,87,59,0)); }
-.step:hover .stepIcon{ background: var(--clay, #B5573B); color:var(--paper); border-color: var(--clay, #B5573B); transform: rotate(-6deg) }
+.step:hover{ background: linear-gradient(180deg, rgba(126,200,255,.04), rgba(126,200,255,0)); }
+.step:hover .stepIcon{ background: var(--clay, #7EC8FF); color:var(--paper); border-color: var(--clay, #7EC8FF); transform: rotate(-6deg) }
 .step:hover .stepTitle{ letter-spacing: -.025em }
 .stepNum{
   font-family:var(--label);

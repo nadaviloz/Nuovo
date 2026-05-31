@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 
-export default function useCountUp(target, { duration = 1600, decimals = 0 } = {}) {
+export default function useCountUp(target, { duration = 1500, decimals = 0 } = {}) {
   const ref = useRef(null)
   const [value, setValue] = useState(0)
   const started = useRef(false)

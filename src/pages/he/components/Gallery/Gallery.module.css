@@ -31,14 +31,11 @@
   display:flex;
   gap:24px;
   width:max-content;
-  animation: galleryScroll 60s linear infinite;
   will-change: transform;
   padding: 0 12px;
 }
-.marquee:hover .track{animation-play-state: paused}
-@keyframes galleryScroll{
-  from{transform:translateX(0)}
-  to{transform:translateX(50%)}
+@media (prefers-reduced-motion: reduce){
+  .track{ transform:none !important; }
 }
 .item{
   flex-shrink:0;

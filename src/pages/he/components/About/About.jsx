@@ -9,7 +9,7 @@ export default function About() {
         <div className={styles.head}>
           <div>
             <div className={styles.num}> מי אני</div>
-            <h2 className={styles.title}>השף<br/><em>שמגיע אליכם.</em></h2>
+            <h2 className={styles.title}>השף<br/><em>שמגיע אליכם</em></h2>
           </div>
           <p className={styles.lede}>שנים של ניסיון במטבחים, מאות אירועים - ויחס אישי שמרגישים מהרגע הראשון.</p>
         </div>
