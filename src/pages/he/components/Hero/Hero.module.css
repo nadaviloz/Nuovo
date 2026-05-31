@@ -203,46 +203,144 @@
 }
 
 @media (max-width: 900px){
+  /* Mobile redesign: light surface, hero image up top, headline + stacked CTAs below.
+     Scoped to mobile only — desktop keeps the dark cinematic layout. */
   .hero{
-    min-height:calc(100svh - 64px);
-    display:flex;
-    align-items:flex-end;
-    padding-top:40px;
-    padding-bottom:88px;
+    --ink:#111111;
+    --paper:#ffffff;
+    --muted:#5b5b66;
+    --brand:#2563eb;
+    min-height:0;
+    display:block;
+    background-color:#ffffff;
+    background-image:none;
+    background-attachment:scroll;
+    color:var(--ink);
+    padding: 20px 20px 48px;
+    overflow:visible;
   }
   .hero::before,.hero::after{display:none}
-  .wrap{width:100%}
+  .wrap{
+    width:100%;
+    padding-left:0; padding-right:0;
+  }
   .content{
     position:relative;
-    text-align:right;
+    text-align:center;
     max-width:none;
     margin:0;
+    display:flex;
+    flex-direction:column;
+    gap:20px;
   }
+
+  /* Image becomes a contained card at the top instead of a full-bleed background. */
+  .photoFrame{
+    position:relative;
+    inset:auto;
+    order:1;
+    width:100%;
+    aspect-ratio: 4 / 5;
+    border-radius:22px;
+    overflow:hidden;
+    box-shadow: 0 12px 32px rgba(15,23,42,.10), 0 0 0 1px rgba(15,23,42,.06);
+  }
+  .photoLayer{
+    background-position: center 28%;
+    background-size: cover;
+    transform: scale(1.02);
+    animation:none;
+  }
+  .photoLayer::after{ display:none; }
+
   .eyebrow{
-    position:static;transform:none;
-    justify-content:flex-start;
-    margin:0 0 22px;
+    order:2;
+    position:static; transform:none;
+    justify-content:center;
+    color:var(--brand);
+    font-weight:600;
+    margin:8px 0 0;
   }
+  .eyebrow::before{ background:var(--brand); }
+
   .headline{
-    position:static;right:auto;bottom:auto;
-    max-width:none;margin:0 0 18px;
-    font-size:clamp(40px, 12vw, 64px);
+    order:3;
+    position:static; right:auto; bottom:auto;
+    text-align:center;
+    max-width:none;
+    margin:0;
+    color:var(--ink);
+    text-shadow:none;
+    font-size:clamp(30px, 8.5vw, 42px);
+    line-height:1.1;
+    letter-spacing:-.02em;
   }
+  .headline em{
+    color:#9aa0ad;
+  }
+
   .lede{
-    position:static;right:auto;bottom:auto;
-    max-width:none;margin:0 0 30px;
-    font-size:17px;line-height:1.65;
+    order:4;
+    position:static; right:auto; bottom:auto;
+    text-align:center;
+    max-width:none;
+    margin:0 auto;
+    padding:0 4px;
+    font-size:16px;
+    line-height:1.65;
+    color:var(--muted);
+    font-weight:400;
+    opacity:1;
+    transform:none;
   }
+
   .ctas{
-    position:static;margin:0;
-    flex-direction:row;flex-wrap:wrap;
-    align-items:stretch;justify-content:flex-start;
-    gap:14px;
+    order:5;
+    position:static;
+    margin:8px 0 0;
+    flex-direction:column;
+    align-items:stretch;
+    justify-content:center;
+    gap:12px;
+    width:100%;
   }
-  .btnPrimary,.btnText{
-    position:static;left:auto;bottom:auto;
+
+  /* Primary: solid brand-blue with white text + white arrow. */
+  .btnPrimary{
+    background:var(--brand);
+    color:#ffffff;
+    padding:18px 24px;
+    border-radius:10px;
+    font-size:15px;
+    letter-spacing:.08em;
+    box-shadow: 0 8px 20px rgba(37,99,235,.28);
     justify-content:center;
   }
-  .btnPrimary{padding:22px 36px;font-size:13px}
-  .btnText{padding:18px 28px}
+  .btnPrimary:hover{
+    background:#1d4ed8;
+    box-shadow: 0 12px 26px rgba(37,99,235,.35);
+  }
+  .arrow{
+    width:auto; height:auto;
+    background:transparent;
+    color:#ffffff;
+    font-size:18px;
+  }
+
+  /* Secondary: outline / ghost with dark border + dark text on white. */
+  .btnText{
+    background:#ffffff;
+    color:var(--ink);
+    border:1.5px solid rgba(17,17,17,.85);
+    border-radius:10px;
+    padding:16px 24px;
+    font-size:14px;
+    letter-spacing:.08em;
+    justify-content:center;
+  }
+  .btnText:hover{
+    background:rgba(17,17,17,.04);
+    border-color:#111111;
+    box-shadow:none;
+  }
 }
