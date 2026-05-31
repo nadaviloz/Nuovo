@@ -110,16 +110,20 @@
 }
 @media (max-width: 720px){
   .peekLeft{
-    width: 340px;
-    bottom: -160px;
-    left: -30%;
-    opacity: .82;
+    width: 300px;
+    top: -90px;
+    bottom: auto;
+    left: -26%;
+    opacity: .8;
   }
+  /* Keep the fish dish actually on screen at the bottom of the section
+     instead of pushed off the top edge. */
   .peekRight{
     width: 280px;
-    top: -120px;
-    right: -28%;
-    opacity: .72;
+    top: auto;
+    bottom: -70px;
+    right: -22%;
+    opacity: .8;
   }
 }
 
@@ -351,6 +355,16 @@
   }
   .track:hover,
   .track:nth-child(n):hover{ transform: translateY(-6px) }
+  /* Keep every card's footer identical: the min-diners pill and the price
+     always stack the same way, instead of wrapping differently per card. */
+  .tMeta{
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-items: flex-start;
+    gap: 14px;
+  }
+  .tMin{ order: 1 }
+  .tPriceWrap{ order: 2 }
 }
 
 /* ── Reduced motion ───────────────────────────────────────────────── */

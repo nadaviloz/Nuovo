@@ -37,7 +37,16 @@
   opacity:.88;
 }
 @media (max-width:900px){
-  .peek{ display:none; }
+  /* Keep the dish on phones too — centered low behind the steps as a soft
+     splash, fully visible (not cut) and out of the way of the text. */
+  .peek{
+    display:block;
+    width:min(74vw,360px);
+    left:50%; right:auto;
+    bottom:-4%;
+    transform:translate(-50%,0) rotate(-1.5deg);
+    opacity:.5;
+  }
 }
 .head{
   display:grid;grid-template-columns:1fr 1.6fr;gap:60px;
