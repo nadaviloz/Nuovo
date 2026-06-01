@@ -8,7 +8,8 @@ const upgrades = [
     title: 'עמדת פיצות נאפולי סטייל',
     desc: 'בר פיצות מבצק משובח עם מחמצת 15 שנים, הפיצות נאפות בטאבון במקום לעיני הסועדים ויוצאות במגוון תוספות ורטבים.',
     price: '30',
-    img: '/assets/pizza-station.png'
+    img: '/assets/pizza-station.png',
+    accentImg: '/assets/pizza-cutout.png'
   },
   {
     id: 'pasta',
@@ -51,6 +52,15 @@ export default function Upgrades() {
             className={`${styles.band} ${i % 2 === 1 ? styles.bandFlip : ''}`}
             style={{ '--i': i }}
           >
+            {u.accentImg && (
+              <img
+                src={u.accentImg}
+                alt=""
+                aria-hidden="true"
+                className={styles.accentDish}
+                loading="lazy"
+              />
+            )}
             <div className={styles.media}>
               <img src={u.img} alt={u.title} loading="lazy" />
             </div>
