@@ -5,6 +5,8 @@ import Hero from './components/Hero/Hero.jsx'
 import About from './components/About/About.jsx'
 import Process from './components/Process/Process.jsx'
 import Tracks from './components/Tracks/Tracks.jsx'
+import MenuBridge from './components/MenuBridge/MenuBridge.jsx'
+import Upgrades from './components/Upgrades/Upgrades.jsx'
 import Testimonials from './components/Testimonials/Testimonials.jsx'
 import Faq from './components/Faq/Faq.jsx'
 import Kitchen from './components/Kitchen/Kitchen.jsx'
@@ -90,7 +92,7 @@ export default function HebrewPage() {
       const childSelectors = [
         '[class*="_lede_"]', '[class*="_num_"]',
         '[class*="_ctas_"]', '[class*="_copy_"] p',
-        '[class*="_card_"]', '[class*="_step_"]',
+        '[class*="_card_"]', '[class*="_step_"]', '[class*="_band_"]',
         '[class*="_chat_"]', '[class*="_qa_"]',
         '[class*="_eyebrow_"]'
       ].join(', ')
@@ -219,7 +221,9 @@ export default function HebrewPage() {
       <Hero />
       <About />
       <Process />
+      <MenuBridge />
       <Tracks />
+      <Upgrades />
       <Testimonials />
       <Faq />
       <Kitchen />

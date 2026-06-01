@@ -64,7 +64,7 @@ export default function Tracks() {
       <div className={styles.wrap}>
         <div className={styles.head}>
           <div>
-            <div className={styles.num}>/ 04 - מסלולים</div>
+            <div className={styles.num}>/ שלב 1 · מסלולים</div>
             <h2 className={styles.title}>חמישה מסלולים<br/><em>שף אחד</em></h2>
           </div>
           <p className={styles.lede}>חמש דרכים שונות לארח. בוחרים את הסגנון, ואנחנו בונים את התפריט מסביב לאירוע, השוק והאורחים. אפשר להוסיף מנות, להחליף, להתאים — נחזור איתכם על הכול.</p>
