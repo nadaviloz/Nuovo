@@ -14,42 +14,9 @@
   position:relative;
   isolation:isolate;
 }
-/* Seams: the top and bottom edges melt from the dim-white sections above
-   (Tracks) and below (Faq) into the black, so neither boundary is a hard line.
-   Bands live inside the section's outer padding, clear of the cards/title. */
+/* Clean edges into neighbouring light sections — no gradient melt bands. */
 .host::before,
-.host::after{
-  content:"";
-  position:absolute;
-  left:0; right:0;
-  height: clamp(45px, 6vh, 80px);
-  z-index:0;
-  pointer-events:none;
-}
-/* Long, eased melt: solid off-white at the very edge, dissolving gently into
-   the black over a tall band so neither boundary is a hard line. */
-.host::before{
-  top:0;
-  background: linear-gradient(180deg,
-    var(--paper) 0%,
-    rgba(216,212,207,.88) 7%,
-    rgba(216,212,207,.64) 16%,
-    rgba(216,212,207,.36) 30%,
-    rgba(216,212,207,.16) 46%,
-    rgba(216,212,207,.05) 66%,
-    rgba(216,212,207,0) 100%);
-}
-.host::after{
-  bottom:0;
-  background: linear-gradient(0deg,
-    var(--paper) 0%,
-    rgba(216,212,207,.88) 7%,
-    rgba(216,212,207,.64) 16%,
-    rgba(216,212,207,.36) 30%,
-    rgba(216,212,207,.16) 46%,
-    rgba(216,212,207,.05) 66%,
-    rgba(216,212,207,0) 100%);
-}
+.host::after{ display: none; }
 .wrap{
   max-width:var(--max);
   margin:0 auto;

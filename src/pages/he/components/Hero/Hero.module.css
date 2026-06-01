@@ -45,12 +45,11 @@
   from{ transform: scale(1.28); }
   to{   transform: scale(1.10); }
 }
-/* Softer cinematic overlays on top of the photo — keep the chef clearly visible. */
+/* Light vignette on the photo only — no bottom melt into the next section. */
 .photoLayer::after{
   content:""; position:absolute; inset:0;
   background:
-    radial-gradient(120% 70% at 70% 18%, rgba(8,8,8,0) 0%, rgba(8,8,8,.20) 60%, rgba(8,8,8,.68) 100%),
-    linear-gradient(180deg, rgba(8,8,8,.06) 0%, rgba(8,8,8,.28) 55%, rgba(8,8,8,.90) 100%);
+    radial-gradient(120% 70% at 70% 18%, rgba(8,8,8,0) 0%, rgba(8,8,8,.18) 62%, rgba(8,8,8,.48) 100%);
   pointer-events:none;
 }
 @media (prefers-reduced-motion: reduce){
@@ -59,27 +58,8 @@
 /* Stage var on .hero so the photoFrame can compute its inset. */
 .hero{ --frame-inset: clamp(18px, 2.2vw, 36px); }
 
-/* Seam into the dim-white Gallery below: the bottom edge melts from the dark
-   hero up into the page's off-white so there's no hard black→white line.
-   Sits above the photo (z 2) but below the headline/CTAs (z 3). */
-.hero::after{
-  content:"";
-  position:absolute;
-  left:0; right:0; bottom:0;
-  height: clamp(55px, 7vh, 95px);
-  z-index:2;
-  pointer-events:none;
-  /* Eased melt — stays soft, gathers to the solid off-white near the bottom,
-     so the photo dissolves into the page with no hard band. */
-  background: linear-gradient(180deg,
-    rgba(216,212,207,0) 0%,
-    rgba(216,212,207,.05) 34%,
-    rgba(216,212,207,.16) 54%,
-    rgba(216,212,207,.36) 70%,
-    rgba(216,212,207,.64) 84%,
-    rgba(216,212,207,.88) 93%,
-    var(--paper) 100%);
-}
+/* Clean cut into the light section below — no gradient melt band. */
+.hero::after{ display: none; }
 .wrap{
   max-width:var(--max);
   margin:0 auto;

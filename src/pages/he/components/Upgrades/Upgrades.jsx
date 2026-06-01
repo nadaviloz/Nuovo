@@ -22,7 +22,7 @@ const upgrades = [
     title: 'עמדת דגים נאים',
     desc: 'בר של דגים נאים על הקרח במגוון סוגים, מרקמים ורטבים. ניתן לבחור עד 4 סוגים שונים של מנות דגים.',
     price: '45',
-    img: '/assets/fish-salad.jpg'
+    img: '/assets/fish-station.png'
   },
   {
     id: 'dessert',

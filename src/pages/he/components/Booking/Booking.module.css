@@ -17,42 +17,9 @@
   position:relative;
   isolation:isolate;
 }
-/* Seams: top/bottom edges melt from the dim-white neighbours into the black so
-   there's no hard line. Bands sit in the section's outer padding, behind the
-   form card and headline. */
+/* Clean edges into neighbouring light sections — no gradient melt bands. */
 .section::before,
-.section::after{
-  content:"";
-  position:absolute;
-  left:0; right:0;
-  height: clamp(45px, 6vh, 80px);
-  z-index:0;
-  pointer-events:none;
-}
-/* Long, eased melt: solid off-white at the very edge, dissolving gently into
-   the black over a tall band so neither boundary is a hard line. */
-.section::before{
-  top:0;
-  background: linear-gradient(180deg,
-    var(--paper) 0%,
-    rgba(216,212,207,.88) 7%,
-    rgba(216,212,207,.64) 16%,
-    rgba(216,212,207,.36) 30%,
-    rgba(216,212,207,.16) 46%,
-    rgba(216,212,207,.05) 66%,
-    rgba(216,212,207,0) 100%);
-}
-.section::after{
-  bottom:0;
-  background: linear-gradient(0deg,
-    var(--paper) 0%,
-    rgba(216,212,207,.88) 7%,
-    rgba(216,212,207,.64) 16%,
-    rgba(216,212,207,.36) 30%,
-    rgba(216,212,207,.16) 46%,
-    rgba(216,212,207,.05) 66%,
-    rgba(216,212,207,0) 100%);
-}
+.section::after{ display: none; }
 .section .form{
   --ink: #0A0A0A;
   --ink-70: rgba(10,10,10,.7);
