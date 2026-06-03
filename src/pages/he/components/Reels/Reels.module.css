@@ -17,18 +17,18 @@
 }
 .grid{
   display:grid;
-  grid-template-columns: minmax(0, 320px);
+  grid-template-columns: minmax(0, 360px);
   gap:18px;
-  justify-content:start;
+  justify-content:center;
 }
 .grid.multi{
-  grid-template-columns: repeat(2, minmax(0, 220px));
-  gap:14px;
+  grid-template-columns: repeat(2, minmax(0, 360px));
+  gap:24px;
 }
 .card{
   position:relative;
   aspect-ratio: 9/16;
-  border-radius:10px;
+  border-radius:14px;
   overflow:hidden;
   background:#0a0a0a;
   border:1px solid var(--rule);
@@ -58,7 +58,7 @@
 }
 .name{
   font-family:var(--serif);
-  font-weight:400; font-size:16px; letter-spacing:-.01em;
+  font-weight:400; font-size:18px; letter-spacing:-.01em;
   text-shadow: 0 2px 14px rgba(0,0,0,.6);
 }
 .poster{
@@ -71,7 +71,7 @@
 .toggle{
   position:absolute;
   left:50%; top:50%; transform:translate(-50%,-50%);
-  width:54px; height:54px;
+  width:64px; height:64px;
   border-radius:50%;
   background: rgba(10,10,10,.5);
   -webkit-backdrop-filter: blur(4px);

@@ -1,0 +1,166 @@
+/* ──────────────────────────────────────────────────────────────────────────
+   Pure Flavors — "אז מה זה בעצם שולחן השף?" The concept + food philosophy
+   from the brief (page 3, the PURE FLAVORS pillar). Sets up the menus.
+   Editorial: section head + a tall dish photo beside the philosophy copy.
+   Mirrors the Table Art / Service Includes section tokens.
+   ──────────────────────────────────────────────────────────────────── */
+.section{
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  margin-top: clamp(24px, 4vw, 64px);
+  padding-top: clamp(86px, 9vw, 150px);
+  padding-bottom: clamp(82px, 9vw, 150px);
+  background: transparent;
+
+  --ink: #2B1C12;
+  --ink-72: rgba(43, 28, 18, .72);
+  --ink-56: rgba(43, 28, 18, .56);
+  --copper: #8A6044;
+  --rule: rgba(95, 69, 50, .16);
+}
+.section::before{
+  content: "";
+  position: absolute;
+  top: 0;
+  left: var(--pad-x);
+  right: var(--pad-x);
+  height: 1px;
+  background: linear-gradient(90deg,
+    rgba(95,69,50,0),
+    rgba(95,69,50,.22) 18%,
+    rgba(138,96,68,.28) 50%,
+    rgba(95,69,50,.22) 82%,
+    rgba(95,69,50,0)
+  );
+  pointer-events: none;
+}
+
+.wrap{
+  max-width: var(--max);
+  margin: 0 auto;
+  padding-left: var(--pad-x);
+  padding-right: var(--pad-x);
+}
+
+/* ── Section head ───────────────────────────────────────────────────── */
+.head{
+  display: grid;
+  grid-template-columns: 1.1fr .9fr;
+  gap: clamp(32px, 5vw, 72px);
+  align-items: center;
+  margin-bottom: clamp(54px, 7vw, 104px);
+}
+.num{
+  font-family: var(--label);
+  font-size: 11px;
+  letter-spacing: .24em;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: var(--copper);
+  direction: ltr;
+  text-align: right;
+}
+.title{
+  font-family: var(--serif);
+  font-weight: 600;
+  font-size: clamp(40px, 5.4vw, 88px);
+  line-height: .98;
+  letter-spacing: -.04em;
+  margin-top: 16px;
+  color: var(--ink);
+  text-align: right;
+}
+.title em{
+  font-family: var(--accent);
+  font-style: normal;
+  font-weight: 400;
+}
+.lede{
+  font-size: clamp(18px, 1.5vw, 24px);
+  line-height: 1.7;
+  color: var(--ink-72);
+  font-weight: 300;
+  text-align: right;
+  max-width: 40ch;
+  justify-self: start;
+}
+
+/* ── Body: dish photo beside the philosophy copy ────────────────────── */
+.body{
+  display: grid;
+  grid-template-columns: .92fr 1.08fr;
+  gap: clamp(40px, 6vw, 100px);
+  align-items: center;
+  direction: rtl;
+}
+.media{
+  margin: 0;
+  position: relative;
+  border-radius: 3px;
+  overflow: hidden;
+  aspect-ratio: 4 / 5;
+  box-shadow: 0 30px 60px -34px rgba(40, 32, 26, .5);
+}
+.media img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.copy{ min-width: 0; }
+.label{
+  font-family: var(--label);
+  font-size: 12px;
+  letter-spacing: .3em;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: var(--copper);
+  direction: ltr;
+  text-align: right;
+  padding-bottom: clamp(16px, 2vw, 24px);
+  margin-bottom: clamp(22px, 2.6vw, 34px);
+  border-bottom: 1px solid var(--rule);
+}
+.para{
+  font-size: clamp(17px, 1.4vw, 22px);
+  line-height: 1.85;
+  color: var(--ink-72);
+  font-weight: 300;
+  text-align: right;
+}
+.para + .para{ margin-top: clamp(18px, 2vw, 28px); }
+.closing{
+  margin-top: clamp(24px, 2.8vw, 38px);
+  font-family: var(--serif);
+  font-size: clamp(20px, 1.9vw, 28px);
+  line-height: 1.4;
+  font-weight: 600;
+  letter-spacing: -.02em;
+  color: var(--ink);
+}
+
+/* ── Mobile ─────────────────────────────────────────────────────────── */
+@media (max-width: 900px){
+  .section{
+    padding-top: clamp(64px, 16vw, 92px);
+    padding-bottom: clamp(74px, 17vw, 104px);
+  }
+  .head{
+    grid-template-columns: 1fr;
+    margin-bottom: clamp(40px, 10vw, 56px);
+  }
+  .lede{
+    max-width: none;
+    justify-self: stretch;
+  }
+  .body{
+    grid-template-columns: 1fr;
+    gap: clamp(30px, 8vw, 44px);
+  }
+  .media{
+    aspect-ratio: 3 / 4;
+    max-height: 70vh;
+  }
+}

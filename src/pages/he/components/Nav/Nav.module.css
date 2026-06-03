@@ -1,11 +1,11 @@
 .nav{
   --clay:#6B4423;
-  position:sticky;top:0;z-index:10;
-  background:rgba(14,14,14,.78);
-  backdrop-filter: blur(16px) saturate(140%);
-  -webkit-backdrop-filter: blur(16px) saturate(140%);
-  border-bottom:1px solid rgba(255,255,255,.08);
-  transition: box-shadow .35s ease, background .35s ease, border-color .35s ease;
+  /* Floating pill: a fixed, transparent full-width wrapper with side gutters;
+     the rounded "pill" itself is .navInner. pointer-events are off on the
+     wrapper so it never blocks clicks in the gutters. */
+  position:fixed;top:14px;left:0;right:0;z-index:50;
+  padding:0 clamp(14px, 4vw, 40px);
+  pointer-events:none;
   animation: navIn .6s cubic-bezier(.2,.7,.2,1) both;
   will-change: transform, opacity;
 }
@@ -16,19 +16,27 @@
 @media (prefers-reduced-motion: reduce){
   .nav{ animation:none }
 }
-.scrolled{
+.scrolled .navInner{
   background:rgba(10,10,10,.92);
-  box-shadow: 0 12px 40px rgba(0,0,0,.35);
-  border-bottom-color: rgba(255,255,255,.1);
+  box-shadow: 0 16px 44px rgba(0,0,0,.42);
+  border-color: rgba(255,255,255,.14);
 }
 .navInner{
   position:relative;
+  pointer-events:auto;
   display:flex;align-items:center;justify-content:space-between;
-  height:76px;
+  height:68px;
   max-width:var(--max);
   margin:0 auto;
-  padding-left:var(--pad-x);
-  padding-right:var(--pad-x);
+  padding-left:clamp(22px, 3vw, 36px);
+  padding-right:clamp(22px, 3vw, 36px);
+  background:rgba(14,14,14,.72);
+  backdrop-filter: blur(18px) saturate(150%);
+  -webkit-backdrop-filter: blur(18px) saturate(150%);
+  border:1px solid rgba(255,255,255,.10);
+  border-radius:999px;
+  box-shadow:0 10px 34px rgba(0,0,0,.30);
+  transition: box-shadow .35s ease, background .35s ease, border-color .35s ease;
 }
 .brand{
   font-family:"Cormorant Garamond", serif;
@@ -43,10 +51,10 @@
 }
 .dot{width:5px;height:5px;background:var(--clay);display:inline-block;border-radius:50%;transform:translateY(-3px);margin-inline-start:2px}
 .navLinks{
-  display:flex;gap:36px;
+  display:flex;gap:30px;
   font-family:var(--label);
-  font-size:12px;letter-spacing:.16em;text-transform:uppercase;
-  color:rgba(255,255,255,.6);font-weight:500;
+  font-size:14.5px;letter-spacing:.08em;text-transform:uppercase;
+  color:rgba(255,255,255,.62);font-weight:500;
 }
 .navLinks a{
   position:relative;
@@ -63,7 +71,7 @@
 .navLinks a:hover::after{transform: scaleX(1); transform-origin: left center}
 .navCta{
   font-family:var(--label);
-  font-size:12px;letter-spacing:.16em;text-transform:uppercase;font-weight:500;
+  font-size:13.5px;letter-spacing:.1em;text-transform:uppercase;font-weight:500;
   color:var(--paper);
   padding:13px 26px;border:1px solid rgba(255,255,255,.45);border-radius:999px;
   transition: background .3s ease, color .3s ease, border-color .3s ease, transform .3s ease, box-shadow .3s ease;
@@ -103,13 +111,15 @@
 .mobileMenu{
   display:none;
   position:absolute;
-  top:100%;left:0;right:0;
+  top:calc(100% + 10px);
+  left:clamp(14px,4vw,40px);right:clamp(14px,4vw,40px);
   background:rgba(10,10,10,.98);
   backdrop-filter: blur(16px) saturate(140%);
   -webkit-backdrop-filter: blur(16px) saturate(140%);
-  border-bottom:1px solid rgba(255,255,255,.1);
+  border:1px solid rgba(255,255,255,.12);
+  border-radius:22px;
   box-shadow: 0 24px 48px rgba(0,0,0,.45);
-  padding: 8px var(--pad-x) 30px;
+  padding: 10px 22px 26px;
   flex-direction:column;
 }
 .mobileLinks{display:flex;flex-direction:column}

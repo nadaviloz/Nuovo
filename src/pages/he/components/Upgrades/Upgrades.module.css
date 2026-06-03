@@ -139,8 +139,8 @@
 }
 
 .desc{
-  font-size: clamp(15px, 1.05vw, 17px);
-  line-height: 1.7;
+  font-size: clamp(16.5px, 1.15vw, 19px);
+  line-height: 1.78;
   color: var(--ink-70);
   font-weight: 400;
   text-align: right;

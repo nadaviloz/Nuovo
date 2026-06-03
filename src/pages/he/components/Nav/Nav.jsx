@@ -5,7 +5,7 @@ const LINKS = [
   { href: '#about', label: 'מי אני' },
   { href: '#how', label: 'איך זה עובד' },
   { href: '#tracks', label: 'מסלולים' },
-  { href: '#faq', label: 'שאלות נפוצות' },
+  { href: '#service', label: 'מה כלול' },
 ]
 
 export default function Nav() {

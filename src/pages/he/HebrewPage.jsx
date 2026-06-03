@@ -4,17 +4,20 @@ import Nav from './components/Nav/Nav.jsx'
 import Hero from './components/Hero/Hero.jsx'
 import About from './components/About/About.jsx'
 import Process from './components/Process/Process.jsx'
+import PureFlavors from './components/PureFlavors/PureFlavors.jsx'
 import Tracks from './components/Tracks/Tracks.jsx'
 import MenuBridge from './components/MenuBridge/MenuBridge.jsx'
 import Upgrades from './components/Upgrades/Upgrades.jsx'
 import TableArt from './components/TableArt/TableArt.jsx'
 import Testimonials from './components/Testimonials/Testimonials.jsx'
-import Faq from './components/Faq/Faq.jsx'
 import Kitchen from './components/Kitchen/Kitchen.jsx'
+import ServiceIncludes from './components/ServiceIncludes/ServiceIncludes.jsx'
 import Booking from './components/Booking/Booking.jsx'
 import Footer from './components/Footer/Footer.jsx'
 import ScrollProgress from './components/ScrollProgress/ScrollProgress.jsx'
 import FloatWhatsApp from './components/FloatWhatsApp/FloatWhatsApp.jsx'
+import FloatBook from './components/FloatBook/FloatBook.jsx'
+import BackToTop from './components/BackToTop/BackToTop.jsx'
 
 /* Split a headline element's children by <br> into lines, then wrap each
    line in <span.he-mask><span.he-inner>…</span></span>. Idempotent. */
@@ -222,16 +225,19 @@ export default function HebrewPage() {
       <Hero />
       <About />
       <Process />
+      <PureFlavors />
       <MenuBridge />
       <Tracks />
       <Upgrades />
       <TableArt />
       <Testimonials />
-      <Faq />
+      <ServiceIncludes />
       <Kitchen />
       <Booking />
       <Footer />
       <FloatWhatsApp />
+      <FloatBook />
+      <BackToTop />
     </div>
   )
 }

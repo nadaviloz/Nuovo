@@ -12,9 +12,9 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
    pull-back ease, slow stagger, never a bounce.
    ──────────────────────────────────────────────────────────────────────── */
 :root{
-  --reveal-duration: .9s;
+  --reveal-duration: 1.05s;
   --reveal-ease: cubic-bezier(0.16, 1, 0.3, 1);
-  --reveal-stagger: 120ms;
+  --reveal-stagger: 110ms;
   --mask-overshoot: 0.14em;
 
   --parallax-amount: 0.15;
@@ -55,6 +55,33 @@ section [class*="_headline_"] em,
 header [class*="_title_"] em{
   font-weight: 500;
   letter-spacing: -.034em;
+}
+
+/* ──────────────────────────────────────────────────────────────────────────
+   Readability pass. Hebrew body copy was set thin (weight 300) at small clamp
+   sizes and read hard. This raises the floor site-wide via the hashed
+   CSS-module class stems (matched case-insensitively, distinctive enough not
+   to mis-target). Specificity (0,1,1) beats each component's own `.x` rule,
+   so it wins without !important; display titles/quotes stay untouched.
+   ──────────────────────────────────────────────────────────────────────── */
+section [class*="lede" i],
+header  [class*="lede" i]{
+  font-size: clamp(18px, 1.45vw, 23px);
+  line-height: 1.8;
+  font-weight: 400;
+}
+/* Running body copy + descriptions (Process, Tracks, Service Includes). */
+section [class*="stepBody" i],
+section [class*="tDesc" i],
+section [class*="itemText" i]{
+  font-size: clamp(17px, 1.2vw, 20px);
+  line-height: 1.82;
+  font-weight: 400;
+}
+/* Pure Flavors paragraphs are already large — just firm the weight. */
+section [class*="para" i]{
+  font-weight: 400;
+  line-height: 1.85;
 }
 
 

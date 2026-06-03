@@ -1,0 +1,243 @@
+/* ──────────────────────────────────────────────────────────────────────────
+   Service Includes — "מה כלול בשירות שלנו?" Two editorial columns,
+   hairline rows, no card boxes. Mirrors the Table Art section tokens.
+   ──────────────────────────────────────────────────────────────────── */
+.section{
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  margin-top: clamp(24px, 4vw, 64px);
+  padding-top: clamp(86px, 9vw, 150px);
+  padding-bottom: clamp(82px, 9vw, 150px);
+  background: transparent;
+
+  --ink: #2B1C12;
+  --ink-72: rgba(43, 28, 18, .72);
+  --ink-56: rgba(43, 28, 18, .56);
+  --ink-40: rgba(43, 28, 18, .40);
+  --copper: #8A6044;
+  --copper-soft: rgba(138, 96, 68, .34);
+  --rule: rgba(95, 69, 50, .16);
+}
+.section::before{
+  content: "";
+  position: absolute;
+  top: 0;
+  left: var(--pad-x);
+  right: var(--pad-x);
+  height: 1px;
+  background: linear-gradient(90deg,
+    rgba(95,69,50,0),
+    rgba(95,69,50,.22) 18%,
+    rgba(138,96,68,.28) 50%,
+    rgba(95,69,50,.22) 82%,
+    rgba(95,69,50,0)
+  );
+  pointer-events: none;
+}
+
+/* Seared-tuna plate peeking off the left edge — bleeds half off the page and
+   fuses to the paper with a radial mask + warm drop-shadow (FAQ treatment). */
+.peek{
+  position: absolute;
+  z-index: 0;
+  pointer-events: none;
+  height: auto;
+  width: clamp(300px, 24vw, 440px);
+  bottom: 16%;
+  left: 0;
+  transform: translate(-46%, 6%);
+  filter: drop-shadow(0 16px 36px rgba(40, 32, 26, .12));
+  opacity: .98;
+}
+
+.wrap{
+  position: relative;
+  z-index: 1;
+  max-width: var(--max);
+  margin: 0 auto;
+  padding-left: var(--pad-x);
+  padding-right: var(--pad-x);
+}
+
+/* ── Section head ───────────────────────────────────────────────────── */
+.head{
+  display: grid;
+  grid-template-columns: 1.1fr .9fr;
+  gap: clamp(32px, 5vw, 72px);
+  align-items: center;
+  margin-bottom: clamp(54px, 7vw, 104px);
+}
+.num{
+  font-family: var(--label);
+  font-size: 11px;
+  letter-spacing: .24em;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: var(--copper);
+  direction: rtl;
+  text-align: right;
+}
+.title{
+  font-family: var(--serif);
+  font-weight: 600;
+  font-size: clamp(44px, 6vw, 96px);
+  line-height: .96;
+  letter-spacing: -.04em;
+  margin-top: 16px;
+  color: var(--ink);
+  text-align: right;
+}
+.title em{
+  font-family: var(--accent);
+  font-style: normal;
+  font-weight: 400;
+}
+.lede{
+  font-size: clamp(17px, 1.35vw, 21px);
+  line-height: 1.86;
+  color: var(--ink-72);
+  font-weight: 300;
+  text-align: right;
+  max-width: 48ch;
+  justify-self: start;
+}
+
+/* ── Two columns ────────────────────────────────────────────────────── */
+.cols{
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(40px, 6vw, 96px);
+  direction: rtl;
+}
+.spine{
+  position: absolute;
+  top: 6px;
+  bottom: 6px;
+  left: 50%;
+  width: 1px;
+  transform: translateX(-50%);
+  background: linear-gradient(180deg,
+    rgba(95,69,50,0),
+    rgba(95,69,50,.20) 12%,
+    rgba(95,69,50,.20) 88%,
+    rgba(95,69,50,0)
+  );
+  pointer-events: none;
+}
+
+.col{ min-width: 0; }
+.colHead{
+  font-family: var(--serif);
+  font-weight: 600;
+  font-size: clamp(22px, 2.4vw, 32px);
+  letter-spacing: -.02em;
+  line-height: 1.1;
+  text-align: right;
+  padding-bottom: clamp(16px, 2vw, 24px);
+  margin-bottom: clamp(8px, 1.4vw, 16px);
+  border-bottom: 1px solid var(--rule);
+}
+.colHeadIn{ color: var(--ink); }
+.colHeadOut{ color: var(--ink-56); }
+
+.list{
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.item{
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: clamp(12px, 1.4vw, 18px);
+  align-items: start;
+  padding: clamp(18px, 2.2vw, 26px) 0;
+  border-bottom: 1px solid var(--rule);
+}
+.item:last-child{ border-bottom: 0; }
+
+.markWrap{
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: clamp(28px, 2.4vw, 34px);
+  height: clamp(28px, 2.4vw, 34px);
+  border-radius: 50%;
+  margin-top: 2px;
+  flex: none;
+}
+.markIn{
+  color: var(--copper);
+  box-shadow: inset 0 0 0 1px var(--copper-soft);
+}
+.markOut{
+  color: var(--ink-40);
+  box-shadow: inset 0 0 0 1px var(--rule);
+}
+.mark{ display: block; }
+
+.itemBody{ min-width: 0; }
+.itemTitle{
+  font-family: var(--serif);
+  font-weight: 600;
+  font-size: clamp(18px, 1.5vw, 23px);
+  line-height: 1.2;
+  letter-spacing: -.02em;
+  color: var(--ink);
+  text-align: right;
+}
+.itemText{
+  margin-top: 6px;
+  font-size: clamp(15px, 1.12vw, 17px);
+  line-height: 1.72;
+  color: var(--ink-72);
+  font-weight: 300;
+  text-align: right;
+}
+.colHeadOut ~ .list .itemTitle{ color: var(--ink-72); }
+
+/* ── Travel note ────────────────────────────────────────────────────── */
+.note{
+  width: min(82%, 760px);
+  margin: clamp(48px, 6vw, 84px) auto 0;
+  padding-top: clamp(22px, 2.6vw, 34px);
+  border-top: 1px solid var(--rule);
+  text-align: center;
+  font-size: clamp(15px, 1.1vw, 17px);
+  letter-spacing: .01em;
+  line-height: 1.75;
+  color: var(--ink-56);
+  font-weight: 400;
+}
+
+/* ── Mobile ─────────────────────────────────────────────────────────── */
+@media (max-width: 900px){
+  .section{
+    padding-top: clamp(64px, 16vw, 92px);
+    padding-bottom: clamp(74px, 17vw, 104px);
+  }
+  .head{
+    grid-template-columns: 1fr;
+    margin-bottom: clamp(44px, 11vw, 64px);
+  }
+  .lede{
+    max-width: none;
+    justify-self: stretch;
+  }
+  .cols{
+    grid-template-columns: 1fr;
+    gap: clamp(38px, 10vw, 56px);
+  }
+  .spine{ display: none; }
+  .note{
+    width: 100%;
+  }
+  /* Plate hugs the bottom-left edge, only a soft crescent showing. */
+  .peek{
+    width: min(60vw, 290px);
+    bottom: clamp(8px, 4vw, 36px);
+    transform: translate(-30%, 22%);
+    opacity: .5;
+  }
+}

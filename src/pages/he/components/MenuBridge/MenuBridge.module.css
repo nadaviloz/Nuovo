@@ -124,8 +124,8 @@
 }
 
 .stepHint{
-  font-size: clamp(13px, 1vw, 15px);
-  line-height: 1.65;
+  font-size: clamp(14.5px, 1.1vw, 16.5px);
+  line-height: 1.7;
   color: var(--ink-55);
   font-weight: 400;
   text-align: right;

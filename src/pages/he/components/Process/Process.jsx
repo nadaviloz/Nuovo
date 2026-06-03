@@ -26,7 +26,7 @@ export default function Process() {
             <div className={styles.num}>/ 02 - האירוע</div>
             <h2 className={styles.title}>ארבעה שלבים<br/><em>לילה אחד בלתי נשכח</em></h2>
           </div>
-          <p className={styles.lede}>בלי שיחות טעימה, בלי טופס משעמם. בוחרים מסלול תאריך ואנחנו דואגים לכל השאר - מהבצק הראשון ועד הכוס האחרונה במקומה.</p>
+          <p className={styles.lede}>בלי שיחות טעימה, בלי טופס משעמם. בוחרים מסלול תאריך ואנחנו דואגים לכל השאר - מהבצק הראשון ועד הצלחת האחרונה במקומה.</p>
         </div>
         <div className={styles.grid}>
           {steps.map((s, i) => (

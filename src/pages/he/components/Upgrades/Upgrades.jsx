@@ -8,8 +8,7 @@ const upgrades = [
     title: 'עמדת פיצות נאפולי סטייל',
     desc: 'בר פיצות מבצק משובח עם מחמצת 15 שנים, הפיצות נאפות בטאבון במקום לעיני הסועדים ויוצאות במגוון תוספות ורטבים.',
     price: '30',
-    img: '/assets/pizza-station.png',
-    accentImg: '/assets/pizza-cutout.png'
+    img: '/assets/pizza-station.png'
   },
   {
     id: 'pasta',
