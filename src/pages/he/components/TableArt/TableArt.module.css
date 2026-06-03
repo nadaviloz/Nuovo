@@ -335,23 +335,22 @@
   .stepKicker{
     margin-bottom: 12px;
   }
-  .arrow{
-    width: clamp(64px, 18vw, 88px);
-    opacity: .64;
-  }
-  .flowItem:nth-child(1) .arrow{
-    left: 18%;
-    bottom: clamp(-58px, -12vw, -42px);
-    transform: rotate(-8deg);
-  }
-  .flowItem:nth-child(2) .arrow{
-    right: 18%;
-    bottom: clamp(-58px, -12vw, -42px);
-    transform: scaleX(-1) rotate(-8deg);
-  }
+  /* Steps stack vertically on mobile, so every connector simply points
+     straight DOWN to the next step — centered, identical, no side-offset or
+     mirror-flip (those were for the desktop left/right zig-zag and made the
+     arrows lean off-axis into the photos). The asset is already a down-arrow.
+     The nth-child selectors are repeated here to reset the desktop rules'
+     left/right anchors (in RTL a leftover `right` would otherwise win). */
+  .arrow,
+  .flowItem:nth-child(1) .arrow,
+  .flowItem:nth-child(2) .arrow,
   .flowItem:nth-child(3) .arrow{
+    width: clamp(40px, 12vw, 54px);
+    opacity: .6;
     left: 50%;
-    bottom: clamp(-62px, -13vw, -46px);
+    right: auto;
+    bottom: clamp(-60px, -13vw, -46px);
+    transform: translateX(-50%);
   }
   .galleryWrap{
     margin-top: clamp(34px, 10vw, 52px);
