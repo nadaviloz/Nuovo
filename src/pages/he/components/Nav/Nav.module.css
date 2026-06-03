@@ -51,10 +51,10 @@
 }
 .dot{width:5px;height:5px;background:var(--clay);display:inline-block;border-radius:50%;transform:translateY(-3px);margin-inline-start:2px}
 .navLinks{
-  display:flex;gap:30px;
+  display:flex;gap:28px;
   font-family:var(--label);
-  font-size:14.5px;letter-spacing:.08em;text-transform:uppercase;
-  color:rgba(255,255,255,.62);font-weight:500;
+  font-size:16.5px;letter-spacing:.05em;text-transform:uppercase;
+  color:rgba(255,255,255,.82);font-weight:500;
 }
 .navLinks a{
   position:relative;
@@ -71,7 +71,7 @@
 .navLinks a:hover::after{transform: scaleX(1); transform-origin: left center}
 .navCta{
   font-family:var(--label);
-  font-size:13.5px;letter-spacing:.1em;text-transform:uppercase;font-weight:500;
+  font-size:15px;letter-spacing:.08em;text-transform:uppercase;font-weight:500;
   color:var(--paper);
   padding:13px 26px;border:1px solid rgba(255,255,255,.45);border-radius:999px;
   transition: background .3s ease, color .3s ease, border-color .3s ease, transform .3s ease, box-shadow .3s ease;
