@@ -61,9 +61,18 @@
   pointer-events: none;
   height: auto;
   border-radius: 50%;
-  /* Soft round vignette so the photo edge dissolves into the marble. */
-  -webkit-mask-image: radial-gradient(circle at 50% 50%, #000 58%, transparent 72%);
-          mask-image: radial-gradient(circle at 50% 50%, #000 58%, transparent 72%);
+  /* Soft round vignette so the photo edge dissolves into the marble. The food
+     shots sit on bright-white plates/backgrounds; fading raw white out to the
+     muted page tone left a glowing halo around each peek. Pulling the whole
+     image down a touch (brightness/contrast) and warming it (sepia) seats the
+     whites near the page's warm off-white BEFORE they fade, so the edge melts
+     in instead of glowing. The base filter is re-declared per-peek below to
+     keep each one's directional drop-shadow — those rules prepend these same
+     tone adjustments. */
+  filter: brightness(.82) contrast(1.05) saturate(1.06) sepia(.1);
+  /* Slightly tighter fade (was 58%/72%) trims the pure-white plate rim. */
+  -webkit-mask-image: radial-gradient(circle at 50% 50%, #000 50%, transparent 66%);
+          mask-image: radial-gradient(circle at 50% 50%, #000 50%, transparent 66%);
 }
 
 /* Left bowl — the tomato, the visual lead. Mid-height, larger, opaque. */
@@ -73,6 +82,7 @@
   width: clamp(420px, 38vw, 640px);
   transform: translate(-58%, -50%);
   filter:
+    brightness(.82) contrast(1.05) saturate(1.06) sepia(.1)
     drop-shadow(0 30px 60px rgba(120, 50, 10, .22))
     drop-shadow(0 8px 20px rgba(120, 50, 10, .14));
   opacity: .96;
@@ -86,6 +96,7 @@
   width: clamp(360px, 32vw, 540px);
   transform: translate(58%, 35%);
   filter:
+    brightness(.82) contrast(1.05) saturate(1.06) sepia(.1)
     drop-shadow(0 30px 60px rgba(30, 60, 80, .22))
     drop-shadow(0 8px 20px rgba(30, 60, 80, .14));
   opacity: .92;

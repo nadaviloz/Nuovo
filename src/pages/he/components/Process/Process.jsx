@@ -10,8 +10,7 @@ const steps = [
 export default function Process() {
   return (
     <section id="how" className={styles.section}>
-      {/* Plated dish peeking off the right edge — background splash, same
-          radial-mask treatment as the menu & FAQ sections. */}
+      {/* Decorative plate bleeding off the right edge. */}
       <img
         src="/assets/flower-table-cutout.png"
         alt=""

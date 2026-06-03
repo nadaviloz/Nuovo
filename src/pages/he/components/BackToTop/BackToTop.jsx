@@ -1,8 +1,7 @@
 import { useEffect, useState } from 'react'
 import styles from './BackToTop.module.css'
 
-/* Small round button that fades in (bottom-right, above the WhatsApp FAB)
-   after the visitor scrolls down, gliding the page back to the top on click. */
+// Round button that fades in after scrolling and glides back to the top.
 export default function BackToTop() {
   const [show, setShow] = useState(false)
 

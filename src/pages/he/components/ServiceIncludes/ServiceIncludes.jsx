@@ -1,9 +1,6 @@
 import styles from './ServiceIncludes.module.css'
 
-/* "מה כלול בשירות שלנו?" — the expectation-setter from the brief (page 6).
-   Two editorial columns: what the service includes vs. what it doesn't.
-   Wording kept verbatim to the client PDF. Hairline rows, no card boxes,
-   off-white paper, with the seared-tuna plate peeking off the left edge. */
+// "מה כלול בשירות שלנו?" — two columns: what the service includes vs. what it doesn't.
 const included = [
   {
     title: 'שולחנות ומפות שעליהם יוגש כל האוכל',
@@ -65,9 +62,7 @@ function Dash() {
 export default function ServiceIncludes() {
   return (
     <section id="service" className={styles.section} aria-labelledby="service-title">
-      {/* Seared-tuna plate peeking off the left edge. Uses a pre-cut PNG
-          (slate background removed, soft feathered alpha) so the white plate
-          bleeds into the paper with no gray rim — no CSS mask needed. */}
+      {/* Pre-cut plate PNG bleeding off the left edge — no CSS mask needed. */}
       <img
         src="/assets/plate-cutout.png"
         alt=""

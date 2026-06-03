@@ -41,9 +41,7 @@ const packages = [
 export default function Tracks() {
   return (
     <section id="tracks" className={styles.section}>
-      {/* Peeking hero plates — organic splashes of color bleeding off
-          opposing edges of the section. Tomato on the left at mid-height,
-          fish-salad on the bottom-right for editorial counter-balance. */}
+      {/* Decorative plates bleeding off opposite edges (tomato left, fish-salad bottom-right). */}
       <img
         src="/assets/tomato.jpg"
         alt=""

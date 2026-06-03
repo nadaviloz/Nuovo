@@ -1,8 +1,7 @@
 import { useEffect, useState } from 'react'
 import styles from './FloatBook.module.css'
 
-/* Persistent booking CTA that floats in (bottom-left) once the visitor has
-   scrolled past the hero, so a "לתיאום אירוע" action is always one tap away. */
+// Floating booking CTA that appears once you scroll past the hero.
 export default function FloatBook() {
   const [show, setShow] = useState(false)
 

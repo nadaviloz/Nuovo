@@ -1,7 +1,6 @@
 import styles from './Upgrades.module.css'
 
-/* Nuovo Upgrades — step 2 of the menu journey. Alternating editorial photo
-   bands (option 2). Swap `img` paths when real photography is ready. */
+// Nuovo Upgrades — alternating photo bands. Swap img paths when real photos land.
 const upgrades = [
   {
     id: 'pizza',

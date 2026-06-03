@@ -4,8 +4,8 @@
   border-top:1px solid var(--rule);
 }
 .head{
-  display:flex;align-items:baseline;justify-content:space-between;gap:16px;
-  margin-bottom:20px;
+  display:flex;align-items:center;justify-content:space-between;gap:16px;
+  margin-bottom:24px;
 }
 .label{
   font-family:var(--label);
@@ -15,19 +15,53 @@
   font-family:var(--accent);font-style:normal;
   font-size:14px;color:var(--ink-55);
 }
+
+/* ── Category tabs — a single segmented pill: פיצה / מנות שף ── */
+.tabs{
+  display:inline-flex;
+  gap:4px;
+  padding:4px;
+  border:1px solid var(--rule);
+  border-radius:999px;
+  background: rgba(27,19,10,.03);
+}
+.tab{
+  font-family:var(--label);
+  font-size:12px; letter-spacing:.14em; text-transform:uppercase; font-weight:600;
+  color: var(--ink-55);
+  padding:9px 20px;
+  border-radius:999px;
+  border:0; background:transparent; cursor:pointer;
+  transition: color .3s ease, background .3s ease, box-shadow .3s ease;
+}
+.tab:hover{ color: var(--ink) }
+.tabActive{
+  color: var(--paper);
+  background: var(--ink);
+  box-shadow: 0 6px 18px -6px rgba(14,14,14,.5);
+}
+
+/* One scrolling reel row at every width — handles 4 pizza or 13 chef clips
+   without growing into a tall multi-row grid. RTL: it starts at the right and
+   scrolls left; a half-visible trailing card hints there's more. */
 .grid{
-  display:grid;
-  grid-template-columns: minmax(0, 360px);
+  display:flex;
   gap:18px;
-  justify-content:center;
+  align-items:stretch;
+  overflow-x:auto;
+  scroll-snap-type: x proximity;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width:none;
+  margin-inline: calc(var(--pad-x) * -1);
+  padding-inline: var(--pad-x);
+  padding-bottom:10px;
 }
-.grid.multi{
-  grid-template-columns: repeat(2, minmax(0, 360px));
-  gap:24px;
-}
+.grid::-webkit-scrollbar{ display:none }
 .card{
   position:relative;
+  flex: 0 0 clamp(232px, 23vw, 288px);
   aspect-ratio: 9/16;
+  scroll-snap-align: start;
   border-radius:14px;
   overflow:hidden;
   background:#0a0a0a;
@@ -91,28 +125,11 @@
   transform: translate(-50%,-50%) scale(1.06);
 }
 
-@media (max-width: 900px){
-  .grid.multi{ grid-template-columns: repeat(2, minmax(0, 1fr)); justify-content:stretch }
-}
 @media (max-width: 640px){
-  .grid, .grid.multi{
-    display: flex;
-    grid-template-columns: none;
-    flex-direction: row;
-    align-items: stretch;
-    gap: 12px;
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: none;
-    margin-inline: calc(var(--pad-x) * -1);
-    padding-inline: var(--pad-x);
-    padding-bottom: 8px;
-    justify-content: flex-start;
-  }
-  .grid::-webkit-scrollbar, .grid.multi::-webkit-scrollbar{ display: none }
+  .head{ flex-wrap:wrap; gap:12px }
+  .grid{ gap:12px; scroll-snap-type: x mandatory }
   .card{
-    flex: 0 0 70%;
+    flex: 0 0 64%;
     scroll-snap-align: center;
   }
 }

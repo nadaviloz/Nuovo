@@ -19,8 +19,7 @@ import FloatWhatsApp from './components/FloatWhatsApp/FloatWhatsApp.jsx'
 import FloatBook from './components/FloatBook/FloatBook.jsx'
 import BackToTop from './components/BackToTop/BackToTop.jsx'
 
-/* Split a headline element's children by <br> into lines, then wrap each
-   line in <span.he-mask><span.he-inner>…</span></span>. Idempotent. */
+// Wrap each <br>-separated line of a headline in mask spans for the clip-in reveal.
 function maskifyHeadline(el) {
   if (!el || el.dataset.heMasked === '1') return
   if (el.dataset.heMasked === 'skip') return
@@ -61,8 +60,7 @@ export default function HebrewPage() {
     return () => { document.body.style.background = prevBg }
   }, [])
 
-  /* ── Editorial reveal: clip-mask headlines + staggered children, fired by
-        IntersectionObserver as each section enters the viewport. ── */
+  // Clip-mask headlines and stagger their siblings as each section scrolls in.
   useEffect(() => {
     const root = pageRef.current
     if (!root) return
@@ -71,10 +69,8 @@ export default function HebrewPage() {
     const sections = Array.from(root.querySelectorAll('section, header'))
 
     const watched = []
+    // Re-mask a headline if a re-render (e.g. the booking form) strips the spans.
     const guard = (h) => {
-      // If React re-renders the headline (Faq accordion, Booking form), the
-      // masks get stripped. Watch the headline's children and re-mask whenever
-      // the masks disappear.
       const obs = new MutationObserver(() => {
         if (h.dataset.heMasked === 'skip') return
         if (!h.querySelector('.he-mask')) {
@@ -87,12 +83,9 @@ export default function HebrewPage() {
     }
 
     sections.forEach((sec) => {
-      // Headlines: maskify every h1/h2/h3 inside the section.
       sec.querySelectorAll('h1, h2, h3').forEach((h) => { maskifyHeadline(h); guard(h) })
 
-      // Children that fade-up after the headline. These get their own --i
-      // so they cascade. We target ledes, eyebrow numbers, paragraphs, ctas
-      // — but NOT children of headlines themselves (those are masked).
+      // Siblings that cascade up after the headline (each gets its own --i index).
       const childSelectors = [
         '[class*="_lede_"]', '[class*="_num_"]',
         '[class*="_ctas_"]', '[class*="_copy_"] p',
@@ -117,17 +110,12 @@ export default function HebrewPage() {
       return
     }
 
-    // Hero is visible at first paint — reveal immediately so the headline
-    // clips in on load instead of waiting for an intersection event.
+    // Hero is on screen at first paint, so reveal it right away.
     const hero = root.querySelector('header')
     if (hero) requestAnimationFrame(() => hero.classList.add('he-revealed'))
 
-    // threshold:0 (not 0.2) so a section reveals the instant its top crosses
-    // into view. A fixed ratio fails for sections taller than the viewport —
-    // e.g. the Tracks menu and the Booking form are ~3000px tall, so on a
-    // phone they can never reach 20% visibility and would stay invisible. The
-    // negative bottom rootMargin holds the reveal until the top edge is ~12%
-    // up the screen, preserving the "fade in as you arrive" feel.
+    // threshold:0 + a negative bottom margin, so tall sections (Tracks, Booking)
+    // still reveal on phones where they can never reach a fixed visibility ratio.
     const io = new IntersectionObserver((entries) => {
       entries.forEach((e) => {
         if (e.isIntersecting) {
@@ -141,14 +129,12 @@ export default function HebrewPage() {
     return () => { io.disconnect(); watched.forEach((o) => o.disconnect()) }
   }, [])
 
-  /* ── Image parallax (0.15). JS writes --parallax-y on every [data-parallax]
-        element on each scroll frame; the CSS rule handles the transform. ── */
+  // Parallax: write --parallax-y per scroll frame; the CSS rule applies the transform.
   useEffect(() => {
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
     const root = pageRef.current
     if (!root) return
 
-    // Tag the elements we want to parallax (idempotent).
     root.querySelectorAll('[class*="_photo_"], [class*="_portraitImg_"]').forEach((el) => {
       if (!el.hasAttribute('data-parallax')) el.setAttribute('data-parallax', '')
     })
@@ -164,7 +150,6 @@ export default function HebrewPage() {
       ) || 0.15
       els.forEach((el) => {
         const r = el.getBoundingClientRect()
-        // skip work for elements far outside the viewport
         if (r.bottom < -vh || r.top > vh * 2) return
         const center = r.top + r.height / 2
         const offset = (center - vh / 2) * -amount
@@ -184,8 +169,7 @@ export default function HebrewPage() {
     }
   }, [])
 
-/* ── Eased anchor navigation + a single hairline sweep across the
-        screen as the page transitions. No dark overlay — line only. ── */
+  // Eased scrolling for in-page anchor links.
   useEffect(() => {
     const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches
     const easeInOutCubic = (t) => (t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2)

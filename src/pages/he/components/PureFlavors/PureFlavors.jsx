@@ -1,8 +1,6 @@
 import styles from './PureFlavors.module.css'
 
-/* "אז מה זה בעצם שולחן השף?" — the concept anchor + food philosophy from the
-   brief (page 3, PURE FLAVORS). Wording kept faithful to the client PDF.
-   Sits before the menus so a visitor first understands what Chef Table is. */
+// Concept intro that sits before the menus: what a chef's table actually is.
 export default function PureFlavors() {
   return (
     <section id="chef-table" className={styles.section} aria-labelledby="chef-table-title">

@@ -62,20 +62,69 @@ function Reel({ src, poster, name }) {
   )
 }
 
-const reels = [
-  { name: 'פיצה · נאפולי', poster: '/uploads/reel-pizza-1.jpg', src: '/uploads/reel-pizza-1.mp4' },
-  { name: 'חציל · ירוק',   poster: '/uploads/reel-pizza-2.jpg', src: '/uploads/reel-pizza-2.mp4' }
-]
+const categories = {
+  pizza: {
+    label: 'פיצה',
+    reels: [
+      { name: 'פסטו וזיתים',    poster: '/uploads/reel-pizza-1.jpg', src: '/uploads/reel-pizza-1.mp4' },
+      { name: 'פסטו ורוקט',     poster: '/uploads/reel-pizza-2.jpg', src: '/uploads/reel-pizza-2.mp4' },
+      { name: 'צ׳דר ובזיליקום', poster: '/uploads/reel-pizza-3.jpg', src: '/uploads/reel-pizza-3.mp4' },
+      { name: 'פסטו ומוצרלה',   poster: '/uploads/reel-pizza-4.jpg', src: '/uploads/reel-pizza-4.mp4' },
+      { name: 'עגבניות שרי',    poster: '/uploads/reel-pizza-5.jpg', src: '/uploads/reel-pizza-5.mp4' },
+      { name: 'פיצה ירוקה',     poster: '/uploads/reel-pizza-6.jpg', src: '/uploads/reel-pizza-6.mp4' },
+      { name: 'מרגריטה קלאסית', poster: '/uploads/reel-pizza-7.jpg', src: '/uploads/reel-pizza-7.mp4' }
+    ]
+  },
+  chef: {
+    label: 'מנות שף',
+    reels: [
+      { name: 'דגים נאים',  poster: '/uploads/reel-chef-1.jpg',  src: '/uploads/reel-chef-1.mp4' },
+      { name: 'מנה ראשונה', poster: '/uploads/reel-chef-2.jpg',  src: '/uploads/reel-chef-2.mp4' },
+      { name: 'דלעת צלויה', poster: '/uploads/reel-chef-3.jpg',  src: '/uploads/reel-chef-3.mp4' },
+      { name: 'רוטב ירוק',  poster: '/uploads/reel-chef-4.jpg',  src: '/uploads/reel-chef-4.mp4' },
+      { name: 'הדרים',      poster: '/uploads/reel-chef-5.jpg',  src: '/uploads/reel-chef-5.mp4' },
+      { name: 'רביולי',     poster: '/uploads/reel-chef-6.jpg',  src: '/uploads/reel-chef-6.mp4' },
+      { name: 'שמן ירוק',   poster: '/uploads/reel-chef-7.jpg',  src: '/uploads/reel-chef-7.mp4' },
+      { name: 'פסטה טרייה', poster: '/uploads/reel-chef-8.jpg',  src: '/uploads/reel-chef-8.mp4' },
+      { name: 'חציל וסלסה', poster: '/uploads/reel-chef-9.jpg',  src: '/uploads/reel-chef-9.mp4' },
+      { name: 'מנת שף',     poster: '/uploads/reel-chef-10.jpg', src: '/uploads/reel-chef-10.mp4' }
+    ]
+  }
+}
+
+const order = ['pizza', 'chef']
+
+// Cache-buster — bump when a reel's contents change but its filename is reused.
+const V = '?v=22'
 
 export default function Reels() {
+  const [active, setActive] = useState('pizza')
+  const reels = categories[active].reels
+
   return (
     <div className={styles.wrap}>
       <div className={styles.head}>
-        <div className={styles.label}>מהמטבח של אוהד</div>
+        <div className={styles.tabs} role="tablist" aria-label="סוגי סרטונים">
+          {order.map((key) => (
+            <button
+              key={key}
+              type="button"
+              role="tab"
+              aria-selected={active === key}
+              className={`${styles.tab} ${active === key ? styles.tabActive : ''}`}
+              onClick={() => setActive(key)}
+            >
+              {categories[key].label}
+            </button>
+          ))}
+        </div>
         <div className={styles.hint}>לחצו לנגן</div>
       </div>
-      <div className={`${styles.grid} ${reels.length > 1 ? styles.multi : ''}`}>
-        {reels.map((r, i) => <Reel key={i} {...r} />)}
+      {/* key remounts the grid on tab change so a playing clip stops when you switch. */}
+      <div key={active} className={`${styles.grid} ${styles.multi}`}>
+        {reels.map((r, i) => (
+          <Reel key={i} name={r.name} src={r.src + V} poster={r.poster + V} />
+        ))}
       </div>
     </div>
   )

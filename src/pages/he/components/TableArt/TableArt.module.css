@@ -354,21 +354,21 @@
   }
   /* 1 · leans in from the LEFT */
   .flowItem:nth-child(1) .arrow{
-    left: 24%;
+    left: 32%;
     right: auto;
-    transform: rotate(-11deg);
+    transform: rotate(-6deg);
   }
   /* 2 · mirrored, leans in from the RIGHT */
   .flowItem:nth-child(2) .arrow{
     left: auto;
-    right: 24%;
-    transform: scaleX(-1) rotate(-11deg);
+    right: 32%;
+    transform: scaleX(-1) rotate(-6deg);
   }
   /* 3 · back to the LEFT */
   .flowItem:nth-child(3) .arrow{
-    left: 24%;
+    left: 32%;
     right: auto;
-    transform: rotate(-11deg);
+    transform: rotate(-6deg);
   }
   .galleryWrap{
     margin-top: clamp(34px, 10vw, 52px);

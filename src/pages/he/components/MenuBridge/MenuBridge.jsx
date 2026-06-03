@@ -1,7 +1,6 @@
 import styles from './MenuBridge.module.css'
 
-/* Editorial typographic bridge — step 1 (base menu) flows into step 2
-   (upgrades). Pure negative space, vertical hairline, no card boxes. */
+// Typographic bridge from the base menu (step 1) into the upgrades (step 2).
 export default function MenuBridge() {
   return (
     <section id="menu-bridge" className={styles.bridge} aria-label="בחירת תפריט — שלב 1 ושלב 2">
