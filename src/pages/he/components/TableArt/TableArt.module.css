@@ -341,19 +341,34 @@
      arrows lean off-axis into the photos). The asset is already a down-arrow.
      The nth-child selectors are repeated here to reset the desktop rules'
      left/right anchors (in RTL a leftover `right` would otherwise win). */
-  .arrow,
-  .flowItem:nth-child(1) .arrow,
-  .flowItem:nth-child(2) .arrow,
-  .flowItem:nth-child(3) .arrow{
+  /* Shared sizing. Each arrow floats in the gap below its step; the per-item
+     rules below alternate it left / right / left so the connectors keep the
+     hand-drawn zig-zag rhythm of the desktop layout instead of marching
+     straight down. Sized smaller than the gap (~104–140px) with clear air
+     above the next photo. */
+  .arrow{
     width: clamp(34px, 9vw, 44px);
     opacity: .55;
-    left: 50%;
     right: auto;
-    /* Sized smaller than the gap (~104–140px) and pushed far enough below the
-       step that it floats centered in the whitespace with clear air above the
-       next photo — no longer crowding the image or riding up into the text. */
     bottom: clamp(-86px, -22vw, -66px);
-    transform: translateX(-50%);
+  }
+  /* 1 · leans in from the LEFT */
+  .flowItem:nth-child(1) .arrow{
+    left: 24%;
+    right: auto;
+    transform: rotate(-11deg);
+  }
+  /* 2 · mirrored, leans in from the RIGHT */
+  .flowItem:nth-child(2) .arrow{
+    left: auto;
+    right: 24%;
+    transform: scaleX(-1) rotate(-11deg);
+  }
+  /* 3 · back to the LEFT */
+  .flowItem:nth-child(3) .arrow{
+    left: 24%;
+    right: auto;
+    transform: rotate(-11deg);
   }
   .galleryWrap{
     margin-top: clamp(34px, 10vw, 52px);
