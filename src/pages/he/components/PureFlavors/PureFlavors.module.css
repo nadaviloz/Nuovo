@@ -46,7 +46,7 @@
 /* ── Section head ───────────────────────────────────────────────────── */
 .head{
   display: grid;
-  grid-template-columns: 1.1fr .9fr;
+  grid-template-columns: auto 1fr;
   gap: clamp(32px, 5vw, 72px);
   align-items: center;
   margin-bottom: clamp(54px, 7vw, 104px);
@@ -64,17 +64,31 @@
 .title{
   font-family: var(--serif);
   font-weight: 600;
-  font-size: clamp(40px, 5.4vw, 88px);
+  font-size: clamp(48px, 6vw, 104px);
   line-height: .98;
   letter-spacing: -.04em;
   margin-top: 16px;
   color: var(--ink);
   text-align: right;
+  white-space: nowrap;
+  position: relative;
 }
 .title em{
   font-family: var(--accent);
-  font-style: normal;
+  font-style: italic;
   font-weight: 400;
+  color: inherit;
+}
+/* Classic letterhead rule beneath the title, anchored to the right (RTL start). */
+.title::after{
+  content: "";
+  display: block;
+  width: min(100%, 9em);
+  height: 2px;
+  margin-top: clamp(16px, 1.5vw, 26px);
+  margin-inline-end: auto;
+  background: linear-gradient(to left, var(--copper) 0%, rgba(138,96,68,.4) 50%, transparent 100%);
+  opacity: .85;
 }
 .lede{
   font-size: clamp(18px, 1.5vw, 24px);
@@ -151,6 +165,7 @@
     grid-template-columns: 1fr;
     margin-bottom: clamp(40px, 10vw, 56px);
   }
+  .title{ white-space: normal; }
   .lede{
     max-width: none;
     justify-self: stretch;

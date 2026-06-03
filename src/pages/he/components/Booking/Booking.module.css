@@ -205,6 +205,21 @@
   pointer-events: none;
 }
 
+/* Native date field — whole box opens the picker; keep our custom icon as the only cue. */
+.dateInput{ cursor: pointer; min-height: 51px; }
+.dateInput::-webkit-calendar-picker-indicator{
+  position: absolute;
+  inset: 0;
+  width: auto;
+  height: auto;
+  margin: 0;
+  padding: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+/* Before a date is picked, show the format hint in the muted placeholder tone. */
+.dateEmpty::-webkit-datetime-edit{ color: var(--txt-3); }
+
 .selectWrap{ position: relative; }
 .select{
   appearance: none;

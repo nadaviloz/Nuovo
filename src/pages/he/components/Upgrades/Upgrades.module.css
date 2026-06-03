@@ -29,29 +29,46 @@
 
 /* ── Section head ───────────────────────────────────────────────────── */
 .head{
-  max-width: 720px;
-  margin-inline-start: auto;
+  width: fit-content;
+  max-width: 100%;
+  margin-inline-start: 0;
+  margin-inline-end: auto;
+  overflow: visible;
 }
 .num{
   font-family: var(--label);
-  font-size: 11px; letter-spacing: .22em; text-transform: uppercase;
+  font-size: 11px; letter-spacing: .28em; text-transform: uppercase;
   font-weight: 600; color: var(--warm);
   direction: ltr; text-align: right;
 }
 .title{
-  font-family: var(--serif); font-weight: 300;
-  font-size: clamp(36px, 4.2vw, 64px);
-  line-height: 1.02; letter-spacing: -.01em;
-  margin-top: 16px;
+  font-family: var(--serif); font-weight: 400;
+  font-size: clamp(46px, 6vw, 88px);
+  line-height: .98; letter-spacing: -.02em;
+  margin-top: clamp(14px, 1.4vw, 20px);
   color: var(--ink);
   direction: ltr; text-align: right;
   text-transform: uppercase;
+  white-space: nowrap;
+  position: relative;
 }
 .title em{
   font-family: var(--accent);
   font-style: italic; font-weight: 400;
   text-transform: none;
+  letter-spacing: -.022em;
   color: var(--warm);
+}
+/* Classic letterhead rule beneath the title. */
+.title::after{
+  content: "";
+  display: block;
+  width: min(100%, 10em);
+  height: 2px;
+  margin-top: clamp(16px, 1.5vw, 26px);
+  margin-inline-end: auto;
+  background: linear-gradient(to left, var(--warm) 0%, rgba(107,68,35,.45) 50%, transparent 100%);
+  opacity: .9;
 }
 .lede{
   margin-top: clamp(14px, 1.6vw, 22px);
@@ -174,6 +191,7 @@
 /* ── Mobile: stacked bands, photo always on top ─────────────────────── */
 @media (max-width: 860px){
   .head{ margin-inline-start: 0 }
+  .title{ white-space: normal; }
   .bands{ gap: clamp(40px, 10vw, 56px) }
 
   .band,

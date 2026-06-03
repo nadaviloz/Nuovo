@@ -75,6 +75,9 @@ export default function Booking() {
   const [diet, setDiet] = useState([])
   const [submitted, setSubmitted] = useState(false)
 
+  // Today in local-time YYYY-MM-DD — used as the date picker's floor (no past dates).
+  const todayISO = useMemo(() => new Date().toLocaleDateString('en-CA'), [])
+
   const set = (key) => (e) => setValues((v) => ({ ...v, [key]: e.target.value }))
 
   const stepGuests = (delta) => setValues((v) => {
@@ -196,7 +199,14 @@ export default function Booking() {
               <div className={styles.field}>
                 <label className={styles.label}>תאריך</label>
                 <div className={styles.inputWrap}>
-                  <input type="text" className={styles.input} value={values.date} onChange={set('date')} placeholder="שבת, 13 ביוני" />
+                  <input
+                    type="date"
+                    className={`${styles.input} ${styles.dateInput} ${values.date ? '' : styles.dateEmpty}`}
+                    value={values.date}
+                    onChange={set('date')}
+                    min={todayISO}
+                    aria-label="תאריך האירוע"
+                  />
                   <span className={styles.inputIco}><Cal /></span>
                 </div>
               </div>

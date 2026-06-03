@@ -10,20 +10,11 @@ const steps = [
 export default function Process() {
   return (
     <section id="how" className={styles.section}>
-      {/* Decorative plate bleeding off the right edge. */}
-      <img
-        src="/assets/flower-table-cutout.png"
-        alt=""
-        aria-hidden="true"
-        className={styles.peek}
-        data-parallax
-        loading="lazy"
-      />
       <div className={styles.wrap}>
         <div className={styles.head}>
           <div>
             <div className={styles.num}>/ 02 - האירוע</div>
-            <h2 className={styles.title}>ארבעה שלבים<br/><em>לילה אחד בלתי נשכח</em></h2>
+            <h2 className={styles.title}>ארבעה שלבים <em>לילה אחד בלתי נשכח</em></h2>
           </div>
           <p className={styles.lede}>בלי שיחות טעימה, בלי טופס משעמם. בוחרים מסלול תאריך ואנחנו דואגים לכל השאר - מהבצק הראשון ועד הצלחת האחרונה במקומה.</p>
         </div>

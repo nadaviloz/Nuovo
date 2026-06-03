@@ -17,7 +17,8 @@
   --stone-soft: rgba(107, 68, 35, .13);
 }
 
-/* Hairline spine — drops through both steps, leads into שלב 1 below. */
+/* Hairline spine — drops through both steps, leads into שלב 1 below.
+   Draws itself downward as the section reveals. */
 .spine{
   position: absolute;
   left: 50%;
@@ -33,7 +34,10 @@
     transparent 100%
   );
   pointer-events: none;
+  clip-path: inset(0 0 100% 0);
+  transition: clip-path 1.3s cubic-bezier(0.16, 1, 0.3, 1) .15s;
 }
+.bridge:global(.he-revealed) .spine{ clip-path: inset(0 0 0 0); }
 
 .wrap{
   position: relative;
@@ -43,7 +47,7 @@
   padding-right: var(--pad-x);
   display: flex;
   flex-direction: column;
-  gap: clamp(52px, 7vw, 88px);
+  gap: clamp(30px, 4vw, 52px);
 }
 
 /* ── Step row — typographic only, no container chrome ───────────────── */
@@ -64,12 +68,12 @@
 
 .stepOne{
   align-self: flex-end;
-  margin-inline-end: clamp(20px, 6vw, calc(50% - 36px));
+  margin-inline-end: clamp(12px, 3vw, 44px);
 }
 
 .stepTwo{
   align-self: flex-start;
-  margin-inline-start: clamp(20px, 6vw, calc(50% - 36px));
+  margin-inline-start: clamp(12px, 3vw, 44px);
   grid-template-columns: 1fr auto;
 }
 .stepTwo .numeral{ order: 2 }
@@ -90,10 +94,11 @@
   transform: none;
 }
 
-/* Large soft serif numeral — luxury menu index feel. */
+/* Large soft serif numeral — luxury menu index feel.
+   Wipes up + settles into place a beat after its row reveals. */
 .numeral{
   font-family: var(--serif);
-  font-size: clamp(68px, 10.5vw, 128px);
+  font-size: clamp(72px, 11vw, 136px);
   font-weight: 300;
   line-height: .82;
   letter-spacing: -.05em;
@@ -101,9 +106,23 @@
   user-select: none;
   direction: ltr;
   margin-top: -.06em;
-  transition: color .6s ease;
+  clip-path: inset(0 0 108% 0);
+  opacity: 0;
+  transform: translateY(.14em) scale(.92);
+  transform-origin: bottom center;
+  transition:
+    clip-path 1.05s cubic-bezier(0.16, 1, 0.3, 1),
+    opacity .9s ease,
+    transform 1.05s cubic-bezier(0.16, 1, 0.3, 1),
+    color .6s ease;
+  transition-delay: calc(var(--i, 0) * 160ms + 260ms);
 }
-.bridgeStep:hover .numeral{ color: rgba(107, 68, 35, .22) }
+.bridge:global(.he-revealed) .numeral{
+  clip-path: inset(0 0 -8% 0);
+  opacity: 1;
+  transform: none;
+}
+.bridgeStep:hover .numeral{ color: rgba(107, 68, 35, .26) }
 
 .copy{
   display: flex; flex-direction: column;
@@ -129,7 +148,7 @@
   color: var(--ink-55);
   font-weight: 400;
   text-align: right;
-  max-width: 36ch;
+  max-width: 52ch;
 }
 
 /* ── Mobile: keep spine, tighten stagger ────────────────────────────── */
@@ -167,7 +186,14 @@
   }
   .bridgeStep,
   .stepTitle,
-  .numeral{
+  .numeral,
+  .spine{
     transition: none !important;
   }
+  .numeral{
+    clip-path: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+  .spine{ clip-path: none !important; }
 }

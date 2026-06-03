@@ -12,44 +12,8 @@
   position:relative;
   z-index:1;
 }
-/* Plated dish bleeding off the right edge as a background splash — soft round
-   vignette dissolves the photo edge into the section, warm drop-shadow fuses
-   it to the surface. Same treatment as the menu & FAQ sections. */
-.peek{
-  position:absolute;
-  z-index:0;
-  pointer-events:none;
-  height:auto;
-  width:clamp(420px,34vw,640px);
-  bottom:-8%;
-  right:0;
-  /* Transparent cutout: push the plate hard into the bottom-right corner so the
-     straight cut edge bleeds off the page, leaving only a clean porcelain
-     crescent as an editorial splash. */
-  transform:translate(50%,0) rotate(-1.5deg);
-  border-radius:50%;
-  filter:
-    brightness(.96)
-    contrast(1.06)
-    saturate(.94)
-    drop-shadow(0 34px 58px rgba(32,24,16,.18))
-    drop-shadow(0 8px 18px rgba(107,68,35,.10));
-  opacity:.88;
-}
-@media (max-width:900px){
-  /* Keep the dish on phones too — centered low behind the steps as a soft
-     splash, fully visible (not cut) and out of the way of the text. */
-  .peek{
-    display:block;
-    width:min(74vw,360px);
-    left:50%; right:auto;
-    bottom:-4%;
-    transform:translate(-50%,0) rotate(-1.5deg);
-    opacity:.5;
-  }
-}
 .head{
-  display:grid;grid-template-columns:1fr 1.6fr;gap:60px;
+  display:grid;grid-template-columns:auto 1fr;gap:60px;
   margin-bottom: clamp(60px, 7vw, 100px);
   align-items:end;
 }
@@ -60,9 +24,10 @@
 }
 .title{
   font-family:var(--serif);font-weight:300;
-  font-size:clamp(50px,6.2vw,104px);
+  font-size:clamp(30px,3.6vw,54px);
   line-height:.96;letter-spacing:-.032em;
   margin-top:22px;
+  white-space:nowrap;
 }
 .title em{font-family:var(--accent);font-style:normal;font-weight:400;letter-spacing:-.022em}
 .lede{
@@ -156,6 +121,7 @@
 
 @media (max-width: 900px){
   .head{grid-template-columns:1fr}
+  .title{white-space:normal}
   .grid{grid-template-columns:1fr 1fr}
   /* The single threaded rail only reaches the first row, so on the 2×2 mobile
      grid the bottom row (III, IV) had no line. Replace it with a per-step

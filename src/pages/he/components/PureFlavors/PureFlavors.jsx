@@ -8,7 +8,7 @@ export default function PureFlavors() {
         <div className={styles.head}>
           <div>
             <div className={styles.num}>/ Chef Table</div>
-            <h2 id="chef-table-title" className={styles.title}>אז מה זה<br /><em>שולחן השף?</em></h2>
+            <h2 id="chef-table-title" className={styles.title}>אז מה זה <em>שולחן השף?</em></h2>
           </div>
           <p className={styles.lede}>
             החזון שלנו לקחת את שני העולמות שאנחנו הכי אוהבים ולחבר אותם לחוויה אחת מושלמת.
@@ -18,8 +18,8 @@ export default function PureFlavors() {
         <div className={styles.body}>
           <figure className={styles.media}>
             <img
-              src="/uploads/gallery/gallery-2.jpg"
-              alt="מנת שף — דג נא בעבודת יד עם שמן זית ועשבי תיבול"
+              src="/assets/pureflavors-chef.jpg"
+              alt="השף מזליף שמן עשבים על מנת שף בעבודת יד"
               loading="lazy"
             />
           </figure>

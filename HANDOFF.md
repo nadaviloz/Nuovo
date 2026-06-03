@@ -1,64 +1,59 @@
-# Handoff — Nuovo chef site, Kitchen video gallery
+# Handoff — Nuovo chef site (continue coding)
 
 ## Project
-Hebrew RTL marketing site for private chef "Nuovo/שולחן". React + Vite, no backend.
-Run: `npm run dev` → http://localhost:5174 (or 5173). Nothing is committed or deployed —
-the **Vercel site (nuovo-phi.vercel.app) is STALE**; I've been viewing old builds, which
-caused repeated "already-fixed" confusion. **Hard-refresh (⌘⇧R)** to see current local state.
+Hebrew **RTL** marketing site for private chef "Nuovo / שולחן השף". **React 18 + Vite 5**, no backend.
+- Run: `cd ~/Downloads/Testing-Product && npm run dev` → http://localhost:5173
+- Repo: `github.com/nadaviloz/Nuovo`, branch `main`. Vercel auto-deploys on push.
+- Components: `src/pages/he/components/<Name>/<Name>.jsx` + `<Name>.module.css`
+- Main page + scroll/reveal/parallax logic: `src/pages/he/HebrewPage.jsx`
+- Design tokens: `src/pages/he/HebrewPage.module.css`, `src/styles/globals.css`
 
-## Done this session (all local, uncommitted)
-1. **Mobile section reveal fix** — `HebrewPage.jsx` IntersectionObserver was `threshold:0.2`,
-   which hid sections taller than the viewport on phones. Now `threshold:0, rootMargin '0px 0px -12% 0px'`.
-2. **TableArt connector arrows** (`TableArt.module.css` mobile) — now alternate left/right with a
-   gentle 6° lean, sized to sit in the gap.
-3. **Tracks peek photos** (`Tracks.module.css`) — the tomato/fish photos had a white glow halo
-   (bright plates fading over the muted page). Fixed with `filter: brightness(.82) contrast(1.05)
-   saturate(1.06) sepia(.1)` + tighter radial mask. Blend modes don't work here (`isolation:isolate`).
-4. **Kitchen video gallery** — main work, see below.
+## Git state (READ THIS FIRST)
+- Last **pushed** commit: `b22f76c` "Clean up repo and tighten code comments".
+- Everything since then is **LOCAL, UNCOMMITTED** (the title / image edits below).
+- `node_modules/`, `dist/`, `.backups/` are now gitignored AND untracked — leave them out of git.
+- **Don't commit or push unless the user explicitly says so.** Always `npm run build` to verify.
 
-## Kitchen gallery (`src/pages/he/components/Reels/Reels.jsx`)
-- Two-tab toggle (פיצה / מנות שף), single horizontal scrolling reel row at all widths.
-- **7 pizza** reels (`reel-pizza-1..7`) + **10 chef** reels (`reel-chef-1..10`), each `.mp4` + `.jpg`
-  poster in `public/uploads/`. Videos compressed 540×960, crf30, no audio.
-- Source raw videos: `~/Desktop/ohadproject/Videos/` (cryptic SaveClip names; classify with ffmpeg frames).
+## Done this session
+1. **Repo cleanup** (committed + pushed in `b22f76c`): untracked node_modules/dist/.backups;
+   deleted dead files/folders (root `uploads/`, `assets/`, `skills/`, `undo.sh`, unused images in
+   `public/assets`). Trimmed AI-style comments across components; fixed stale "Faq" references.
+2. **Headlines → one row + editorial "title signature"** (LOCAL, uncommitted). Applied to
+   **About**, **PureFlavors**, **TableArt**: removed forced `<br>`; head grid → `auto 1fr` so the
+   title takes only the width it needs; `white-space:nowrap` (reverts to `normal` under 900px);
+   bigger fonts; the `<em>` second part is the italic **accent** font in **brown** (`color:inherit`,
+   NOT copper); a classic copper hairline `::after` rule sits under each title.
+   - **Process** title also one-row but **shrunk** (`clamp(30px,3.6vw,54px)`) since it's long.
+3. **MenuBridge 01/02**: pulled the two steps closer to the center spine, smaller vertical gap,
+   fixed the "· All Fish" line wrap (hint `max-width:52ch`). Added a reveal animation — numerals
+   **wipe up** (clip-path + scale) a beat after each row, and the spine **draws downward**. Numerals
+   slightly bigger. Respects `prefers-reduced-motion`.
+4. **Upgrades**: title bigger + more formal (uppercase serif, `NUOVO` regular + `UPGRADES` bold in
+   warm/brown). Header block moved flush right (`.head{margin-inline-start:0; margin-inline-end:auto}`).
+5. **Process decorative plate**: added a new rose-sashimi cutout, user didn't like it → **fully
+   removed** (img + `.peek` CSS + the asset). Process is now just title + 4 steps.
+6. **PureFlavors photo** swapped to the chef-plating shot → `public/assets/pureflavors-chef.jpg`
+   (was `/uploads/gallery/gallery-2.jpg`).
 
-### IMPORTANT: cache-buster
-`const V = '?v=13'` in Reels.jsx is appended to every poster/video URL. Re-sorting reuses
-filenames, so browsers serve stale images. **Bump V (→14, 15…) every time you change a reel's file.**
+## Customer preferences (important)
+- HATES: grey card boxes, gradient melt fades between sections, cursor gimmicks, plain "Word-doc"
+  looking titles, images awkwardly cut at edges, oversized decorative elements.
+- LIKES: editorial typography, big **one-row** section titles with an **italic accent** second word
+  + a thin **copper hairline** under them, accent **text in brown** (copper only for the line),
+  quiet luxury, generous whitespace, RTL, real photos, subtle/faded background elements.
+- Iterates visually from **PC and phone screenshots**. Mobile is handled separately — desktop titles
+  use `nowrap`, mobile wraps normally on purpose.
 
-### How to apply a custom thumbnail (the workflow that works)
-User sends: a thumbnail image path + a screenshot of the video (the dish). To match:
-extract frames with `ffmpeg -ss <t> -i reel.mp4 -frames:v 1 out.png` and compare. Then:
-```
-ffmpeg -y -i "<SRC>" -vf "scale=540:960:force_original_aspect_ratio=increase,crop=540:960" \
-  -q:v 3 public/uploads/reel-<cat>-<n>.jpg
-```
-Then bump `const V` in Reels.jsx. Verify with Playwright (see below).
+## Photo library (NOT in the repo)
+`~/Desktop/ohadproject/` → `EventPhotos/`, `FoodPhotos/`, `Videos/`, `WebsiteAssets/`,
+`PhotosFromINST/SavedFromInstagram/`, `Reviews/`, `כלים/`. New downloads land in `~/Downloads`
+(usually `SaveClip.App_*`), then get sorted into ohadproject on request.
 
-### Thumbnail status
-DONE (custom): pizza-1 פסטו וזיתים, pizza-2 פסטו ורוקט, pizza-3 צ׳דר, pizza-6 פיצה ירוקה,
-pizza-7 מרגריטה · chef-1 tuna, chef-2 freekeh salad, chef-3 baked pasta, chef-5 salmon,
-chef-6 ravioli, chef-7 beetroot, chef-10 plated cubes.
+## Open / next
+1. Decide whether to **commit + push** the current local title/image changes.
+2. **Dessert (קינוחים) upgrade** photo is still a placeholder (`/uploads/gallery/gallery-1.jpg`).
+3. **WhatsApp number** is still a placeholder in `FloatWhatsApp.jsx` (`972500000000`).
+4. Sanity-check the one-row titles + the new PureFlavors photo on a phone.
 
-STILL ON FIRST-FRAME POSTERS (need custom): **pizza-4** (פסטו ומוצרלה), **pizza-5** (עגבניות שרי),
-**chef-4** (רוטב ירוק), **chef-8** (פסטה טרייה / pasta-making), **chef-9** (חציל וסלסה / eggplant-on-green).
-
-### Two UNPLACED thumbnails in ~/Downloads (user must say which video):
-- `עיצוב ללא שם(11).png` — red/radicchio + parmesan pizza. Looks like pizza-1's FINAL frame
-  (pizza-1 video = pesto+mozz → +tomatoes/olives [= (9).png, applied] → +red topping [= (11).png]).
-  Open question: replace pizza-1's (9).png with (11).png, or it's a different reel.
-- `SaveClip.App_644964899_...n.jpg` — a folded/closed CALZONE. Matches no current video; user said
-  "replace this thumbnail with that" without naming the target. Needs the video screenshot.
-
-## Verifying (Playwright is available but not in node_modules)
-```
-PWDIR=/Users/nadav/.npm/_npx/e41f203b7505f1fb/node_modules
-ln -sf "$PWDIR/playwright" node_modules/playwright; ln -sf "$PWDIR/playwright-core" node_modules/playwright-core
-# run a .mjs from the project dir; scroll #kitchen, click [role=tab], screenshot [class*="_card_"]
-# remove the symlinks after
-```
-
-## Next steps
-1. Place pizza-4, pizza-5, chef-4, chef-8, chef-9 thumbnails as the user sends them.
-2. Resolve (11).png and the calzone.
-3. **Commit everything and deploy to Vercel** so the user stops reviewing stale builds.
+## Memento checkpoints
+`./memento.sh save|list|undo` snapshots `src/` and `public/` locally.

@@ -34,28 +34,28 @@ const photos = [
     layout: 'galleryHero'
   },
   {
-    src: '/uploads/gallery/gallery-5.jpg',
-    alt: 'סידור פרחים לבנים על שולחן מעוצב',
+    src: '/assets/tableart-buffet-dark.jpg',
+    alt: 'מגוון מנות שף מוגשות בכלי קרמיקה על שולחן מעוצב',
     layout: 'a'
   },
   {
-    src: '/uploads/gallery/gallery-1.jpg',
-    alt: 'בופה עם מפות draped וסידור ורדים',
+    src: '/assets/tableart-buffet-brick.jpg',
+    alt: 'בופה חגיגי עם סידור פרחים גבוה על רקע קיר לבנים',
     layout: 'b'
   },
   {
-    src: '/uploads/gallery/gallery-8.jpg',
-    alt: 'קרמיקה מעוטרת עם מנה מוגשת',
+    src: '/assets/tableart-table-night.jpg',
+    alt: 'שולחן עגול מעוצב עם נרות ופרחים על רקע נוף לילי',
     layout: 'c'
   },
   {
-    src: '/uploads/gallery/gallery-6.jpg',
-    alt: 'מפה לבנה מקופלת עם הגשה על קרמיקה',
+    src: '/assets/tableart-buffet-greenhouse.jpg',
+    alt: 'בופה ארוך במפות לבנות עם סידורי פרחים וצמחייה',
     layout: 'd'
   },
   {
-    src: '/uploads/gallery/gallery-7.jpg',
-    alt: 'קערת קרמיקה עם סלט טרי',
+    src: '/uploads/gallery/gallery-5.jpg',
+    alt: 'סידור פרחים לבנים על שולחן מעוצב',
     layout: 'e'
   }
 ]
@@ -68,7 +68,7 @@ export default function TableArt() {
           <div>
             <div className={styles.num}>/ Table Art</div>
             <h2 id="table-art-title" className={styles.title}>
-              TABLE<br /><em>ART</em>
+              TABLE <em>ART</em>
             </h2>
           </div>
           <p className={styles.lede}>

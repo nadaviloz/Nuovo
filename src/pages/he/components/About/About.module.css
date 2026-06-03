@@ -1,6 +1,7 @@
 .section{
   padding-top:clamp(120px,12vw,200px);
   padding-bottom:clamp(120px,12vw,200px);
+  --warm:#6B4423;
 }
 .wrap{
   max-width:var(--max);
@@ -9,7 +10,7 @@
   padding-right:var(--pad-x);
 }
 .head{
-  display:grid;grid-template-columns:1fr 1.6fr;gap:60px;
+  display:grid;grid-template-columns:auto 1fr;gap:60px;
   margin-bottom: clamp(60px, 7vw, 100px);
   align-items:end;
 }
@@ -20,11 +21,29 @@
 }
 .title{
   font-family:var(--serif);font-weight:300;
-  font-size:clamp(50px,6.2vw,104px);
-  line-height:.96;letter-spacing:-.032em;
+  font-size:clamp(58px,7.2vw,124px);
+  line-height:.96;letter-spacing:-.034em;
   margin-top:22px;
+  white-space:nowrap;
+  position:relative;
 }
-.title em{font-family:var(--accent);font-style:normal;font-weight:400;letter-spacing:-.022em}
+.title em{
+  font-family:var(--accent);
+  font-style:italic;font-weight:400;
+  letter-spacing:-.022em;
+  color:var(--warm);
+}
+/* Classic letterhead rule beneath the title, anchored to the right (RTL start). */
+.title::after{
+  content:"";
+  display:block;
+  width:min(100%, 9em);
+  height:2px;
+  margin-top:clamp(16px,1.5vw,26px);
+  margin-inline-end:auto;
+  background:linear-gradient(to left, var(--warm) 0%, rgba(107,68,35,.4) 50%, transparent 100%);
+  opacity:.85;
+}
 .lede{
   font-size:19px;line-height:1.7;color:var(--ink-70);
   max-width: 50ch;justify-self:start;
@@ -182,4 +201,5 @@
 
 @media (max-width: 900px){
   .head, .grid{grid-template-columns:1fr}
+  .title{white-space:normal}
 }
