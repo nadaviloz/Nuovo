@@ -122,6 +122,12 @@ export default function HebrewPage() {
     const hero = root.querySelector('header')
     if (hero) requestAnimationFrame(() => hero.classList.add('he-revealed'))
 
+    // threshold:0 (not 0.2) so a section reveals the instant its top crosses
+    // into view. A fixed ratio fails for sections taller than the viewport —
+    // e.g. the Tracks menu and the Booking form are ~3000px tall, so on a
+    // phone they can never reach 20% visibility and would stay invisible. The
+    // negative bottom rootMargin holds the reveal until the top edge is ~12%
+    // up the screen, preserving the "fade in as you arrive" feel.
     const io = new IntersectionObserver((entries) => {
       entries.forEach((e) => {
         if (e.isIntersecting) {
@@ -129,7 +135,7 @@ export default function HebrewPage() {
           io.unobserve(e.target)
         }
       })
-    }, { threshold: 0.2, rootMargin: '0px 0px -10% 0px' })
+    }, { threshold: 0, rootMargin: '0px 0px -12% 0px' })
 
     sections.forEach((s) => { if (s !== hero) io.observe(s) })
     return () => { io.disconnect(); watched.forEach((o) => o.disconnect()) }
