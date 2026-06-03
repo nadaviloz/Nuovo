@@ -312,7 +312,7 @@
     justify-self: stretch;
   }
   .flow{
-    gap: clamp(72px, 20vw, 106px);
+    gap: clamp(104px, 27vw, 140px);
   }
   .step,
   .stepFlip{
@@ -345,11 +345,14 @@
   .flowItem:nth-child(1) .arrow,
   .flowItem:nth-child(2) .arrow,
   .flowItem:nth-child(3) .arrow{
-    width: clamp(40px, 12vw, 54px);
-    opacity: .6;
+    width: clamp(34px, 9vw, 44px);
+    opacity: .55;
     left: 50%;
     right: auto;
-    bottom: clamp(-60px, -13vw, -46px);
+    /* Sized smaller than the gap (~104–140px) and pushed far enough below the
+       step that it floats centered in the whitespace with clear air above the
+       next photo — no longer crowding the image or riding up into the text. */
+    bottom: clamp(-86px, -22vw, -66px);
     transform: translateX(-50%);
   }
   .galleryWrap{
