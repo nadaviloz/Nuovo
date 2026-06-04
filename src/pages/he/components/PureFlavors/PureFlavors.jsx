@@ -1,4 +1,5 @@
 import styles from './PureFlavors.module.css'
+import PremiumImage from '../PremiumImage/PremiumImage.jsx'
 
 // Concept intro that sits before the menus: what a chef's table actually is.
 export default function PureFlavors() {
@@ -16,13 +17,13 @@ export default function PureFlavors() {
         </div>
 
         <div className={styles.body}>
-          <figure className={styles.media}>
-            <img
-              src="/assets/pureflavors-chef.jpg"
-              alt="השף מזליף שמן עשבים על מנת שף בעבודת יד"
-              loading="lazy"
-            />
-          </figure>
+          <PremiumImage
+            className={styles.media}
+            src="/assets/pureflavors-chef.jpg"
+            alt="השף מזליף שמן עשבים על מנת שף בעבודת יד"
+            zoom
+            sizes="(max-width: 900px) 92vw, 46vw"
+          />
 
           <div className={styles.copy}>
             <div className={styles.label}>Pure Flavors</div>

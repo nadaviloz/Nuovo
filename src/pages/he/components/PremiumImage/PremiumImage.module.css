@@ -1,0 +1,76 @@
+/* ──────────────────────────────────────────────────────────────────────────
+   PremiumImage — progressive blur-up + clip-path reveal.
+   Frame paints the dominant colour, then a blurred LQIP, then the sharp image
+   fades over it. Tile clip-reveals on scroll-in via the brand reveal bezier.
+   ──────────────────────────────────────────────────────────────────── */
+.frame{
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  isolation: isolate;
+  /* dominant colour is set inline as background-color.
+     Height comes from the caller: an `aspect` prop, an aspect-ratio on the
+     class passed in (incl. responsive media queries), or `.fill` for a parent
+     that already has a definite height (e.g. a grid cell). */
+}
+.fill{ height: 100%; }
+
+/* Blurred 24px LQIP — sits under the sharp image, scaled past the edges so the
+   blur halo never shows a hard border. Fades out once the sharp image lands. */
+.lqip{
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  filter: blur(16px) saturate(1.04);
+  transform: scale(1.12);
+  opacity: 1;
+  transition: opacity 1s var(--reveal-ease, cubic-bezier(.16,1,.3,1));
+}
+.loaded .lqip{ opacity: 0; }
+
+/* Sharp image — fades in over the blur. Stays transform-free unless .zoom. */
+.img{
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  opacity: 0;
+  transition: opacity .9s var(--reveal-ease, cubic-bezier(.16,1,.3,1));
+}
+.loaded .img{ opacity: 1; }
+
+/* ── Clip-path reveal — the tile is unmasked from behind a wall, top→down.
+   Driven by the page orchestrator: the tile opens when its ancestor section
+   gains `.he-revealed`, in lock-step with that section's headline reveal. ── */
+.canReveal{
+  clip-path: inset(0 0 100% 0);
+  will-change: clip-path;
+  transition: clip-path var(--reveal-duration, 1.05s) var(--reveal-ease, cubic-bezier(.16,1,.3,1));
+}
+:global(.he-revealed) .canReveal{
+  clip-path: inset(0 0 0 0);
+}
+
+/* ── Optional slow editorial hover-zoom (opt-in via `zoom`) ─────────────── */
+.zoom .img{
+  transition:
+    opacity .9s var(--reveal-ease, cubic-bezier(.16,1,.3,1)),
+    transform 1.1s var(--reveal-ease, cubic-bezier(.16,1,.3,1));
+}
+@media (hover: hover) and (pointer: fine){
+  .zoom:hover .img{ transform: scale(1.045); }
+}
+
+/* ── Reduced motion — no clip, no fades that hide content, no zoom ──────── */
+@media (prefers-reduced-motion: reduce){
+  .canReveal{ clip-path: none !important; transition: none !important; }
+  .img{ opacity: 1 !important; transition: none !important; }
+  .lqip{ display: none !important; }
+  .zoom:hover .img{ transform: none !important; }
+}

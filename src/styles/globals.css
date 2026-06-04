@@ -84,6 +84,36 @@ section [class*="para" i]{
   line-height: 1.85;
 }
 
+/* ──────────────────────────────────────────────────────────────────────────
+   Optical typography — hanging punctuation + meaning-aware line breaking.
+   Hebrew RTL reads best when leading/trailing quotes hang into the margin and
+   lines break on sense rather than raw width. `hanging-punctuation` is
+   progressive (Safari today) and `text-wrap:balance/pretty` degrades silently
+   everywhere else — both are safe to ship now.
+   ──────────────────────────────────────────────────────────────────────── */
+section,
+header,
+[class*="_page_"]{
+  hanging-punctuation: first allow-end last;
+}
+/* Display headlines settle into balanced, even rags. */
+section [class*="_title_"],
+header  [class*="_title_"],
+section [class*="_headline_"],
+section [class*="_name_"],
+section [class*="_stepTitle_"]{
+  text-wrap: balance;
+}
+/* Running copy avoids orphans and lonely last-line words. */
+section [class*="lede" i],
+section [class*="para" i],
+section [class*="body" i],
+section [class*="desc" i],
+section [class*="stepBody" i],
+section [class*="hint" i]{
+  text-wrap: pretty;
+}
+
 
 /* ──────────────────────────────────────────────────────────────────────────
    Editorial clip-path headline reveal.

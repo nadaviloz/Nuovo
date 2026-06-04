@@ -1,6 +1,7 @@
 import styles from './Upgrades.module.css'
+import PremiumImage from '../PremiumImage/PremiumImage.jsx'
 
-// Nuovo Upgrades — alternating photo bands. Swap img paths when real photos land.
+// Nuovo Upgrades — photo-forward 2×2 station cards. Swap img paths when real photos land.
 const upgrades = [
   {
     id: 'pizza',
@@ -43,25 +44,16 @@ export default function Upgrades() {
         </div>
       </div>
 
-      <div className={styles.bands}>
+      <div className={styles.grid}>
         {upgrades.map((u, i) => (
-          <article
-            key={u.id}
-            className={`${styles.band} ${i % 2 === 1 ? styles.bandFlip : ''}`}
-            style={{ '--i': i }}
-          >
-            {u.accentImg && (
-              <img
-                src={u.accentImg}
-                alt=""
-                aria-hidden="true"
-                className={styles.accentDish}
-                loading="lazy"
-              />
-            )}
-            <div className={styles.media}>
-              <img src={u.img} alt={u.title} loading="lazy" />
-            </div>
+          <article key={u.id} className={styles.card} style={{ '--i': i }}>
+            <PremiumImage
+              className={styles.media}
+              src={u.img}
+              alt={u.title}
+              zoom
+              sizes="(max-width: 720px) 92vw, (max-width: 1024px) 46vw, 44vw"
+            />
             <div className={styles.body}>
               <h3 className={styles.name}>{u.title}</h3>
               <p className={styles.desc}>{u.desc}</p>
