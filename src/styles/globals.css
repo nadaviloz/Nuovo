@@ -24,6 +24,9 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
   --reveal-ease: cubic-bezier(0.16, 1, 0.3, 1);
   --reveal-stagger: 110ms;
   --mask-overshoot: 0.14em;
+  /* Top clip room for cap/ascender tops — bigger than the bottom because tight
+     editorial titles (e.g. line-height < .9) push glyph tops above the line box. */
+  --mask-overshoot-top: 0.22em;
 
   --parallax-amount: 0.15;
 
@@ -168,6 +171,10 @@ section [class*="hint" i]{
   line-height: inherit;
   padding-bottom: var(--mask-overshoot);
   margin-bottom: calc(-1 * var(--mask-overshoot));
+  /* Mirror the bottom overshoot on top so cap/ascender tops aren't shaved by the
+     overflow:hidden clip. Negative margin keeps layout unchanged. */
+  padding-top: var(--mask-overshoot-top);
+  margin-top: calc(-1 * var(--mask-overshoot-top));
   /* Horizontal breathing room so edge glyphs (e.g. a trailing ת) aren't shaved
      by the overflow:hidden clip; negative margin keeps layout unchanged. */
   padding-inline: .08em;
@@ -214,6 +221,6 @@ section [class*="hint" i]{
   html{ scroll-behavior: auto; }
   .he-inner{ transform: none !important; transition: none !important; }
   .he-child{ opacity: 1 !important; transform: none !important; transition: none !important; }
-  .he-mask{ overflow: visible !important; padding-bottom: 0 !important; margin-bottom: 0 !important; }
+  .he-mask{ overflow: visible !important; padding-bottom: 0 !important; margin-bottom: 0 !important; padding-top: 0 !important; margin-top: 0 !important; }
   [data-parallax]{ transform: none !important; }
 }

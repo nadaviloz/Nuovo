@@ -71,9 +71,6 @@ export default function TableArt() {
               TABLE <em>ART</em>
             </h2>
           </div>
-          <p className={styles.lede}>
-            אנחנו מאמינים שנראות וסטייל הם חלק בלתי נפרד מחווית אירוח מדהימה ואת זה אנחנו רוצים להעניק באירוע שלכם.
-          </p>
         </div>
 
         <div className={styles.flow} aria-label="מרכיבי עיצוב השולחן">

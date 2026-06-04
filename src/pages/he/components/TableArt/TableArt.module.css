@@ -44,9 +44,8 @@
 /* ── Section head ───────────────────────────────────────────────────── */
 .head{
   display: grid;
-  grid-template-columns: auto minmax(320px, 1fr);
-  gap: clamp(28px, 4vw, 60px);
-  align-items: center;
+  grid-template-columns: auto;
+  justify-content: start; /* RTL: inline-start = right, so the title hugs the right edge */
   margin-bottom: clamp(58px, 8vw, 118px);
 }
 .num{
