@@ -216,7 +216,25 @@
 }
 
 /* Native date field — whole box opens the picker; keep our custom icon as the only cue. */
-.dateInput{ cursor: pointer; min-height: 51px; }
+.dateInput{
+  cursor: pointer;
+  min-height: 51px;
+  /* iOS/Android render the value via a flex pseudo-element that is NOT vertically
+     centred by default, so the glyph tops get clipped by the content box. Centre it
+     ourselves and give the value box room to breathe. */
+  display: flex;
+  align-items: center;
+  line-height: normal;
+}
+.dateInput::-webkit-datetime-edit{
+  line-height: 1.5;
+  padding: 2px 0;
+}
+.dateInput::-webkit-date-and-time-value{
+  text-align: right;
+  line-height: 1.5;
+  margin: 0;
+}
 .dateInput::-webkit-calendar-picker-indicator{
   position: absolute;
   inset: 0;
@@ -238,6 +256,7 @@
   transform: translateY(-50%);
   color: var(--txt-3);
   font-size: 17px;
+  line-height: 1.5;
   pointer-events: none;
   -webkit-user-select: none;
   user-select: none;
