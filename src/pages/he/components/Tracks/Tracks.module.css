@@ -246,6 +246,31 @@
   transition: transform .5s cubic-bezier(.2,.8,.25,1);
 }
 
+/* Ambient aura — a faint warm light that follows the cursor across the hovered
+   card. z-index:-1 paints it above the glass fill but below the text. Gated to
+   fine pointers so touch/keyboard never see it; off under reduced motion. */
+.track::after{
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity .45s var(--ease, cubic-bezier(.2,.7,.2,1));
+  background: radial-gradient(
+    220px circle at var(--mx, 50%) var(--my, 50%),
+    rgba(139, 94, 60, .14),
+    rgba(139, 94, 60, 0) 60%
+  );
+}
+@media (hover: hover) and (pointer: fine){
+  .track:hover::after{ opacity: 1; }
+}
+@media (prefers-reduced-motion: reduce){
+  .track::after{ transition: none; }
+}
+
 /* ── Card head: number + name on one rhythm line ───────────────────── */
 .tHead{
   display: flex; flex-direction: column; gap: 10px;

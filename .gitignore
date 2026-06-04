@@ -3,3 +3,6 @@ dist/
 .backups/
 .DS_Store
 *.log
+
+# One-shot apply scripts (generated helpers, not part of the app)
+apply-*.sh

@@ -1,4 +1,5 @@
 import styles from './TableArt.module.css'
+import PremiumImage from '../PremiumImage/PremiumImage.jsx'
 
 const steps = [
   {
@@ -77,30 +78,24 @@ export default function TableArt() {
         </div>
 
         <div className={styles.flow} aria-label="מרכיבי עיצוב השולחן">
-          {steps.map((step, i) => (
-            <div key={step.num} className={styles.flowItem}>
-              <article className={`${styles.step} ${step.flip ? styles.stepFlip : ''}`}>
-                <figure className={styles.stepMedia}>
-                  <img src={step.img} alt={step.alt} loading="lazy" />
-                </figure>
-                <div className={styles.stepCopy}>
-                  <div className={styles.stepKicker}>
-                    <span className={styles.stepNum}>{step.num}</span>
-                    <span className={styles.stepRule} aria-hidden="true" />
-                  </div>
-                  <h3 className={styles.stepTitle}>{step.title}</h3>
-                  <p className={styles.stepBody}>{step.body}</p>
-                </div>
-              </article>
-
-              <img
-                src="/assets/image_fcbc10.png"
-                alt=""
-                aria-hidden="true"
-                className={`${styles.arrow} ${i === 1 ? styles.arrowFlip : ''} ${i === 2 ? styles.arrowDown : ''}`}
-                loading="lazy"
+          {steps.map((step) => (
+            <article key={step.num} className={styles.step}>
+              <PremiumImage
+                className={styles.stepMedia}
+                src={step.img}
+                alt={step.alt}
+                zoom
+                sizes="(max-width: 900px) 92vw, 30vw"
               />
-            </div>
+              <div className={styles.stepCopy}>
+                <div className={styles.stepKicker}>
+                  <span className={styles.stepNum}>{step.num}</span>
+                  <span className={styles.stepRule} aria-hidden="true" />
+                </div>
+                <h3 className={styles.stepTitle}>{step.title}</h3>
+                <p className={styles.stepBody}>{step.body}</p>
+              </div>
+            </article>
           ))}
         </div>
 
@@ -121,7 +116,7 @@ export default function TableArt() {
                 className={`${styles.photo} ${styles[ph.layout]}`}
                 style={{ '--i': i }}
               >
-                <img src={ph.src} alt={ph.alt} loading="lazy" />
+                <PremiumImage fill zoom src={ph.src} alt={ph.alt} sizes="(max-width: 900px) 50vw, 30vw" />
               </figure>
             ))}
           </div>

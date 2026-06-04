@@ -54,6 +54,16 @@
 }
 .page ::selection{ background:var(--ink); color:var(--paper) }
 
+/* Ultra-wide / 4K — type is already px-capped (clamp ceilings) so it never
+   grows unbounded; just give the bounded canvas a little more room and grow the
+   side gutters so content doesn't strand in a sea of paper on huge monitors. */
+@media (min-width: 2200px){
+  .page{
+    --max: 1640px;
+    --pad-x: clamp(96px, 7vw, 220px);
+  }
+}
+
 .wrap{
   max-width:var(--max);
   margin:0 auto;

@@ -1,8 +1,10 @@
 import { useRef } from 'react'
 import styles from './Hero.module.css'
+import useMagnetic from '../../hooks/useMagnetic.js'
 
 export default function Hero() {
   const heroRef = useRef(null)
+  const magRef = useMagnetic()
 
   return (
     <header ref={heroRef} className={styles.hero}>
@@ -26,7 +28,7 @@ export default function Hero() {
           </h1>
           <p className={styles.lede}>שף. תפריט שנתפר סביב השולחן שלך. אירוע שאתם מארחים בלי להרים מחבת. אנחנו מביאים את המסעדה - המפתחות נשארים אצלכם.</p>
           <div className={styles.ctas}>
-            <a href="#book" className={styles.btnPrimary}>
+            <a ref={magRef} href="#book" className={styles.btnPrimary}>
               לתיאום אירוע
               <span className={styles.arrow}>←</span>
             </a>

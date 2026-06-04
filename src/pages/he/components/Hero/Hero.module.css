@@ -185,8 +185,9 @@
   box-shadow: 0 10px 30px rgba(0,0,0,.3);
   transition: transform .3s ease, box-shadow .3s ease;
 }
+/* No static lift on hover — the magnetic pull (useMagnetic, fine-pointer only)
+   owns the transform so the two never fight. Box-shadow hover stays for all. */
 .btnPrimary:hover{
-  transform: translateY(-3px);
   box-shadow: 0 18px 48px rgba(107,68,35,.38), 0 0 0 1px rgba(255,255,255,.18);
 }
 .btnPrimary:hover .arrow{ transform: translateX(-4px) }

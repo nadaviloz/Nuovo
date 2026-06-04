@@ -60,13 +60,17 @@
   aspect-ratio: 4/5;
   border-radius:10px;
   overflow:hidden;
+  /* Sticky so the portrait stays composed in view while the long story scrolls
+     beside it — fills what was a dead void next to the lower paragraphs. */
+  position: sticky;
+  top: clamp(96px, 11vh, 132px);
+  align-self: start;
   margin-top: clamp(-32px, -3vw, 0px);
   /* Solid dark fill matches the photo's dark background, so any sub-pixel
      seam at the edges (e.g., from the PNG's built-in padding) blends in
      instead of revealing a light placeholder pattern. */
   background: #1a1a1a;
   border:1px solid var(--rule);
-  position:relative;
   box-shadow:
     0 40px 100px rgba(14,14,14,.16),
     0 0 0 1px rgba(14,14,14,.04);
@@ -202,4 +206,6 @@
 @media (max-width: 900px){
   .head, .grid{grid-template-columns:1fr}
   .title{white-space:normal}
+  /* No sticky on a single-column phone layout — let the portrait flow. */
+  .portrait{ position:static; top:auto; margin-top:0 }
 }

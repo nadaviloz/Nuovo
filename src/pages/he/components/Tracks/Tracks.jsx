@@ -1,5 +1,15 @@
 import styles from './Tracks.module.css'
 
+// Ambient aura — write the cursor's card-local position into CSS vars so the
+// card's radial glow tracks the pointer. No state, no re-render; the CSS
+// (gated to fine pointers + no-reduced-motion) decides whether it shows.
+function onCardMove(e) {
+  const el = e.currentTarget
+  const r = el.getBoundingClientRect()
+  el.style.setProperty('--mx', (e.clientX - r.left) + 'px')
+  el.style.setProperty('--my', (e.clientY - r.top) + 'px')
+}
+
 const packages = [
   {
     num: '01',
@@ -75,6 +85,7 @@ export default function Tracks() {
               key={p.num}
               className={styles.track}
               style={{ '--i': i }}
+              onMouseMove={onCardMove}
             >
               <header className={styles.tHead}>
                 <div className={styles.tNum}>{p.num}</div>
