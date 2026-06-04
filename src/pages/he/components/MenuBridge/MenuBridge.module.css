@@ -9,12 +9,12 @@
   background: transparent;
   overflow: visible;
 
-  --ink: #1B130A;
-  --ink-70: rgba(27, 19, 10, .72);
-  --ink-55: rgba(27, 19, 10, .54);
-  --warm: #6B4423;
+  --ink: var(--c-espresso);
+  --ink-70: rgba(32, 22, 15, .72);
+  --ink-55: rgba(32, 22, 15, .54);
+  --warm: var(--c-copper);
   --stone: rgba(168, 142, 118, .42);
-  --stone-soft: rgba(107, 68, 35, .13);
+  --stone-soft: rgba(123, 96, 68, .13);
 }
 
 /* Hairline spine — drops through both steps, leads into שלב 1 below.
@@ -64,7 +64,7 @@
   transition: opacity .5s ease;
 }
 .bridgeStep:hover{ opacity: .92 }
-.bridgeStep:hover .stepTitle{ color: var(--warm) }
+.bridgeStep:hover .stepTitle{ color: var(--ink) }
 
 .stepOne{
   align-self: flex-end;
@@ -102,7 +102,7 @@
   font-weight: 300;
   line-height: .82;
   letter-spacing: -.05em;
-  color: var(--stone-soft);
+  color: var(--ink-70);
   user-select: none;
   direction: ltr;
   margin-top: -.06em;
@@ -122,7 +122,7 @@
   opacity: 1;
   transform: none;
 }
-.bridgeStep:hover .numeral{ color: rgba(107, 68, 35, .26) }
+.bridgeStep:hover .numeral{ color: var(--ink) }
 
 .copy{
   display: flex; flex-direction: column;

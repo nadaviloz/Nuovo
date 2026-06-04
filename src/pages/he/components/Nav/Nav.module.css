@@ -1,5 +1,4 @@
 .nav{
-  --clay:#6B4423;
   /* Floating pill: a fixed, transparent full-width wrapper with side gutters;
      the rounded "pill" itself is .navInner. pointer-events are off on the
      wrapper so it never blocks clicks in the gutters. */
@@ -49,7 +48,7 @@
   color:var(--paper);
   display:flex;align-items:baseline;gap:2px;
 }
-.dot{width:5px;height:5px;background:var(--clay);display:inline-block;border-radius:50%;transform:translateY(-3px);margin-inline-start:2px}
+.dot{width:5px;height:5px;background:var(--warm);display:inline-block;border-radius:50%;transform:translateY(-3px);margin-inline-start:2px}
 .navLinks{
   display:flex;gap:28px;
   font-family:var(--label);
@@ -80,7 +79,7 @@
 .navCta:hover{
   background:var(--paper);color:var(--ink);border-color:var(--paper);
   transform: translateY(-3px);
-  box-shadow: 0 14px 34px rgba(107,68,35,.30), 0 0 0 1px rgba(255,255,255,.18);
+  box-shadow: 0 14px 34px rgba(123, 96, 68,.30), 0 0 0 1px rgba(255,255,255,.18);
 }
 .right{display:flex;align-items:center;gap:22px}
 .lang{

@@ -12,11 +12,11 @@
   padding-bottom: clamp(80px, 10vw, 140px);
   background: transparent;
 
-  --ink: #1B130A;
-  --ink-70: rgba(27, 19, 10, .72);
-  --ink-55: rgba(27, 19, 10, .54);
-  --rule: rgba(27, 19, 10, .10);
-  --warm: #6B4423;
+  --ink: var(--c-espresso);
+  --ink-70: rgba(32, 22, 15, .72);
+  --ink-55: rgba(32, 22, 15, .54);
+  --rule: var(--c-rule);
+  --warm: var(--c-copper);
 }
 
 .wrap{
@@ -39,7 +39,7 @@
 .num{
   font-family: var(--label);
   font-size: 11px; letter-spacing: .28em; text-transform: uppercase;
-  font-weight: 600; color: var(--warm);
+  font-weight: 600; color: var(--ink);
   direction: ltr; text-align: right;
 }
 .title{
@@ -58,7 +58,7 @@
   font-style: italic; font-weight: 400;
   text-transform: none;
   letter-spacing: -.022em;
-  color: var(--warm);
+  color: var(--ink);
 }
 /* Classic letterhead rule beneath the title. */
 .title::after{
@@ -68,7 +68,7 @@
   height: 2px;
   margin-top: clamp(16px, 1.5vw, 26px);
   margin-inline-end: auto;
-  background: linear-gradient(to left, var(--warm) 0%, rgba(107,68,35,.45) 50%, transparent 100%);
+  background: linear-gradient(to left, var(--warm) 0%, rgba(123, 96, 68,.45) 50%, transparent 100%);
   opacity: .9;
 }
 .lede{
@@ -100,15 +100,17 @@
   flex-direction: column;
   border-radius: 24px;
   overflow: hidden;
-  border: 1px solid rgba(202, 198, 190, .9);
+  /* Warm clay-tinted hairline border + buttery multi-layer optical shadow. */
+  border: 1px solid rgba(123, 96, 68, .12);
   background:
-    linear-gradient(180deg, rgba(233,230,224,.94) 0%, rgba(226,223,216,.9) 100%);
+    linear-gradient(180deg, rgba(235,231,223,.95) 0%, rgba(228,223,214,.9) 100%);
   -webkit-backdrop-filter: blur(14px) saturate(1.05);
           backdrop-filter: blur(14px) saturate(1.05);
   box-shadow:
-    0 1px 0 rgba(255,255,255,.9) inset,
-    0 2px 4px rgba(80, 50, 20, .04),
-    0 24px 50px -22px rgba(80, 50, 20, .18);
+    0 1px 0 rgba(255,255,255,.7) inset,
+    0 2px 8px rgba(40, 28, 18, .03),
+    0 16px 40px -20px rgba(40, 28, 18, .14),
+    0 40px 80px -44px rgba(40, 28, 18, .12);
   transition:
     transform .7s cubic-bezier(.16,1,.3,1),
     box-shadow .7s cubic-bezier(.16,1,.3,1),
@@ -117,10 +119,11 @@
 .card:hover{
   transform: translateY(-9px);
   box-shadow:
-    0 1px 0 rgba(255,255,255,.9) inset,
-    0 4px 10px rgba(80, 50, 20, .06),
-    0 44px 86px -22px rgba(80, 50, 20, .30);
-  border-color: rgba(107, 68, 35, .25);
+    0 1px 0 rgba(255,255,255,.7) inset,
+    0 4px 12px rgba(40, 28, 18, .05),
+    0 28px 56px -24px rgba(40, 28, 18, .20),
+    0 56px 100px -50px rgba(40, 28, 18, .16);
+  border-color: rgba(123, 96, 68, .22);
   transition:
     transform .45s cubic-bezier(.16,1,.3,1),
     box-shadow .45s cubic-bezier(.16,1,.3,1),
@@ -134,7 +137,7 @@
   top: 0; right: 0; left: 0;
   height: 2px;
   z-index: 2;
-  background: linear-gradient(90deg, transparent, var(--warm) 40%, #8B5E3C 80%, transparent);
+  background: linear-gradient(90deg, transparent, var(--warm) 40%, #9A7C5C 80%, transparent);
   transform: scaleX(0);
   transform-origin: right center;
   transition: transform .9s cubic-bezier(.16,1,.3,1);
@@ -191,7 +194,7 @@
 .priceValue{
   font-family: var(--serif); font-weight: 600;
   font-size: clamp(28px, 2.1vw, 36px); line-height: 1;
-  color: var(--warm); letter-spacing: -.02em;
+  color: var(--ink); letter-spacing: -.02em;
   direction: ltr;
 }
 .priceUnit{

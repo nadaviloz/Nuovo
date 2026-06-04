@@ -13,11 +13,11 @@
   padding-bottom: clamp(82px, 9vw, 150px);
   background: transparent;
 
-  --ink: #2B1C12;
-  --ink-72: rgba(43, 28, 18, .72);
-  --ink-56: rgba(43, 28, 18, .56);
-  --copper: #8A6044;
-  --rule: rgba(95, 69, 50, .16);
+  --ink: var(--c-espresso);
+  --ink-72: rgba(32, 22, 15, .72);
+  --ink-56: rgba(32, 22, 15, .56);
+  --copper: var(--c-copper);
+  --rule: var(--c-rule);
 }
 .section::before{
   content: "";
@@ -29,7 +29,7 @@
   background: linear-gradient(90deg,
     rgba(95,69,50,0),
     rgba(95,69,50,.22) 18%,
-    rgba(138,96,68,.28) 50%,
+    rgba(123, 96, 68,.28) 50%,
     rgba(95,69,50,.22) 82%,
     rgba(95,69,50,0)
   );
@@ -57,7 +57,7 @@
   letter-spacing: .24em;
   text-transform: uppercase;
   font-weight: 600;
-  color: var(--copper);
+  color: var(--ink);
   direction: ltr;
   text-align: right;
 }
@@ -87,7 +87,7 @@
   height: 2px;
   margin-top: clamp(16px, 1.5vw, 26px);
   margin-inline-end: auto;
-  background: linear-gradient(to left, var(--copper) 0%, rgba(138,96,68,.4) 50%, transparent 100%);
+  background: linear-gradient(to left, var(--copper) 0%, rgba(123, 96, 68,.4) 50%, transparent 100%);
   opacity: .85;
 }
 .lede{
@@ -127,7 +127,7 @@
   letter-spacing: .3em;
   text-transform: uppercase;
   font-weight: 600;
-  color: var(--copper);
+  color: var(--ink);
   direction: ltr;
   text-align: right;
   padding-bottom: clamp(16px, 2vw, 24px);

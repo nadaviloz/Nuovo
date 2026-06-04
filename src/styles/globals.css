@@ -6,6 +6,14 @@ img{display:block;max-width:100%}
 a{color:inherit;text-decoration:none}
 button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 
+/* Accessibility — a visible keyboard-focus ring in the brand bronze (for the demo
+   and beyond). Mouse users never see it; only :focus-visible (keyboard/AT). */
+:focus-visible{
+  outline: 2px solid var(--c-copper, #7B6044);
+  outline-offset: 3px;
+  border-radius: 1px;
+}
+
 /* ──────────────────────────────────────────────────────────────────────────
    Motion tokens. All editorial-grade animations read from these — no magic
    numbers in component CSS. Tuned for a Loewe/Bottega-style cadence: long
@@ -21,6 +29,26 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 
   --page-wipe-duration: 1100ms;
   --page-wipe-ease: cubic-bezier(0.77, 0, 0.18, 1);
+
+  /* ────────────────────────────────────────────────────────────────────────
+     CANONICAL PALETTE — physical, tactile, culinary. Single source of truth;
+     every section maps its local tokens to these (no hardcoded hexes). Each
+     colour derives from a real material — raw linen, stone, taupe ceramic,
+     smoked paprika, charred espresso. NO pure #000/#FFF, no digital/plastic
+     hexes, no "tech orange". The accent (`--c-copper`) is the spec's "--warm".
+     ──────────────────────────────────────────────────────────────────────── */
+  --c-paper:      #F2EFE9;            /* Raw Linen / Warm Alabaster — canvas     */
+  --c-paper-2:    #E8E3DB;            /* Stone — subtle section contrast         */
+  --c-paper-hi:   #F8F6F1;            /* lifted linen — subtle highlight         */
+  --c-clay:       #CDC8BE;            /* Earthy Taupe (zero yellow) — 2ndary cards*/
+  --c-ink:        #231F1C;            /* Charred Espresso — warm "wet ink"       */
+  --c-espresso:   #231F1C;            /* same charred espresso — section ink     */
+  --c-copper:     #7B6044;            /* Muted Architectural Bronze — THE accent */
+  --c-copper-deep:#4F3E2B;            /* Deep Bronze — accent hover / deep       */
+  --c-rule:       #BDB7AB;            /* Faded Clay — ultra-delicate hairline    */
+  --c-rule-2:     rgba(189, 183, 171, .55); /* even fainter border / hairline   */
+  --c-glow-a:     rgba(123, 96, 68, .10); /* bronze ambient glow, warm side      */
+  --c-glow-b:     rgba(95, 75, 54, .08); /* bronze ambient glow, deep side       */
 }
 
 /* Always-on smooth-scroll fallback. JS overrides it with eased scrolling
@@ -37,7 +65,7 @@ html{scroll-behavior:smooth}
   vertical-align: middle;
   width: 28px;
   height: 1px;
-  background: linear-gradient(90deg, transparent, #6B4423 60%, #4A2E12);
+  background: linear-gradient(90deg, transparent, var(--c-copper) 60%, var(--c-copper-deep));
   margin-inline-end: 10px;
   transform: translateY(-1px);
 }

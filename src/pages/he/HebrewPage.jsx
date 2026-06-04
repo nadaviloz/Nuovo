@@ -51,12 +51,11 @@ function maskifyHeadline(el) {
 
 export default function HebrewPage() {
   const pageRef = useRef(null)
-  const wipeRef = useRef(null)
 
   useEffect(() => {
     document.title = 'שולחן - שף פרטי'
     const prevBg = document.body.style.background
-    document.body.style.background = '#DAD7D1'
+    document.body.style.background = '#F2EFE9'
     return () => { document.body.style.background = prevBg }
   }, [])
 
@@ -207,9 +206,6 @@ export default function HebrewPage() {
 
   return (
     <div ref={pageRef} className={styles.page}>
-      <div ref={wipeRef} className={styles.wipe} aria-hidden="true">
-        <span className={styles.wipeLine} />
-      </div>
       <ScrollProgress />
       <Nav />
       <Hero />

@@ -11,13 +11,13 @@
   padding-bottom: clamp(82px, 9vw, 150px);
   background: transparent;
 
-  --ink: #2B1C12;
-  --ink-72: rgba(43, 28, 18, .72);
-  --ink-56: rgba(43, 28, 18, .56);
-  --ink-40: rgba(43, 28, 18, .40);
-  --copper: #8A6044;
-  --copper-soft: rgba(138, 96, 68, .34);
-  --rule: rgba(95, 69, 50, .16);
+  --ink: var(--c-espresso);
+  --ink-72: rgba(32, 22, 15, .72);
+  --ink-56: rgba(32, 22, 15, .56);
+  --ink-40: rgba(32, 22, 15, .40);
+  --copper: var(--c-copper);
+  --copper-soft: rgba(123, 96, 68, .34);
+  --rule: var(--c-rule);
 }
 .section::before{
   content: "";
@@ -29,7 +29,7 @@
   background: linear-gradient(90deg,
     rgba(95,69,50,0),
     rgba(95,69,50,.22) 18%,
-    rgba(138,96,68,.28) 50%,
+    rgba(123, 96, 68,.28) 50%,
     rgba(95,69,50,.22) 82%,
     rgba(95,69,50,0)
   );
@@ -74,7 +74,7 @@
   letter-spacing: .24em;
   text-transform: uppercase;
   font-weight: 600;
-  color: var(--copper);
+  color: var(--ink);
   direction: rtl;
   text-align: right;
 }
@@ -168,7 +168,7 @@
   flex: none;
 }
 .markIn{
-  color: var(--copper);
+  color: var(--ink);
   box-shadow: inset 0 0 0 1px var(--copper-soft);
 }
 .markOut{

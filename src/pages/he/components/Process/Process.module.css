@@ -50,11 +50,11 @@
   height: 1px;
   background: linear-gradient(90deg,
     transparent 0%,
-    rgba(107,68,35,0) 4%,
-    rgba(107,68,35,.45) 18%,
-    rgba(139,94,60,.45) 50%,
-    rgba(74,46,18,.45) 82%,
-    rgba(74,46,18,0) 96%,
+    rgba(123, 96, 68,0) 4%,
+    rgba(123, 96, 68,.45) 18%,
+    rgba(123, 96, 68,.45) 50%,
+    rgba(79, 62, 43,.45) 82%,
+    rgba(79, 62, 43,0) 96%,
     transparent 100%);
   pointer-events:none;
   z-index:0;
@@ -93,15 +93,15 @@
   position:relative;
   background:
     radial-gradient(circle at 30% 25%, rgba(255,255,255,.18), rgba(255,255,255,0) 60%),
-    linear-gradient(160deg, rgba(107,68,35,.08), rgba(74,46,18,.05));
+    linear-gradient(160deg, rgba(123, 96, 68,.08), rgba(79, 62, 43,.05));
   -webkit-backdrop-filter: blur(8px);
   backdrop-filter: blur(8px);
   color: var(--ink);
   box-shadow:
-    inset 0 0 0 1px rgba(107,68,35,.35),
+    inset 0 0 0 1px rgba(123, 96, 68,.35),
     inset 0 1px 0 rgba(255,255,255,.35),
     0 4px 16px rgba(10,10,10,.06),
-    0 0 0 6px rgba(107,68,35,0);
+    0 0 0 6px rgba(123, 96, 68,0);
   transition:
     background .6s cubic-bezier(.22,1,.36,1),
     color .6s cubic-bezier(.22,1,.36,1),
@@ -109,14 +109,14 @@
     transform .6s cubic-bezier(.22,1,.36,1);
 }
 .step:hover .stepIcon{
-  background: var(--clay-grad, linear-gradient(135deg,#6B4423 0%,#8B5E3C 55%,#4A2E12 100%));
+  background: var(--warm-grad, linear-gradient(135deg,#7B6044 0%,#9A7C5C 55%,#4F3E2B 100%));
   color: #ffffff;
   transform: scale(1.06);
   box-shadow:
     inset 0 0 0 1px rgba(255,255,255,.40),
     inset 0 1px 0 rgba(255,255,255,.45),
-    0 8px 22px rgba(107,68,35,.22),
-    0 0 0 6px rgba(107,68,35,.08);
+    0 8px 22px rgba(123, 96, 68,.22),
+    0 0 0 6px rgba(123, 96, 68,.08);
 }
 
 @media (max-width: 900px){
@@ -136,9 +136,9 @@
     height:1px;
     background: linear-gradient(90deg,
       transparent 0%,
-      rgba(107,68,35,.45) 26%,
-      rgba(139,94,60,.45) 50%,
-      rgba(74,46,18,.45) 74%,
+      rgba(123, 96, 68,.45) 26%,
+      rgba(123, 96, 68,.45) 50%,
+      rgba(79, 62, 43,.45) 74%,
       transparent 100%);
     pointer-events:none;
   }

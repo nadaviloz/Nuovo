@@ -9,7 +9,7 @@
   height: 58px;
   padding: 0 26px;
   border-radius: 999px;
-  background: var(--clay-grad, linear-gradient(135deg,#6B4423 0%,#8B5E3C 55%,#4A2E12 100%));
+  background: var(--warm-grad, linear-gradient(135deg,#7B6044 0%,#9A7C5C 55%,#4F3E2B 100%));
   color: #F4F0EA;
   font-family: var(--label);
   font-size: 13px;
@@ -17,7 +17,7 @@
   text-transform: uppercase;
   font-weight: 600;
   text-decoration: none;
-  box-shadow: 0 10px 26px rgba(74,46,18,.34);
+  box-shadow: 0 10px 26px rgba(79, 62, 43,.34);
   /* hidden until scrolled past the hero */
   opacity: 0;
   transform: translateY(16px) scale(.96);
@@ -34,7 +34,7 @@
 }
 .book:hover{
   transform: translateY(-3px);
-  box-shadow: 0 16px 36px rgba(74,46,18,.44);
+  box-shadow: 0 16px 36px rgba(79, 62, 43,.44);
 }
 .icon{ display: inline-flex; align-items: center; justify-content: center; }
 .label{ white-space: nowrap; }
