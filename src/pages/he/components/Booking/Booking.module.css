@@ -215,56 +215,44 @@
   pointer-events: none;
 }
 
-/* Native date field — whole box opens the picker; keep our custom icon as the only cue. */
-.dateInput{
-  cursor: pointer;
-  min-height: 51px;
-  /* iOS/Android render the value via a flex pseudo-element that is NOT vertically
-     centred by default, so the glyph tops get clipped by the content box. Centre it
-     ourselves and give the value box room to breathe. */
+/* ── Date field ──────────────────────────────────────────────────────────
+   The visible box (.dateDisplay) is OUR OWN element — it inherits the form's
+   RTL and is vertically centred exactly like every other input, so the date
+   can never clip or fall out of line. The real <input type="date"> is laid
+   invisibly on top (opacity:0, fills the box) only to capture the tap and open
+   the native picker. This sidesteps every iOS/Android quirk in how the native
+   value text is painted — we never show the native value at all. */
+.dateDisplay{
   display: flex;
   align-items: center;
-  line-height: normal;
-}
-/* Hide the native value text entirely — we render our own right-aligned, vertically
-   centred Hebrew date on top (.datePlaceholder/.dateFilled) so it never clips on phones. */
-.dateInput::-webkit-datetime-edit{
-  color: transparent;
-  line-height: 1.5;
-  padding: 2px 0;
-}
-.dateInput::-webkit-clear-button,
-.dateInput::-webkit-inner-spin-button{ display: none; }
-.dateInput::-webkit-date-and-time-value{
-  text-align: right;
-  line-height: 1.5;
-  margin: 0;
-}
-.dateInput::-webkit-calendar-picker-indicator{
-  position: absolute;
-  inset: 0;
-  width: auto;
-  height: auto;
-  margin: 0;
-  padding: 0;
-  opacity: 0;
+  min-height: 51px;
   cursor: pointer;
 }
-/* Our own date text, overlaid right-aligned and vertically centred so it matches
-   every other input and never clips. Dim for the placeholder, full ink once filled. */
-.datePlaceholder{
+.dateText{ color: var(--txt); }
+.dateHint{ color: var(--txt-3); }
+.dateNative{
   position: absolute;
-  right: 17px;
-  top: 50%;
-  transform: translateY(-50%);
-  color: var(--txt-3);
-  font-size: 17px;
-  line-height: 1.5;
-  pointer-events: none;
-  -webkit-user-select: none;
-  user-select: none;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  opacity: 0;
+  background: transparent;
+  -webkit-appearance: none;
+  appearance: none;
+  cursor: pointer;
 }
-.dateFilled{ color: var(--txt); }
+/* Desktop Chrome: let a click anywhere on the (invisible) field open the picker. */
+.dateNative::-webkit-calendar-picker-indicator{
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  cursor: pointer;
+}
 
 .selectWrap{ position: relative; }
 .select{

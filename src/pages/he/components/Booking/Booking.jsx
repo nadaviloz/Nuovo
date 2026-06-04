@@ -212,17 +212,19 @@ export default function Booking() {
               <div className={styles.field}>
                 <label className={styles.label}>תאריך</label>
                 <div className={styles.inputWrap}>
+                  <div className={`${styles.input} ${styles.dateDisplay}`} aria-hidden="true">
+                    <span className={values.date ? styles.dateText : styles.dateHint}>
+                      {values.date ? formatHebDate(values.date) : 'בחרו תאריך'}
+                    </span>
+                  </div>
                   <input
                     type="date"
-                    className={`${styles.input} ${styles.dateInput}`}
+                    className={styles.dateNative}
                     value={values.date}
                     onChange={set('date')}
                     min={todayISO}
                     aria-label="תאריך האירוע"
                   />
-                  <span className={`${styles.datePlaceholder} ${values.date ? styles.dateFilled : ''}`} aria-hidden="true">
-                    {values.date ? formatHebDate(values.date) : 'בחרו תאריך'}
-                  </span>
                   <span className={styles.inputIco}><Cal /></span>
                 </div>
               </div>
