@@ -253,6 +253,10 @@
   box-shadow: 0 18px 60px rgba(43, 28, 18, .08);
 }
 .galleryHero{ grid-column: 1; grid-row: 1 / span 3; }
+/* The hero shot is a tall 9:16 portrait — show it whole (contain) instead of
+   cropping top/bottom. The narrow side margins fill with the photo's own
+   dominant tone, reading like a matted editorial print. */
+.galleryHero img{ object-fit: contain; }
 .a{ grid-column: 2; grid-row: 1; }
 .b{ grid-column: 3; grid-row: 1 / span 2; }
 .c{ grid-column: 2; grid-row: 2 / span 2; }

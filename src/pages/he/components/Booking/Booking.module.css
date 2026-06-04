@@ -226,10 +226,15 @@
   align-items: center;
   line-height: normal;
 }
+/* Hide the native value text entirely — we render our own right-aligned, vertically
+   centred Hebrew date on top (.datePlaceholder/.dateFilled) so it never clips on phones. */
 .dateInput::-webkit-datetime-edit{
+  color: transparent;
   line-height: 1.5;
   padding: 2px 0;
 }
+.dateInput::-webkit-clear-button,
+.dateInput::-webkit-inner-spin-button{ display: none; }
 .dateInput::-webkit-date-and-time-value{
   text-align: right;
   line-height: 1.5;
@@ -245,10 +250,8 @@
   opacity: 0;
   cursor: pointer;
 }
-/* Before a date is picked: hide the native edit text entirely (iOS Safari shows
-   nothing here anyway, desktop shows a "yyyy/mm/dd" hint) and overlay our own
-   right-aligned RTL placeholder so the field matches every other input. */
-.dateEmpty::-webkit-datetime-edit{ color: transparent; }
+/* Our own date text, overlaid right-aligned and vertically centred so it matches
+   every other input and never clips. Dim for the placeholder, full ink once filled. */
 .datePlaceholder{
   position: absolute;
   right: 17px;
@@ -261,6 +264,7 @@
   -webkit-user-select: none;
   user-select: none;
 }
+.dateFilled{ color: var(--txt); }
 
 .selectWrap{ position: relative; }
 .select{

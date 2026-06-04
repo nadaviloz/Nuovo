@@ -54,6 +54,19 @@ function Arrow() {
   )
 }
 
+// Format an ISO "YYYY-MM-DD" value as a Hebrew date (e.g. "4 ביוני 2026"). We render
+// this ourselves and hide the native value text, because iOS/Android paint the date
+// via a pseudo-element we can't reliably centre — it clips on phones. Parsed as a
+// local date (not UTC) so the day never shifts across time zones.
+function formatHebDate(iso) {
+  if (!iso) return ''
+  const [y, m, d] = iso.split('-').map(Number)
+  if (!y || !m || !d) return ''
+  return new Date(y, m - 1, d).toLocaleDateString('he-IL', {
+    day: 'numeric', month: 'long', year: 'numeric'
+  })
+}
+
 export default function Booking() {
   const [values, setValues] = useState({
     track: '',
@@ -201,13 +214,15 @@ export default function Booking() {
                 <div className={styles.inputWrap}>
                   <input
                     type="date"
-                    className={`${styles.input} ${styles.dateInput} ${values.date ? '' : styles.dateEmpty}`}
+                    className={`${styles.input} ${styles.dateInput}`}
                     value={values.date}
                     onChange={set('date')}
                     min={todayISO}
                     aria-label="תאריך האירוע"
                   />
-                  {!values.date && <span className={styles.datePlaceholder} aria-hidden="true">בחרו תאריך</span>}
+                  <span className={`${styles.datePlaceholder} ${values.date ? styles.dateFilled : ''}`} aria-hidden="true">
+                    {values.date ? formatHebDate(values.date) : 'בחרו תאריך'}
+                  </span>
                   <span className={styles.inputIco}><Cal /></span>
                 </div>
               </div>
