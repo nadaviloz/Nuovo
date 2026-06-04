@@ -44,6 +44,16 @@
   line-height:.96;letter-spacing:-.032em;
   margin-top:22px;
 }
+/* Copper letterhead hairline beneath the title (RTL start, fades left). */
+.title::after{
+  content:"";
+  display:block;
+  width:100%;
+  height:2px;
+  margin-top:clamp(16px,1.6vw,28px);
+  background:linear-gradient(to left, var(--c-copper) 0%, rgba(123,96,68,.4) 50%, transparent 100%);
+  opacity:.85;
+}
 .title em{font-family:var(--accent);font-style:normal;font-weight:400;letter-spacing:-.022em;color:var(--paper)}
 .lede{
   font-size:19px;line-height:1.7;color:rgba(250,250,250,.65);

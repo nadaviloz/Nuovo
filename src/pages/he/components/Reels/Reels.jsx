@@ -94,7 +94,7 @@ const categories = {
 
 const order = ['pizza', 'chef']
 
-// Cache-buster — bump when a reel's contents change but its filename is reused.
+// Cache-buster - bump when a reel's contents change but its filename is reused.
 const V = '?v=23'
 
 export default function Reels() {

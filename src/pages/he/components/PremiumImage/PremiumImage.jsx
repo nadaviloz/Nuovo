@@ -3,11 +3,11 @@ import styles from './PremiumImage.module.css'
 import lqip from '../../data/lqip.js'
 
 /**
- * PremiumImage — the Michelin image pipeline.
+ * PremiumImage - the Michelin image pipeline.
  *
  * Renders a fixed-aspect frame that paints the photo's dominant colour first,
  * then a 24px blurred base64 LQIP (generated offline by sharp), and finally
- * fades the sharp image over it once decoded — a true progressive blur-up with
+ * fades the sharp image over it once decoded - a true progressive blur-up with
  * zero layout shift.
  *
  * The clip-path "unmask from behind a wall" reveal is driven by the page's
@@ -22,7 +22,7 @@ import lqip from '../../data/lqip.js'
  * Props:
  *   src        public path (also the LQIP lookup key)
  *   alt        accessible text ("" for decorative)
- *   aspect     e.g. "4 / 5" — reserves space; omit when the parent is sized
+ *   aspect     e.g. "4 / 5" - reserves space; omit when the parent is sized
  *   fill       fill a parent that already has a definite height (grid cell)
  *   sizes      responsive sizes hint
  *   priority   above-the-fold: eager + high fetch priority, skips the reveal

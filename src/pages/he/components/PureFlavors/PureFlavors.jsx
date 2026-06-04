@@ -8,7 +8,6 @@ export default function PureFlavors() {
       <div className={styles.wrap}>
         <div className={styles.head}>
           <div>
-            <div className={styles.num}>/ Chef Table</div>
             <h2 id="chef-table-title" className={styles.title}>אז מה זה <em>שולחן השף?</em></h2>
           </div>
           <p className={styles.lede}>
@@ -28,7 +27,7 @@ export default function PureFlavors() {
           <div className={styles.copy}>
             <div className={styles.label}>Pure Flavors</div>
             <p className={styles.para}>
-              מנות שף מוקפדות עם המון מחשבה ויצירתיות, מחומרי גלם מעולים — והכל נעשה בעבודת יד, ממש במקום, אצלכם באירוע.
+              מנות שף מוקפדות עם המון מחשבה ויצירתיות, מחומרי גלם מעולים - והכל נעשה בעבודת יד, ממש במקום, אצלכם באירוע.
             </p>
             <p className={styles.para}>
               מגוון מנות שיתאימו לכל האורחים שלכם, כאלו שכולם יאהבו ויבקשו מהם עוד.

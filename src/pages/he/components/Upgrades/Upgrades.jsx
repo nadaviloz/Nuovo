@@ -1,7 +1,7 @@
 import styles from './Upgrades.module.css'
 import PremiumImage from '../PremiumImage/PremiumImage.jsx'
 
-// Nuovo Upgrades — photo-forward 2×2 station cards. Swap img paths when real photos land.
+// Nuovo Upgrades - photo-forward 2×2 station cards. Swap img paths when real photos land.
 const upgrades = [
   {
     id: 'pizza',
@@ -38,7 +38,6 @@ export default function Upgrades() {
     <section id="upgrades" className={styles.section}>
       <div className={styles.wrap}>
         <div className={styles.head}>
-          <div className={styles.num}>/ שלב 2 · Nuovo Upgrades</div>
           <h2 className={styles.title}>Nuovo <em>Upgrades</em></h2>
           <p className={styles.lede}>כאן תוכלו לבחור תוספות למסלול שלכם ולשדרג את חווית האירוח שלכם לאורחים.</p>
         </div>

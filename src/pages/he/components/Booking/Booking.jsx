@@ -75,7 +75,7 @@ export default function Booking() {
   const [diet, setDiet] = useState([])
   const [submitted, setSubmitted] = useState(false)
 
-  // Today in local-time YYYY-MM-DD — used as the date picker's floor (no past dates).
+  // Today in local-time YYYY-MM-DD - used as the date picker's floor (no past dates).
   const todayISO = useMemo(() => new Date().toLocaleDateString('en-CA'), [])
 
   const set = (key) => (e) => setValues((v) => ({ ...v, [key]: e.target.value }))
@@ -153,10 +153,10 @@ export default function Booking() {
       <div className={styles.wrap}>
         <div className={styles.head}>
           <div>
-            <div className={styles.num}>/ 06 — הזמנה</div>
+            <div className={styles.num}>/ 06 - הזמנה</div>
             <h2 className={styles.title}>ספרו לנו<br/><em>על הערב</em></h2>
           </div>
-          <p className={styles.lede}>לא טופס בירוקרטי — סיפור קצר. ככל שתשתפו יותר, השף יחזור אליכם עם הצעת תפריט מדויקת, לא עם שאלות.</p>
+          <p className={styles.lede}>לא טופס בירוקרטי - סיפור קצר. ככל שתשתפו יותר, השף יחזור אליכם עם הצעת תפריט מדויקת, לא עם שאלות.</p>
         </div>
 
         <form className={styles.bento} onSubmit={onSubmit}>
@@ -207,6 +207,7 @@ export default function Booking() {
                     min={todayISO}
                     aria-label="תאריך האירוע"
                   />
+                  {!values.date && <span className={styles.datePlaceholder} aria-hidden="true">בחרו תאריך</span>}
                   <span className={styles.inputIco}><Cal /></span>
                 </div>
               </div>
@@ -228,7 +229,7 @@ export default function Booking() {
               <span className={styles.cardNum}>02</span>
             </div>
 
-            <p className={styles.hint}>החלק הכי חשוב. אוהד קורא כל מילה — וזה מה שמאפשר לו להגיע מוכן, עם תפריט שמתאים בדיוק לערב שלכם.</p>
+            <p className={styles.hint}>החלק הכי חשוב. אוהד קורא כל מילה - וזה מה שמאפשר לו להגיע מוכן, עם תפריט שמתאים בדיוק לערב שלכם.</p>
 
             <div className={styles.field}>
               <label className={styles.label}>סוג האירוע</label>
@@ -240,9 +241,9 @@ export default function Booking() {
             </div>
 
             <div className={styles.field}>
-              <label className={styles.label}>ספרו לנו עוד — מי האנשים, מה החגיגה, מה תרצו שיקרה</label>
+              <label className={styles.label}>ספרו לנו עוד - מי האנשים, מה החגיגה, מה תרצו שיקרה</label>
               <textarea className={styles.textarea} rows="5" value={values.story} onChange={set('story')} placeholder="לדוגמה: אנחנו זוג, חוגגים 5 שנים יחד, מזמינים שמונה חברים קרובים. אוהבים אוכל איטלקי, אבל אנה צמחונית ולא אוכלת גלוטן. רוצים ערב איכותי שלא נשכח." />
-              <div className={styles.helper}>ככל שתספרו יותר — <em>מי האורחים, מה החגיגה, מה שירגישו</em> — כך התפריט יהיה מדויק.</div>
+              <div className={styles.helper}>ככל שתספרו יותר - <em>מי האורחים, מה החגיגה, מה שירגישו</em> - כך התפריט יהיה מדויק.</div>
             </div>
           </div>
 
@@ -351,7 +352,7 @@ export default function Booking() {
 
             <button type="submit" className={styles.submit} disabled={submitted}>
               <Arrow />
-              <span>{submitted ? 'נשלח — נחזור אליכם תוך 24 שעות' : 'שליחה לאוהד'}</span>
+              <span>{submitted ? 'נשלח - נחזור אליכם תוך 24 שעות' : 'שליחה לאוהד'}</span>
             </button>
             <div className={styles.fine}>ללא כרטיס אשראי · ללא התחייבות · רק אחרי שראיתם את התפריט</div>
           </div>

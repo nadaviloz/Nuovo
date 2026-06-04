@@ -34,15 +34,15 @@
 .photoLayer{
   position:absolute; inset:0; z-index:0;
   background:
-    url('/assets/hero-new.jpg') no-repeat center 22% / cover;
-  transform: scale(1.18);
+    url('/assets/hero-new.jpg') no-repeat center 28% / cover;
+  transform: scale(1.02);
   transform-origin: center 38%;
   animation: heroKenBurns 14s ease-in-out infinite alternate;
   will-change: transform;
 }
 @keyframes heroKenBurns{
-  from{ transform: scale(1.28); }
-  to{   transform: scale(1.10); }
+  from{ transform: scale(1.07); }
+  to{   transform: scale(1.0); }
 }
 /* Light vignette on the photo only — no bottom melt into the next section. */
 .photoLayer::after{
@@ -52,7 +52,7 @@
   pointer-events:none;
 }
 @media (prefers-reduced-motion: reduce){
-  .photoLayer{ animation:none; transform: scale(1.12); }
+  .photoLayer{ animation:none; transform: scale(1.02); }
 }
 /* Stage var on .hero so the photoFrame can compute its inset. */
 .hero{ --frame-inset: clamp(18px, 2.2vw, 36px); }
@@ -93,7 +93,7 @@
 .headline{
   position:absolute;
   z-index:3;
-  bottom:200px;
+  bottom:240px;
   right:var(--pad-x);
   text-align:right;
   max-width:640px;
@@ -105,7 +105,9 @@
   letter-spacing:-.042em;
   margin-top:28px;
   color:var(--paper);
-  text-shadow: 0 1px 40px rgba(0,0,0,.25);
+  /* Tight, crisp legibility shadow that hugs each glyph — a wide blur smudged
+     dark haze into the gaps between letters and onto the light apron area. */
+  text-shadow: 0 1px 4px rgba(0,0,0,.45);
   will-change: transform;
 }
 .line{ display:inline; font-style: inherit; }
@@ -116,6 +118,10 @@
   line-height: inherit;
   padding-bottom: var(--mask-overshoot, .14em);
   margin-bottom: calc(-1 * var(--mask-overshoot, .14em));
+  /* Horizontal breathing room so the last glyph (e.g. ת) isn't shaved by the
+     overflow:hidden clip; negative margin keeps layout position unchanged. */
+  padding-inline: .08em;
+  margin-inline: -.08em;
 }
 .word > span{
   display:inline-block;
@@ -177,10 +183,10 @@
 }
 .btnPrimary{
   background:var(--paper);color:var(--ink);
-  padding:26px 44px;border-radius:6px;
+  padding:30px 54px;border-radius:6px;
   font-family:var(--label);
-  font-size:14px;letter-spacing:.24em;text-transform:uppercase;font-weight:600;
-  display:inline-flex;align-items:center;gap:18px;
+  font-size:15px;letter-spacing:.24em;text-transform:uppercase;font-weight:600;
+  display:inline-flex;align-items:center;gap:20px;
   box-shadow: 0 10px 30px rgba(0,0,0,.3);
   transition: transform .3s ease, box-shadow .3s ease;
 }
@@ -191,9 +197,9 @@
 }
 .btnPrimary:hover .arrow{ transform: translateX(-4px) }
 .arrow{
-  width:30px;height:30px;border-radius:50%;background:var(--warm);color:#fff;
+  width:34px;height:34px;border-radius:50%;background:var(--warm);color:#fff;
   display:inline-flex;align-items:center;justify-content:center;
-  font-size:15px;
+  font-size:16px;
   transition: transform .3s ease;
 }
 .btnText{

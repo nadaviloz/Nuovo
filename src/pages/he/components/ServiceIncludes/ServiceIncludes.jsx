@@ -1,6 +1,6 @@
 import styles from './ServiceIncludes.module.css'
 
-// "מה כלול בשירות שלנו?" — two columns: what the service includes vs. what it doesn't.
+// "מה כלול בשירות שלנו?" - two columns: what the service includes vs. what it doesn't.
 const included = [
   {
     title: 'שולחנות ומפות שעליהם יוגש כל האוכל',
@@ -62,7 +62,7 @@ function Dash() {
 export default function ServiceIncludes() {
   return (
     <section id="service" className={styles.section} aria-labelledby="service-title">
-      {/* Pre-cut plate PNG bleeding off the left edge — no CSS mask needed. */}
+      {/* Pre-cut plate PNG bleeding off the left edge - no CSS mask needed. */}
       <img
         src="/assets/plate-cutout.png"
         alt=""
@@ -77,7 +77,7 @@ export default function ServiceIncludes() {
             <h2 id="service-title" className={styles.title}>מה כלול<br /><em>בשירות שלנו</em></h2>
           </div>
           <p className={styles.lede}>
-            כדי שתדעו בדיוק למה לצפות — לפניכם מה שאנחנו דואגים לו עבורכם, ומה כדאי להשלים מצדכם.
+            כדי שתדעו בדיוק למה לצפות - לפניכם מה שאנחנו דואגים לו עבורכם, ומה כדאי להשלים מצדכם.
           </p>
         </div>
 

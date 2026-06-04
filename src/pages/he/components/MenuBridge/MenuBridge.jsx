@@ -3,7 +3,7 @@ import styles from './MenuBridge.module.css'
 // Typographic bridge from the base menu (step 1) into the upgrades (step 2).
 export default function MenuBridge() {
   return (
-    <section id="menu-bridge" className={styles.bridge} aria-label="בחירת תפריט — שלב 1 ושלב 2">
+    <section id="menu-bridge" className={styles.bridge} aria-label="בחירת תפריט - שלב 1 ושלב 2">
       <div className={styles.spine} aria-hidden="true" />
 
       <div className={styles.wrap}>
@@ -27,7 +27,7 @@ export default function MenuBridge() {
           <span className={styles.numeral} aria-hidden="true">02</span>
           <div className={styles.copy}>
             <span className={styles.stepTitle}>מוסיפים תוספות לבחירה</span>
-            <span className={styles.stepHint}>לא חובה — לשדרוג חוויית האירוח</span>
+            <span className={styles.stepHint}>לא חובה - לשדרוג חוויית האירוח</span>
           </div>
         </a>
       </div>

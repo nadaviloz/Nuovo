@@ -88,6 +88,16 @@
   color: var(--ink);
   text-align: right;
 }
+/* Copper letterhead hairline beneath the title (RTL start, fades left). */
+.title::after{
+  content:"";
+  display:block;
+  width:100%;
+  height:2px;
+  margin-top:clamp(16px,1.6vw,28px);
+  background:linear-gradient(to left, var(--c-copper) 0%, rgba(123,96,68,.4) 50%, transparent 100%);
+  opacity:.85;
+}
 .title em{
   font-family: var(--accent);
   font-style: normal;

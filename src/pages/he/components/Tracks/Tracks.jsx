@@ -1,6 +1,6 @@
 import styles from './Tracks.module.css'
 
-// Ambient aura — write the cursor's card-local position into CSS vars so the
+// Ambient aura - write the cursor's card-local position into CSS vars so the
 // card's radial glow tracks the pointer. No state, no re-render; the CSS
 // (gated to fine pointers + no-reduced-motion) decides whether it shows.
 function onCardMove(e) {
@@ -75,7 +75,7 @@ export default function Tracks() {
             <div className={styles.num}>/ שלב 1 · מסלולים</div>
             <h2 className={styles.title}>חמישה מסלולים<br/><em>שף אחד</em></h2>
           </div>
-          <p className={styles.lede}>חמש דרכים שונות לארח. בוחרים את הסגנון, ואנחנו בונים את התפריט מסביב לאירוע, השוק והאורחים. אפשר להוסיף מנות, להחליף, להתאים — נחזור איתכם על הכול.</p>
+          <p className={styles.lede}>חמש דרכים שונות לארח. בוחרים את הסגנון, ואנחנו בונים את התפריט מסביב לאירוע, השוק והאורחים. אפשר להוסיף מנות, להחליף, להתאים - נחזור איתכם על הכול.</p>
         </div>
       </div>
 

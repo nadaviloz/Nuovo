@@ -15,7 +15,7 @@ const steps = [
     title: 'קולקציית כלי ההגשה',
     body: 'עם קולקציית כלי ההגשה שלנו מאיטליה המיוצרת בעבודת יד, עד לעיצוב עוצר הנשימה המשלב פרחים חיים והתייחסות לכל הפרטים הקטנים.',
     img: '/assets/tableart-serveware.jpg',
-    alt: 'כלי הגשה יוקרתיים — קערות ומגשי כסף מעוטרים',
+    alt: 'כלי הגשה יוקרתיים - קערות ומגשי כסף מעוטרים',
     flip: true
   },
   {
@@ -67,7 +67,6 @@ export default function TableArt() {
       <div className={styles.wrap}>
         <div className={styles.head}>
           <div>
-            <div className={styles.num}>/ Table Art</div>
             <h2 id="table-art-title" className={styles.title}>
               TABLE <em>ART</em>
             </h2>
@@ -100,7 +99,7 @@ export default function TableArt() {
         </div>
 
         <div className={styles.finalStatement}>
-          <p>להביא לכם את השלמות באירוח.</p>
+          <p>להביא לכם את השלמות באירוח</p>
         </div>
 
         <div className={styles.galleryWrap}>

@@ -63,11 +63,18 @@ html{scroll-behavior:smooth}
   content:"";
   display:inline-block;
   vertical-align: middle;
-  width: 28px;
-  height: 1px;
+  width: 1.6em;
+  height: 1.5px;
   background: linear-gradient(90deg, transparent, var(--c-copper) 60%, var(--c-copper-deep));
-  margin-inline-end: 10px;
+  margin-inline-end: .5em;
   transform: translateY(-1px);
+}
+/* Section eyebrow labels enlarged a lot per request (were ~11px). One global
+   override beats every component's local `.num` size (0,1,1 > 0,1,0). */
+section [class*="_num_"],
+header [class*="_num_"]{
+  font-size: clamp(24px, 2.4vw, 33px);
+  letter-spacing: .07em;
 }
 /* Section title hierarchy — tighter letter-spacing and a touch more weight on
    the largest headings so big copy reads as deliberate, dramatic editorial.
@@ -161,6 +168,10 @@ section [class*="hint" i]{
   line-height: inherit;
   padding-bottom: var(--mask-overshoot);
   margin-bottom: calc(-1 * var(--mask-overshoot));
+  /* Horizontal breathing room so edge glyphs (e.g. a trailing ת) aren't shaved
+     by the overflow:hidden clip; negative margin keeps layout unchanged. */
+  padding-inline: .08em;
+  margin-inline: -.08em;
 }
 .he-inner{
   display:inline-block;

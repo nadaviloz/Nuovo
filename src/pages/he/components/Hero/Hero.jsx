@@ -13,7 +13,6 @@ export default function Hero() {
       </div>
       <div className={styles.wrap}>
         <div className={styles.content}>
-          <div className={styles.eyebrow}>שף פרטי · אצלך בבית</div>
           <h1 className={styles.headline} data-he-masked="skip">
             <span className={styles.line}>
               <span className={styles.word} style={{ '--i': 0 }}><span>האירוח</span></span>{' '}
