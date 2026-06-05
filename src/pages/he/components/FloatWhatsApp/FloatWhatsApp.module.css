@@ -39,9 +39,21 @@
   padding-left:20px;
 }
 
-@media (max-width:640px){
-  .fab{bottom:18px;right:18px;height:56px}
-  .icon{width:56px;height:56px}
+/* Mobile: standardized to the site-wide 900px breakpoint. The hover-expand
+   label is a pointer affordance — on touch it just risks overlapping content,
+   so the FAB stays a clean, quiet circle pinned to the bottom-start corner
+   (RTL start = right). Pairs with the booking FAB in the opposite corner. */
+@media (max-width: 900px){
+  .fab{
+    height: var(--fab-size, 56px);
+    inset-block-end: var(--fab-offset, 16px);
+    inset-inline-start: clamp(16px, 4vw, 22px);
+    inset-inline-end: auto;
+  }
+  .icon{ width: var(--fab-size, 56px); height: var(--fab-size, 56px); }
+  /* Neutralize the hover-expand (sticky :hover can fire after a tap on iOS). */
+  .fab:hover{ transform: none; }
+  .fab:hover .label{ max-width: 0; opacity: 0; }
 }
 @media (prefers-reduced-motion:reduce){
   .fab,.label{transition:none}

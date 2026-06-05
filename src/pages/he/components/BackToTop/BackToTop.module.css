@@ -33,13 +33,12 @@
   transform: translateY(-3px);
 }
 
+/* Mobile: hidden. Native momentum scroll + the eased in-page anchor links make
+   a back-to-top control redundant on a phone, and per the brand rules it's the
+   most expendable of the three floating elements (the first decorative extra to
+   cut). Removing it leaves the two primary contact FABs unobstructed. */
 @media (max-width: 900px){
-  .top{
-    width: 44px;
-    height: 44px;
-    bottom: 88px;
-    right: 16px;
-  }
+  .top{ display: none; }
 }
 @media (prefers-reduced-motion: reduce){
   .top{ transition: opacity .2s linear; transform: none; }

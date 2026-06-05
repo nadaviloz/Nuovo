@@ -73,6 +73,25 @@
   .page{
     background-image: none;
     background-attachment: scroll;
+
+    /* ──────────────────────────────────────────────────────────────────────
+       MOBILE FOUNDATION — single source of truth for the phone rebuild.
+       These tokens replace the chaotic per-section clamps (64/74/92/104…) with
+       one consistent rhythm. Later phases swap each section's ad-hoc padding for
+       these vars; nothing here changes desktop (block only applies ≤900px).
+       ──────────────────────────────────────────────────────────────────────── */
+    /* Vertical rhythm — top/bottom padding every section shares. */
+    --section-py: clamp(56px, 14vw, 84px);
+    /* Space under a section head (eyebrow + title + lede) before its content. */
+    --head-gap: clamp(28px, 8vw, 40px);
+    /* Gap between stacked sub-blocks inside a section. */
+    --block-gap: clamp(28px, 7vw, 44px);
+
+    /* Floating-UI system: every fixed control reads these so the WhatsApp and
+       booking FABs sit at the exact same height, are notch-aware (iOS home
+       indicator), and present one unified ≥44px touch target. */
+    --fab-size: 56px;
+    --fab-offset: calc(16px + env(safe-area-inset-bottom, 0px));
   }
 }
 
