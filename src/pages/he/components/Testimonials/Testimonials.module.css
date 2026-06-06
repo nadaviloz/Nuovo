@@ -164,6 +164,14 @@
   .grid{column-count:2}
 }
 @media (max-width: 900px){
+  /* Phase 2 — shared mobile rhythm (token from HebrewPage .page). */
+  .host{
+    padding-block: var(--section-py);
+    /* iOS Safari renders `background-attachment: fixed` unreliably (jitter /
+       banding with the URL bar), so drop to flat scroll on phones — mirrors the
+       Phase 1 fix on .page. `!important` needed to beat the base rule's own. */
+    background-attachment: scroll !important;
+  }
   .head{grid-template-columns:1fr}
 }
 @media (max-width: 640px){

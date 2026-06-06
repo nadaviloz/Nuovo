@@ -203,8 +203,33 @@
 }
 
 @media (max-width: 900px){
+  /* Phase 2 — shared mobile rhythm (tokens from HebrewPage .page). */
+  .section{ padding-block: var(--section-py) }
   .head, .grid{grid-template-columns:1fr}
+  .head{ margin-bottom: var(--head-gap) }
   .title{white-space:normal}
   /* No sticky on a single-column phone layout — let the portrait flow. */
-  .portrait{ position:static; top:auto; margin-top:0 }
+  .portrait{
+    position:static; top:auto; margin-top:0;
+    /* Phase 3 — edge-to-edge full-bleed portrait. The frame's border + radius
+       are removed so the photo meets the screen cleanly (a bordered, rounded
+       image flush to the edge reads as "awkwardly cut"). .portraitImg is
+       object-fit:cover, so the wider frame keeps the chef well-composed. */
+    margin-inline: calc(var(--pad-x) * -1);
+    border:0;
+    border-radius:0;
+  }
+  /* PHASE C — Z-AXIS DEPTH. The portrait bleeds full-bleed to the top edge; the
+     story is pulled UP into an elevated card that physically overlaps the
+     bottom of the photo. zero data loss — every paragraph is preserved. */
+  .grid{ gap: 0; }
+  .copy{
+    position: relative;
+    z-index: 10;
+    margin-top: -56px;
+    background: var(--surface);
+    border-radius: var(--card-radius);
+    padding: var(--card-pad);
+    box-shadow: var(--card-shadow);
+  }
 }

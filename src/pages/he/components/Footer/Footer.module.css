@@ -37,5 +37,10 @@
 }
 
 @media (max-width: 900px){
-  .grid{grid-template-columns:1fr}
+  /* Phase 4 — fold the footer into the Phase 2 rhythm. The hairline-rule
+     structure (.footer + .base top borders) is preserved; only the oversized
+     desktop gaps are swapped for the shared mobile tokens. */
+  .footer{ padding-top: var(--section-py) }
+  .grid{ grid-template-columns:1fr; gap: var(--block-gap) }
+  .base{ margin-top: var(--head-gap); gap: 12px; flex-wrap: wrap }
 }

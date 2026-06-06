@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import styles from './FloatBook.module.css'
 
 // Floating booking CTA that appears once you scroll past the hero.
-export default function FloatBook() {
+export default function FloatBook({ hidden = false }) {
   const [show, setShow] = useState(false)
 
   useEffect(() => {
@@ -15,8 +15,10 @@ export default function FloatBook() {
   return (
     <a
       href="#book"
-      className={`${styles.book} ${show ? styles.show : ''}`}
+      className={`${styles.book} ${show ? styles.show : ''} ${hidden ? styles.hidden : ''}`}
       aria-label="לתיאום אירוע"
+      tabIndex={hidden ? -1 : undefined}
+      aria-hidden={hidden || undefined}
     >
       <span className={styles.icon} aria-hidden="true">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round">

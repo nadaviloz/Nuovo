@@ -51,5 +51,7 @@
   max-width:790px;
 }
 @media (max-width: 900px){
+  /* Phase 2 — shared mobile rhythm (token from HebrewPage .page). */
+  .section{ padding-block: var(--section-py) }
   .head{ grid-template-columns:1fr; gap:24px }
 }

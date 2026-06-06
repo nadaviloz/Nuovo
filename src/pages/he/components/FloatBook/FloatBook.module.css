@@ -32,6 +32,15 @@
   transform: none;
   pointer-events: auto;
 }
+/* Phase 4 — retract while the booking section is active (in view / being filled
+   in), so the FAB never covers the submit button or clutters the keyboard view.
+   Compound selector beats .show regardless of source order; reuses the .book
+   transition above for a smooth fade-and-drop. */
+.book.hidden{
+  opacity: 0;
+  transform: translateY(16px) scale(.96);
+  pointer-events: none;
+}
 .book:hover{
   transform: translateY(-3px);
   box-shadow: 0 16px 36px rgba(79, 62, 43,.44);

@@ -153,25 +153,41 @@
 
 /* ── Mobile ─────────────────────────────────────────────────────────── */
 @media (max-width: 900px){
+  /* Phase 2 — shared mobile rhythm (tokens from HebrewPage .page). */
   .section{
-    padding-top: clamp(64px, 16vw, 92px);
-    padding-bottom: clamp(74px, 17vw, 104px);
+    padding-block: var(--section-py);
   }
   .head{
     grid-template-columns: 1fr;
-    margin-bottom: clamp(40px, 10vw, 56px);
+    margin-bottom: var(--head-gap);
   }
   .title{ white-space: normal; }
   .lede{
     max-width: none;
     justify-self: stretch;
   }
+  /* PHASE C — Z-AXIS DEPTH (mirrors About): the dish photo bleeds full-width to
+     the edges, and the copy is pulled up into an elevated card overlapping it. */
   .body{
     grid-template-columns: 1fr;
-    gap: clamp(30px, 8vw, 44px);
+    gap: 0;
   }
   .media{
     aspect-ratio: 3 / 4;
     max-height: 70vh;
+    /* Phase 3 — edge-to-edge: bleed the dish photo past --pad-x to the screen
+       edges. Radius dropped so no rounded corner sits on the edge; the inner
+       PremiumImage is object-fit:cover, so widening it never distorts. */
+    margin-inline: calc(var(--pad-x) * -1);
+    border-radius: 0;
+  }
+  .copy{
+    position: relative;
+    z-index: 10;
+    margin-top: -56px;
+    background: var(--surface);
+    border-radius: var(--card-radius);
+    padding: var(--card-pad);
+    box-shadow: var(--card-shadow);
   }
 }

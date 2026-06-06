@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import styles from './HebrewPage.module.css'
 import Nav from './components/Nav/Nav.jsx'
 import Hero from './components/Hero/Hero.jsx'
@@ -51,6 +51,9 @@ function maskifyHeadline(el) {
 
 export default function HebrewPage() {
   const pageRef = useRef(null)
+  // True while the booking section is on screen or being filled in — used to
+  // retract the floating CTAs so they never cover the form / submit button.
+  const [bookingActive, setBookingActive] = useState(false)
 
   useEffect(() => {
     document.title = 'שולחן - שף פרטי'
@@ -125,7 +128,38 @@ export default function HebrewPage() {
     }, { threshold: 0, rootMargin: '0px 0px -12% 0px' })
 
     sections.forEach((s) => { if (s !== hero) io.observe(s) })
-    return () => { io.disconnect(); watched.forEach((o) => o.disconnect()) }
+
+    // Safety net: iOS Safari can drop IntersectionObserver callbacks after a
+    // programmatic (eased-anchor) scroll — e.g. tapping the floating Book CTA to
+    // jump straight to #book — which would leave that section's clip-masked
+    // headline and faded-in children stuck invisible. A throttled scroll check
+    // reveals any observed section that's genuinely in view, mirroring the
+    // observer's own trigger line (top < 88% vh) so normal-scroll timing is
+    // unchanged; it only catches sections the observer missed.
+    let safetyTick = false
+    const revealInView = () => {
+      const vh = window.innerHeight
+      sections.forEach((s) => {
+        if (s.classList.contains('he-revealed')) return
+        const r = s.getBoundingClientRect()
+        if (r.top < vh * 0.88 && r.bottom > 0) {
+          s.classList.add('he-revealed')
+          io.unobserve(s)
+        }
+      })
+    }
+    const onSafetyScroll = () => {
+      if (safetyTick) return
+      safetyTick = true
+      requestAnimationFrame(() => { safetyTick = false; revealInView() })
+    }
+    window.addEventListener('scroll', onSafetyScroll, { passive: true })
+
+    return () => {
+      io.disconnect()
+      watched.forEach((o) => o.disconnect())
+      window.removeEventListener('scroll', onSafetyScroll)
+    }
   }, [])
 
   // Parallax: write --parallax-y per scroll frame; the CSS rule applies the transform.
@@ -204,6 +238,44 @@ export default function HebrewPage() {
     return () => document.removeEventListener('click', onClick)
   }, [])
 
+  // Retract the floating CTAs while the user is at / inside the booking form.
+  // One observer + focus listeners (focus is a subset of "in view", but it makes
+  // the keyboard-open case robust even if the viewport shrinks). Both flags are
+  // OR-ed; everything is torn down on unmount so React StrictMode can't leak it.
+  useEffect(() => {
+    const book = document.getElementById('book')
+    if (!book) return
+
+    let inView = false
+    let focused = false
+    const sync = () => setBookingActive(inView || focused)
+
+    const io = new IntersectionObserver(([entry]) => {
+      inView = entry.isIntersecting
+      sync()
+    }, { threshold: 0, rootMargin: '0px 0px -15% 0px' })
+    io.observe(book)
+
+    const onFocusIn = (e) => {
+      if (book.contains(e.target)) { focused = true; sync() }
+    }
+    const onFocusOut = () => {
+      // focusout fires before focus settles; defer a frame to read the result.
+      requestAnimationFrame(() => {
+        focused = book.contains(document.activeElement)
+        sync()
+      })
+    }
+    document.addEventListener('focusin', onFocusIn)
+    document.addEventListener('focusout', onFocusOut)
+
+    return () => {
+      io.disconnect()
+      document.removeEventListener('focusin', onFocusIn)
+      document.removeEventListener('focusout', onFocusOut)
+    }
+  }, [])
+
   return (
     <div ref={pageRef} className={styles.page}>
       <ScrollProgress />
@@ -221,8 +293,8 @@ export default function HebrewPage() {
       <Kitchen />
       <Booking />
       <Footer />
-      <FloatWhatsApp />
-      <FloatBook />
+      <FloatWhatsApp hidden={bookingActive} />
+      <FloatBook hidden={bookingActive} />
       <BackToTop />
     </div>
   )

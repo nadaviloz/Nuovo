@@ -217,106 +217,118 @@
 }
 
 @media (max-width: 900px){
-  /* Mobile redesign: dark surface (matches testimonials), image-as-card on top,
-     headline + stacked CTAs below. PC animations (Ken Burns, word reveal, lede
-     fade) are preserved by NOT overriding them here. */
+  /* Mobile CINEMATIC hero: the photograph fills the entire screen and the
+     headline is anchored low over a bottom legibility scrim — a gradient on the
+     IMAGE itself, not a frosted-glass panel, so it stays on-brand. This realigns
+     mobile with the desktop overlay intent. Ken Burns + clip-reveal motion are
+     inherited from the base rules. */
   .hero{
-    min-height:0;
+    min-height: 100vh;       /* fallback */
+    min-height: 100svh;      /* fills the small viewport without URL-bar jump */
     display:block;
-    /* background-color + noise/grid textures inherited from base .hero rule (matches testimonials). */
-    padding: 20px 20px 48px;
-    overflow:visible;
+    padding:0;
+    overflow:hidden;
+    /* iOS renders fixed backgrounds unreliably; the photo covers the noise
+       anyway, so flatten it (mirrors the Phase 2 fix elsewhere). */
+    background-attachment: scroll;
   }
-  .hero::before,.hero::after{display:none}
+  .hero::before,.hero::after{ display:none }
+
+  /* Photo fills the whole hero, edge to edge — no inset frame, no radius. */
+  .photoFrame{
+    position:absolute;
+    inset:0;
+    border-radius:0;
+    box-shadow:none;
+    z-index:0;
+  }
+  .photoLayer{
+    background-position: center 28%;
+    background-size: cover;
+    animation: heroKenBurns 16s ease-in-out infinite alternate;
+  }
+  /* Bottom-up scrim so the low-anchored headline reads cleanly over any photo. */
+  .photoLayer::after{
+    display:block;
+    background: linear-gradient(
+      to top,
+      rgba(8,8,8,.88) 0%,
+      rgba(8,8,8,.60) 26%,
+      rgba(8,8,8,.16) 52%,
+      rgba(8,8,8,0) 72%
+    );
+  }
+
+  /* Content pinned to the bottom of the screen. */
   .wrap{
-    width:100%;
-    padding-left:0; padding-right:0;
+    position:absolute;
+    inset:0;
+    z-index:3;
+    display:flex;
+    align-items:flex-end;
+    padding-left:var(--pad-x);
+    padding-right:var(--pad-x);
   }
   .content{
     position:relative;
-    text-align:center;
+    direction:rtl;
+    text-align:right;
+    width:100%;
     max-width:none;
     margin:0;
+    padding-bottom: calc(env(safe-area-inset-bottom, 0px) + clamp(30px, 8vw, 52px));
     display:flex;
     flex-direction:column;
-    gap:20px;
+    align-items:stretch;
+    gap: clamp(18px, 5vw, 26px);
   }
 
-  /* Image becomes a contained card at the top instead of a full-bleed background.
-     Ken Burns animation from .photoLayer base rule keeps running. */
-  .photoFrame{
-    position:relative;
-    inset:auto;
-    order:1;
-    width:100%;
-    aspect-ratio: 4 / 5;
-    border-radius:22px;
-    overflow:hidden;
-    box-shadow:
-      0 0 0 1px rgba(255,255,255,.08),
-      0 24px 60px rgba(0,0,0,.55);
-  }
-  .photoLayer{
-    background-position: center 22%;
-    background-size: cover;
-    /* Looping Ken Burns so the photo stays alive past the initial 16s play. */
-    animation: heroKenBurns 14s ease-in-out infinite alternate;
-  }
-  /* No heavy gradient overlay needed since text now sits BELOW the photo. */
-  .photoLayer::after{ display:none; }
+  .eyebrow{ display:none; }
 
-  .eyebrow{
-    order:2;
-    position:static; transform:none;
-    justify-content:center;
-    margin:8px 0 0;
-  }
-
+  /* The "wow" — a large editorial headline over the photo. */
   .headline{
-    order:3;
     position:static; right:auto; bottom:auto;
-    text-align:center;
+    text-align:right;
     max-width:none;
     margin:0;
-    font-size:clamp(30px, 8.5vw, 44px);
-    line-height:1.1;
-    letter-spacing:-.02em;
+    font-size: clamp(44px, 13vw, 78px);
+    line-height: .98;
+    letter-spacing: -.035em;
+    text-shadow: 0 2px 20px rgba(0,0,0,.5);
   }
+  /* Accent line lifted for legibility against the photo. */
+  .headline em{ color: rgba(255,255,255,.62); }
 
-  .lede{
-    order:4;
+  /* `.content .lede` (0,2,0) is needed to outrank the global header-lede rule. */
+  .content .lede{
     position:static; right:auto; bottom:auto;
-    text-align:center;
-    max-width:none;
-    margin:0 auto;
-    padding:0 4px;
-    font-size:16px;
-    line-height:1.65;
+    text-align:right;
+    max-width: 42ch;
+    margin:0;
+    padding:0;
+    font-size: clamp(16px, 4.3vw, 19px);
+    line-height: 1.62;
+    color: rgba(255,255,255,.82);
+    font-weight: 300;
   }
 
   .ctas{
-    order:5;
-    position:static;
-    margin:8px 0 0;
+    position:static; bottom:auto; left:auto;
+    margin: clamp(4px, 2vw, 10px) 0 0;
     flex-direction:column;
     align-items:stretch;
-    justify-content:center;
     gap:12px;
     width:100%;
   }
-
-  /* Primary: match desktop — white bg, dark text, circular --clay arrow badge. */
   .btnPrimary{
-    padding:18px 24px;
+    padding:19px 26px;
     font-size:13px;
     justify-content:center;
   }
-
-  /* Secondary: outline / ghost with light border + light text on dark. */
   .btnText{
     background:transparent;
     color:var(--paper);
-    border:1.5px solid rgba(255,255,255,.55);
+    border:1.5px solid rgba(255,255,255,.5);
     border-radius:10px;
     padding:16px 24px;
     font-size:14px;
@@ -324,7 +336,7 @@
     justify-content:center;
   }
   .btnText:hover{
-    background:rgba(255,255,255,.06);
+    background:rgba(255,255,255,.08);
     border-color:#ffffff;
     box-shadow:none;
   }

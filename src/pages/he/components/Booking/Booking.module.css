@@ -464,6 +464,32 @@
 @media (max-width: 980px){
   .bento{ grid-template-columns: 1fr; }
 }
+/* Phase 2 — shared mobile rhythm (token from HebrewPage .page). */
+@media (max-width: 900px){
+  .section{ padding-block: var(--section-py) }
+
+  /* Phase 4 — mobile booking flow.
+     iOS auto-zooms any text field with font-size < 16px. The visible inputs are
+     already 17px; the invisible native <input type="date"> had no size set, so
+     pin it to 16px — tapping the date no longer zoom-jumps the layout. */
+  .dateNative{ font-size: 16px; }
+
+  /* ≥44px touch targets on the tap-only controls (segmented time picker +
+     preference chips) — they were ~31–37px tall. Buttons, so no zoom concern. */
+  .seg,
+  .chip{
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* Ample spacing between fields, and keep a focused field clear of the fixed
+     nav when iOS scrolls it into view (prevents the keyboard-overlap jump). */
+  .field{ margin-top: 22px; scroll-margin-top: 84px; }
+  .field:first-of-type{ margin-top: 0; }
+  .row2 .field{ margin-top: 0; }
+}
 @media (max-width: 600px){
   .head{
     grid-template-columns: 1fr;
@@ -471,6 +497,7 @@
     gap: 18px;
   }
   .lede{ max-width: none; justify-self: stretch; }
-  .row2{ grid-template-columns: 1fr; }
+  /* Stacked guests/date get a comfortable gap instead of the tight column gap. */
+  .row2{ grid-template-columns: 1fr; gap: 18px; }
   .seg{ padding: 9px 10px; font-size: 13px; }
 }

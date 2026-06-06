@@ -2,7 +2,9 @@
   /* Floating pill: a fixed, transparent full-width wrapper with side gutters;
      the rounded "pill" itself is .navInner. pointer-events are off on the
      wrapper so it never blocks clicks in the gutters. */
-  position:fixed;top:14px;left:0;right:0;z-index:50;
+  /* top is notch-aware: env() is 0 until viewport-fit=cover, so this never
+     shifts the bar on non-notched / desktop viewports. */
+  position:fixed;top:calc(14px + env(safe-area-inset-top, 0px));left:0;right:0;z-index:50;
   padding:0 clamp(14px, 4vw, 40px);
   pointer-events:none;
   animation: navIn .6s cubic-bezier(.2,.7,.2,1) both;
@@ -82,13 +84,6 @@
   box-shadow: 0 14px 34px rgba(123, 96, 68,.30), 0 0 0 1px rgba(255,255,255,.18);
 }
 .right{display:flex;align-items:center;gap:22px}
-.lang{
-  font-family:var(--label);
-  font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.45);
-  display:flex;gap:10px;font-weight:500;
-}
-.lang button{padding:0;font:inherit;color:inherit;letter-spacing:inherit}
-.lang .active{color:#fff;font-weight:600}
 
 /* --- mobile burger + dropdown (hidden on desktop) --- */
 .burger{
@@ -141,11 +136,16 @@
 }
 
 @media (max-width: 900px){
-  .navInner{height:64px}
+  /* Slim, compact pill on phones (was a tall 64px bar with a 38px wordmark). */
+  .navInner{ height:50px; padding-left:18px; padding-right:18px }
   .navLinks{display:none}
   .right{display:none}
-  .brand{font-size:38px}
-  .burger{display:flex}
+  .brand{font-size:26px}
+  .dot{ width:4px; height:4px; transform:translateY(-2px) }
+  .burger{display:flex; width:40px; height:40px; gap:5px; margin-inline-start:-8px}
+  .burger span{ width:20px }
+  .open .burger span:nth-child(1){ transform: translateY(7px) rotate(45deg) }
+  .open .burger span:nth-child(3){ transform: translateY(-7px) rotate(-45deg) }
   .mobileMenu{
     display:flex;
     visibility:hidden;opacity:0;
