@@ -123,6 +123,23 @@ section [class*="para" i]{
 }
 
 /* ──────────────────────────────────────────────────────────────────────────
+   MOBILE TITLE SCALE (Phase 2). Body / lede / eyebrow are already fluid above
+   with phone-safe floors; the gap was the big section TITLES, whose per-
+   component clamps keep desktop-tuned floors (46–58px) that read oversized and
+   risk overflow on ~390px phones. One consistent editorial clamp keeps them big
+   and on-brand while fitting the screen. Specificity (0,1,1) beats each
+   component's own `.title` (0,1,0) without !important; scoped ≤900px so desktop
+   (≥901px) is untouched — zero regression. `_headline_` (Hero) and `_word_`
+   (MenuBridge) keep their bespoke mobile sizes and are intentionally excluded.
+   ──────────────────────────────────────────────────────────────────────── */
+@media (max-width: 900px){
+  section [class*="_title_"],
+  header  [class*="_title_"]{
+    font-size: clamp(42px, 12vw, 76px);
+  }
+}
+
+/* ──────────────────────────────────────────────────────────────────────────
    Optical typography — hanging punctuation + meaning-aware line breaking.
    Hebrew RTL reads best when leading/trailing quotes hang into the margin and
    lines break on sense rather than raw width. `hanging-punctuation` is

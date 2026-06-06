@@ -223,13 +223,13 @@
 
 /* ── Mobile ─────────────────────────────────────────────────────────── */
 @media (max-width: 900px){
+  /* Phase 2 — shared mobile rhythm (tokens from HebrewPage .page). */
   .section{
-    padding-top: clamp(64px, 16vw, 92px);
-    padding-bottom: clamp(74px, 17vw, 104px);
+    padding-block: var(--section-py);
   }
   .head{
     grid-template-columns: 1fr;
-    margin-bottom: clamp(44px, 11vw, 64px);
+    margin-bottom: var(--head-gap);
   }
   .lede{
     max-width: none;
@@ -237,7 +237,7 @@
   }
   .cols{
     grid-template-columns: 1fr;
-    gap: clamp(38px, 10vw, 56px);
+    gap: var(--block-gap);
   }
   .spine{ display: none; }
   .note{

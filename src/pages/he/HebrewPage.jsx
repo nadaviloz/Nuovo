@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import styles from './HebrewPage.module.css'
 import Nav from './components/Nav/Nav.jsx'
 import Hero from './components/Hero/Hero.jsx'
@@ -51,6 +51,9 @@ function maskifyHeadline(el) {
 
 export default function HebrewPage() {
   const pageRef = useRef(null)
+  // True while the booking section is on screen or being filled in — used to
+  // retract the floating CTAs so they never cover the form / submit button.
+  const [bookingActive, setBookingActive] = useState(false)
 
   useEffect(() => {
     document.title = 'שולחן - שף פרטי'
@@ -204,6 +207,44 @@ export default function HebrewPage() {
     return () => document.removeEventListener('click', onClick)
   }, [])
 
+  // Retract the floating CTAs while the user is at / inside the booking form.
+  // One observer + focus listeners (focus is a subset of "in view", but it makes
+  // the keyboard-open case robust even if the viewport shrinks). Both flags are
+  // OR-ed; everything is torn down on unmount so React StrictMode can't leak it.
+  useEffect(() => {
+    const book = document.getElementById('book')
+    if (!book) return
+
+    let inView = false
+    let focused = false
+    const sync = () => setBookingActive(inView || focused)
+
+    const io = new IntersectionObserver(([entry]) => {
+      inView = entry.isIntersecting
+      sync()
+    }, { threshold: 0, rootMargin: '0px 0px -15% 0px' })
+    io.observe(book)
+
+    const onFocusIn = (e) => {
+      if (book.contains(e.target)) { focused = true; sync() }
+    }
+    const onFocusOut = () => {
+      // focusout fires before focus settles; defer a frame to read the result.
+      requestAnimationFrame(() => {
+        focused = book.contains(document.activeElement)
+        sync()
+      })
+    }
+    document.addEventListener('focusin', onFocusIn)
+    document.addEventListener('focusout', onFocusOut)
+
+    return () => {
+      io.disconnect()
+      document.removeEventListener('focusin', onFocusIn)
+      document.removeEventListener('focusout', onFocusOut)
+    }
+  }, [])
+
   return (
     <div ref={pageRef} className={styles.page}>
       <ScrollProgress />
@@ -221,8 +262,8 @@ export default function HebrewPage() {
       <Kitchen />
       <Booking />
       <Footer />
-      <FloatWhatsApp />
-      <FloatBook />
+      <FloatWhatsApp hidden={bookingActive} />
+      <FloatBook hidden={bookingActive} />
       <BackToTop />
     </div>
   )

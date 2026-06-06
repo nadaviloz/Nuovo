@@ -265,15 +265,15 @@
 
 /* ── Mobile ─────────────────────────────────────────────────────────── */
 @media (max-width: 900px){
+  /* Phase 2 — shared mobile rhythm (tokens from HebrewPage .page). */
   .section{
-    padding-top: clamp(64px, 16vw, 92px);
-    padding-bottom: clamp(74px, 17vw, 104px);
+    padding-block: var(--section-py);
   }
   .head{
     grid-template-columns: 1fr;
   }
   .title{ white-space: normal;
-    margin-bottom: clamp(52px, 13vw, 74px);
+    margin-bottom: var(--head-gap);
   }
   .lede{
     max-width: none;
@@ -281,7 +281,7 @@
   }
   .flow{
     grid-template-columns: 1fr;
-    gap: clamp(44px, 12vw, 64px);
+    gap: var(--block-gap);
   }
   .step{
     gap: clamp(18px, 5vw, 26px);
@@ -318,7 +318,14 @@
     grid-template-columns: 1fr 1fr;
     grid-template-rows: auto;
     gap: 8px;
+    /* Phase 3 — edge-to-edge gallery: bleed the photo grid (NOT the head text)
+       past the wrap's --pad-x to the screen edges for a full-bleed editorial
+       mosaic. object-fit is left untouched so no new crop is introduced. */
+    margin-inline: calc(var(--pad-x) * -1);
   }
+  /* Square the corners once flush to the screen so no rounded edge sits on the
+     viewport edge (avoids the "images awkwardly cut at edges" look). */
+  .photo{ border-radius: 0; }
   .galleryHero{
     grid-column: 1 / span 2;
     grid-row: auto;

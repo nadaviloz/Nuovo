@@ -4,15 +4,17 @@ import styles from './FloatWhatsApp.module.css'
 const WHATSAPP_NUMBER = '972500000000'
 const PREFILL = 'היי! אשמח לבדוק זמינות לאירוע 🙂'
 
-export default function FloatWhatsApp() {
+export default function FloatWhatsApp({ hidden = false }) {
   const href = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(PREFILL)}`
   return (
     <a
-      className={styles.fab}
+      className={`${styles.fab} ${hidden ? styles.hidden : ''}`}
       href={href}
       target="_blank"
       rel="noopener noreferrer"
       aria-label="כתבו לנו בוואטסאפ"
+      tabIndex={hidden ? -1 : undefined}
+      aria-hidden={hidden || undefined}
     >
       <span className={styles.icon}>
         <svg viewBox="0 0 24 24" width="26" height="26" aria-hidden="true" fill="currentColor">

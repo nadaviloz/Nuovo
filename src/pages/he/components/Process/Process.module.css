@@ -130,7 +130,9 @@
 }
 
 @media (max-width: 900px){
-  .head{grid-template-columns:1fr}
+  /* Phase 2 — shared mobile rhythm (tokens from HebrewPage .page). */
+  .section{ padding-block: var(--section-py) }
+  .head{grid-template-columns:1fr; margin-bottom: var(--head-gap)}
   .title{white-space:normal}
   .grid{grid-template-columns:1fr 1fr}
   /* The single threaded rail only reaches the first row, so on the 2×2 mobile
