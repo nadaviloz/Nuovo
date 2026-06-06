@@ -136,11 +136,16 @@
 }
 
 @media (max-width: 900px){
-  .navInner{height:64px}
+  /* Slim, compact pill on phones (was a tall 64px bar with a 38px wordmark). */
+  .navInner{ height:50px; padding-left:18px; padding-right:18px }
   .navLinks{display:none}
   .right{display:none}
-  .brand{font-size:38px}
-  .burger{display:flex}
+  .brand{font-size:26px}
+  .dot{ width:4px; height:4px; transform:translateY(-2px) }
+  .burger{display:flex; width:40px; height:40px; gap:5px; margin-inline-start:-8px}
+  .burger span{ width:20px }
+  .open .burger span:nth-child(1){ transform: translateY(7px) rotate(45deg) }
+  .open .burger span:nth-child(3){ transform: translateY(-7px) rotate(-45deg) }
   .mobileMenu{
     display:flex;
     visibility:hidden;opacity:0;

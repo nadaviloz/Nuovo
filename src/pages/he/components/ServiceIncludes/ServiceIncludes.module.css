@@ -240,6 +240,37 @@
     gap: var(--block-gap);
   }
   .spine{ display: none; }
+
+  /* PHASE B — NATIVE SWIPE CAROUSELS. Each column's vertical hairline list is
+     converted into a horizontal scroll-snap track of elevated cards; the user
+     peeks the next card (85% width) at the screen edge. The column heading
+     stays as a label above its track. No items removed. */
+  .colHead{ margin-bottom: 16px; }
+  .list{
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    overscroll-behavior-x: contain;
+    gap: 16px;
+    padding-bottom: 24px;
+    /* bleed the track to the screen edges, but keep the first card at --pad-x */
+    margin-inline: calc(var(--pad-x) * -1);
+    padding-inline: var(--pad-x);
+    scroll-padding-inline: var(--pad-x);
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .list::-webkit-scrollbar{ display: none; }
+  .item{
+    flex: 0 0 85%;
+    scroll-snap-align: center;
+    padding: var(--card-pad);
+    border-bottom: 0;
+    background: var(--surface);
+    border-radius: var(--card-radius);
+    box-shadow: var(--card-shadow);
+  }
+
   .note{
     width: 100%;
   }

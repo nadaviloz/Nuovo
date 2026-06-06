@@ -166,9 +166,11 @@
     max-width: none;
     justify-self: stretch;
   }
+  /* PHASE C — Z-AXIS DEPTH (mirrors About): the dish photo bleeds full-width to
+     the edges, and the copy is pulled up into an elevated card overlapping it. */
   .body{
     grid-template-columns: 1fr;
-    gap: var(--block-gap);
+    gap: 0;
   }
   .media{
     aspect-ratio: 3 / 4;
@@ -178,5 +180,14 @@
        PremiumImage is object-fit:cover, so widening it never distorts. */
     margin-inline: calc(var(--pad-x) * -1);
     border-radius: 0;
+  }
+  .copy{
+    position: relative;
+    z-index: 10;
+    margin-top: -56px;
+    background: var(--surface);
+    border-radius: var(--card-radius);
+    padding: var(--card-pad);
+    box-shadow: var(--card-shadow);
   }
 }

@@ -314,31 +314,34 @@
     gap: 12px;
     justify-items: end;
   }
+  /* PHASE B — the masonry grid becomes a horizontal swipe gallery: uniform
+     rounded photo cards on a snap track, peeking the next shot at the edge. */
   .masonry{
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: auto;
-    gap: 8px;
-    /* Phase 3 — edge-to-edge gallery: bleed the photo grid (NOT the head text)
-       past the wrap's --pad-x to the screen edges for a full-bleed editorial
-       mosaic. object-fit is left untouched so no new crop is introduced. */
+    display: flex;
+    grid-template-columns: none;
+    grid-template-rows: none;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    overscroll-behavior-x: contain;
+    gap: 12px;
+    padding-bottom: 24px;
     margin-inline: calc(var(--pad-x) * -1);
+    padding-inline: var(--pad-x);
+    scroll-padding-inline: var(--pad-x);
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
   }
-  /* Square the corners once flush to the screen so no rounded edge sits on the
-     viewport edge (avoids the "images awkwardly cut at edges" look). */
-  .photo{ border-radius: 0; }
-  .galleryHero{
-    grid-column: 1 / span 2;
-    grid-row: auto;
-    aspect-ratio: 4 / 3;
-  }
-  .a, .b, .c, .d, .e{
-    display: block;
+  .masonry::-webkit-scrollbar{ display: none; }
+  .photo{
+    flex: 0 0 72%;
+    scroll-snap-align: center;
     grid-column: auto;
     grid-row: auto;
-    aspect-ratio: 1;
+    aspect-ratio: 4 / 5;
+    border-radius: 18px;
   }
-  .e{
-    grid-column: 1 / span 2;
-    aspect-ratio: 16 / 9;
-  }
+  /* The hero shot fills its card in the carousel (cover) instead of matting. */
+  .galleryHero{ aspect-ratio: 4 / 5; }
+  .galleryHero img{ object-fit: cover; }
+  .a, .b, .c, .d, .e{ display: block; }
 }

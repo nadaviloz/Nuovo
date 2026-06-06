@@ -134,24 +134,32 @@
   .section{ padding-block: var(--section-py) }
   .head{grid-template-columns:1fr; margin-bottom: var(--head-gap)}
   .title{white-space:normal}
-  .grid{grid-template-columns:1fr 1fr}
-  /* The single threaded rail only reaches the first row, so on the 2×2 mobile
-     grid the bottom row (III, IV) had no line. Replace it with a per-step
-     hairline through each icon so every row reads the same. */
-  .grid::before{ display:none; }
-  .step::before{
-    content:"";
-    position:absolute;
-    /* icon vertical centre: step padding-top (72px) + half the 58px icon */
-    top: calc(72px + 29px);
-    left:0; right:0;
-    height:1px;
-    background: linear-gradient(90deg,
-      transparent 0%,
-      rgba(123, 96, 68,.45) 26%,
-      rgba(123, 96, 68,.45) 50%,
-      rgba(79, 62, 43,.45) 74%,
-      transparent 100%);
-    pointer-events:none;
+  /* PHASE B — the 2×2 step grid becomes a horizontal swipe deck of step cards;
+     the connecting rail/hairline is dropped (cards carry their own separation). */
+  .grid{
+    display: flex;
+    grid-template-columns: none;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    overscroll-behavior-x: contain;
+    gap: 16px;
+    padding-top: 0;
+    padding-bottom: 24px;
+    margin-inline: calc(var(--pad-x) * -1);
+    padding-inline: var(--pad-x);
+    scroll-padding-inline: var(--pad-x);
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
   }
+  .grid::before{ display:none; }
+  .grid::-webkit-scrollbar{ display:none; }
+  .step{
+    flex: 0 0 80%;
+    scroll-snap-align: center;
+    padding: var(--card-pad);
+    background: var(--surface);
+    border-radius: var(--card-radius);
+    box-shadow: var(--card-shadow);
+  }
+  .step::before{ display:none; }
 }

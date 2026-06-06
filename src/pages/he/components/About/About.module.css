@@ -219,4 +219,17 @@
     border:0;
     border-radius:0;
   }
+  /* PHASE C — Z-AXIS DEPTH. The portrait bleeds full-bleed to the top edge; the
+     story is pulled UP into an elevated card that physically overlaps the
+     bottom of the photo. zero data loss — every paragraph is preserved. */
+  .grid{ gap: 0; }
+  .copy{
+    position: relative;
+    z-index: 10;
+    margin-top: -56px;
+    background: var(--surface);
+    border-radius: var(--card-radius);
+    padding: var(--card-pad);
+    box-shadow: var(--card-shadow);
+  }
 }

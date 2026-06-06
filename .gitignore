@@ -4,5 +4,9 @@ dist/
 .DS_Store
 *.log
 
+# Python bytecode cache (e.g. skill scripts) — never commit
+__pycache__/
+*.pyc
+
 # One-shot apply scripts (generated helpers, not part of the app)
 apply-*.sh

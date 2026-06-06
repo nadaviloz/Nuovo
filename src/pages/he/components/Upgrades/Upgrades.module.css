@@ -208,18 +208,115 @@
   .media{ aspect-ratio: 16 / 9 }
 }
 
-/* ── Mobile: single column, photo always on top ─────────────────────── */
-@media (max-width: 720px){
-  .head{ margin-inline-start: 0 }
-  .title{ white-space: normal; }
-  .grid{
-    grid-template-columns: 1fr;
-    gap: clamp(20px, 6vw, 28px);
-    margin-top: clamp(36px, 9vw, 56px);
+/* ── Mobile (≤900px) — "FLOATING BRUTALIST CATALOG" ──────────────────────
+   Gutted the old single-column stack. The grid becomes an edge-to-edge
+   horizontal swipe track of device-style cards (40px radius + 4px BLACK bezel)
+   on the light page background — black-framed "phones" floating on a light
+   stage, so the bezels read crisply (matches the reference). All copy/prices/
+   images preserved; desktop (≥901px) untouched. ──────────────────────────── */
+@media (max-width: 900px){
+  .section{
+    /* Light background (as before) — the black card bezels do the popping. */
+    background: transparent;
+    padding-top: var(--section-py);
+    padding-bottom: clamp(48px, 12vw, 72px);
   }
-  .media{ aspect-ratio: 4 / 3 }
-  .card:hover{ transform: translateY(-5px) }
-  .desc{ flex: 0 1 auto }
+  /* Head on the brand's dark ink (section now sits on the light background). */
+  .title{ white-space: normal; }
+
+  /* Edge-to-edge horizontal swipe track. */
+  .grid{
+    display: flex;
+    grid-template-columns: none;
+    max-width: none;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    overscroll-behavior-x: contain;
+    gap: 24px;
+    padding-inline: var(--pad-x);
+    scroll-padding-inline: var(--pad-x);
+    padding-block: 40px;
+    margin-top: 8px;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .grid::-webkit-scrollbar{ display: none; }
+
+  /* Floating device card with a brutalist bezel. */
+  .card{
+    flex: 0 0 82%;
+    scroll-snap-align: center;
+    border-radius: 40px;
+    border: 4px solid #111;
+    overflow: hidden;
+    background: #EAE8E3;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    box-shadow: 0 24px 48px rgba(0,0,0,.4);
+    display: flex;
+    flex-direction: column;
+  }
+  .card:hover{ transform: none; box-shadow: 0 24px 48px rgba(0,0,0,.4); }
+  .card::before{ display: none; }
+
+  /* Stark heavy divider between the device "screen" and the catalog body. */
+  .media{
+    aspect-ratio: 4 / 5;
+    border-bottom: 2px solid #111;
+  }
+  .body{
+    padding: 18px 16px 22px;
+    gap: 10px;
+    text-align: center;
+  }
+  /* MASSIVE dense title. Capped vs the spec's 56px so the long Hebrew names
+     don't overflow the 82%-wide card; uppercase is inert on Hebrew (harmless). */
+  .name{
+    font-family: var(--sans);
+    font-size: clamp(30px, 8vw, 44px);
+    line-height: .9;
+    font-weight: 800;
+    letter-spacing: -.02em;
+    text-transform: uppercase;
+    color: #111;
+    text-align: center;
+    margin-block: 8px 14px;
+  }
+  /* Utility micro-typography — small, tracked. NOT monospace: monospace fonts
+     have no real Hebrew glyphs, so it would fall back and look broken. */
+  .desc{
+    font-family: var(--label);
+    font-size: 12.5px;
+    line-height: 1.62;
+    letter-spacing: .015em;
+    font-weight: 500;
+    color: #4A433C;
+    text-align: center;
+    flex: 0 1 auto;
+  }
+  /* Pricing as a spec-sheet row: heavy divider + monospace numerals (numbers
+     render perfectly in monospace and read as a structured catalog spec). */
+  .price{
+    justify-content: center;
+    padding-top: 16px;
+    border-top: 2px solid #111;
+    gap: 8px;
+  }
+  .priceLabel,
+  .priceUnit{
+    font-family: var(--label);
+    font-size: 11px;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    color: #6B635A;
+  }
+  .priceValue{
+    font-family: ui-monospace, "SF Mono", "Menlo", monospace;
+    font-size: 30px;
+    font-weight: 700;
+    color: #111;
+    direction: ltr;
+  }
 }
 
 @media (prefers-reduced-motion: reduce){

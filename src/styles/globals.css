@@ -135,7 +135,7 @@ section [class*="para" i]{
 @media (max-width: 900px){
   section [class*="_title_"],
   header  [class*="_title_"]{
-    font-size: clamp(42px, 12vw, 76px);
+    font-size: clamp(46px, 13.5vw, 86px);
   }
 }
 

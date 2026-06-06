@@ -128,7 +128,38 @@ export default function HebrewPage() {
     }, { threshold: 0, rootMargin: '0px 0px -12% 0px' })
 
     sections.forEach((s) => { if (s !== hero) io.observe(s) })
-    return () => { io.disconnect(); watched.forEach((o) => o.disconnect()) }
+
+    // Safety net: iOS Safari can drop IntersectionObserver callbacks after a
+    // programmatic (eased-anchor) scroll — e.g. tapping the floating Book CTA to
+    // jump straight to #book — which would leave that section's clip-masked
+    // headline and faded-in children stuck invisible. A throttled scroll check
+    // reveals any observed section that's genuinely in view, mirroring the
+    // observer's own trigger line (top < 88% vh) so normal-scroll timing is
+    // unchanged; it only catches sections the observer missed.
+    let safetyTick = false
+    const revealInView = () => {
+      const vh = window.innerHeight
+      sections.forEach((s) => {
+        if (s.classList.contains('he-revealed')) return
+        const r = s.getBoundingClientRect()
+        if (r.top < vh * 0.88 && r.bottom > 0) {
+          s.classList.add('he-revealed')
+          io.unobserve(s)
+        }
+      })
+    }
+    const onSafetyScroll = () => {
+      if (safetyTick) return
+      safetyTick = true
+      requestAnimationFrame(() => { safetyTick = false; revealInView() })
+    }
+    window.addEventListener('scroll', onSafetyScroll, { passive: true })
+
+    return () => {
+      io.disconnect()
+      watched.forEach((o) => o.disconnect())
+      window.removeEventListener('scroll', onSafetyScroll)
+    }
   }, [])
 
   // Parallax: write --parallax-y per scroll frame; the CSS rule applies the transform.
