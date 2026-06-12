@@ -52,8 +52,11 @@
    (RTL start = right). Pairs with the booking FAB in the opposite corner. */
 @media (max-width: 900px){
   .fab{
+    /* Smaller, calmer circle on phones (56px read as oversized). */
+    --fab-size: 46px;
     height: var(--fab-size, 56px);
-    inset-block-end: var(--fab-offset, 16px);
+    /* Float just above the thumb-zone tab bar instead of sharing its row. */
+    inset-block-end: calc(var(--bottom-nav-h, 56px) + env(safe-area-inset-bottom, 0px) + 14px);
     inset-inline-start: clamp(16px, 4vw, 22px);
     inset-inline-end: auto;
   }
