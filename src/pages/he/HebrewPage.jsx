@@ -279,9 +279,12 @@ export default function HebrewPage() {
   return (
     <div ref={pageRef} className={styles.page}>
       <ScrollProgress />
-      <Nav />
-      <Hero />
-      <About />
+      <Nav bookingActive={bookingActive} />
+      {/* Curtain reveal: the hero locks in place while About slides up over it. */}
+      <div className={styles.curtainStage}>
+        <Hero />
+        <About />
+      </div>
       <Process />
       <PureFlavors />
       <MenuBridge />

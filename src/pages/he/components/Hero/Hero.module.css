@@ -105,9 +105,9 @@
   letter-spacing:-.042em;
   margin-top:28px;
   color:var(--paper);
-  /* Tight, crisp legibility shadow that hugs each glyph — a wide blur smudged
-     dark haze into the gaps between letters and onto the light apron area. */
-  text-shadow: 0 1px 4px rgba(0,0,0,.45);
+  /* Tight, crisp legibility shadow that hugs each glyph — a tight dark edge plus
+     a soft halo so white type holds up over the light apron / shirt zones. */
+  text-shadow: 0 1px 3px rgba(0,0,0,.66), 0 2px 16px rgba(0,0,0,.5);
   will-change: transform;
 }
 .line{ display:inline; font-style: inherit; }
@@ -144,7 +144,7 @@
   font-synthesis:none;
   font-style:normal;font-weight:800;
   letter-spacing:-.03em;
-  color:rgba(255,255,255,.35);
+  color:rgba(255,255,255,.58);
   display:inline-block;
   padding-inline-start:.05em;
 }
@@ -157,8 +157,9 @@
   max-width:500px;
   margin-top:36px;
   font-size:20px;line-height:1.75;
-  color:rgba(255,255,255,.6);
-  font-weight:300;
+  color:rgba(255,255,255,.8);
+  font-weight:400;
+  text-shadow: 0 1px 3px rgba(0,0,0,.5);
   opacity: 0;
   transform: translateY(28px);
   transition:
@@ -247,15 +248,19 @@
     background-size: cover;
     animation: heroKenBurns 16s ease-in-out infinite alternate;
   }
-  /* Bottom-up scrim so the low-anchored headline reads cleanly over any photo. */
+  /* Bottom-up scrim so the low-anchored headline reads cleanly over any photo.
+     Kept short — it only needs to cover the (now compact) text stack, so the
+     photograph stays visible above it. */
   .photoLayer::after{
     display:block;
     background: linear-gradient(
       to top,
-      rgba(8,8,8,.88) 0%,
-      rgba(8,8,8,.60) 26%,
-      rgba(8,8,8,.16) 52%,
-      rgba(8,8,8,0) 72%
+      rgba(8,8,8,.92) 0%,
+      rgba(8,8,8,.78) 22%,
+      rgba(8,8,8,.5) 40%,
+      rgba(8,8,8,.22) 56%,
+      rgba(8,8,8,.06) 72%,
+      rgba(8,8,8,0) 86%
     );
   }
 
@@ -276,11 +281,13 @@
     width:100%;
     max-width:none;
     margin:0;
-    padding-bottom: calc(env(safe-area-inset-bottom, 0px) + clamp(30px, 8vw, 52px));
+    /* Reserve the fixed bottom tab-bar height so the secondary CTA ("איך זה
+       עובד") isn't trapped behind it. */
+    padding-bottom: calc(env(safe-area-inset-bottom, 0px) + var(--bottom-nav-h, 56px) + clamp(20px, 5vw, 34px));
     display:flex;
     flex-direction:column;
     align-items:stretch;
-    gap: clamp(18px, 5vw, 26px);
+    gap: clamp(12px, 3vw, 16px);
   }
 
   .eyebrow{ display:none; }
@@ -291,13 +298,13 @@
     text-align:right;
     max-width:none;
     margin:0;
-    font-size: clamp(44px, 13vw, 78px);
-    line-height: .98;
-    letter-spacing: -.035em;
-    text-shadow: 0 2px 20px rgba(0,0,0,.5);
+    font-size: clamp(30px, 7.8vw, 44px);
+    line-height: 1.05;
+    letter-spacing: -.03em;
+    text-shadow: 0 1px 3px rgba(0,0,0,.72), 0 2px 16px rgba(0,0,0,.55);
   }
   /* Accent line lifted for legibility against the photo. */
-  .headline em{ color: rgba(255,255,255,.62); }
+  .headline em{ color: rgba(255,255,255,.8); }
 
   /* `.content .lede` (0,2,0) is needed to outrank the global header-lede rule. */
   .content .lede{
@@ -306,10 +313,11 @@
     max-width: 42ch;
     margin:0;
     padding:0;
-    font-size: clamp(16px, 4.3vw, 19px);
-    line-height: 1.62;
-    color: rgba(255,255,255,.82);
-    font-weight: 300;
+    font-size: clamp(14px, 3.9vw, 16px);
+    line-height: 1.55;
+    color: rgba(255,255,255,.92);
+    font-weight: 400;
+    text-shadow: 0 1px 3px rgba(0,0,0,.55);
   }
 
   .ctas{
@@ -321,8 +329,8 @@
     width:100%;
   }
   .btnPrimary{
-    padding:19px 26px;
-    font-size:13px;
+    padding:15px 22px;
+    font-size:12px;
     justify-content:center;
   }
   .btnText{
@@ -330,8 +338,8 @@
     color:var(--paper);
     border:1.5px solid rgba(255,255,255,.5);
     border-radius:10px;
-    padding:16px 24px;
-    font-size:14px;
+    padding:12px 20px;
+    font-size:13px;
     letter-spacing:.08em;
     justify-content:center;
   }

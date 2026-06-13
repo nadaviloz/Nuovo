@@ -48,30 +48,11 @@
 .icon{ display: inline-flex; align-items: center; justify-content: center; }
 .label{ white-space: nowrap; }
 
-/* Mobile: mirror the WhatsApp control — an equal circular bronze FAB in the
-   opposite bottom corner (RTL end = left), notch-aware, so the two read as a
-   balanced pair instead of a wide pill crowding the edge. The booking pill is
-   an explicitly allowed accent surface, so the bronze gradient stays. */
+/* Mobile: the booking action now lives in the bottom thumb-zone tab bar (see
+   Nav). A floating book FAB would duplicate it, so it's retired on phones —
+   desktop keeps the corner pill. */
 @media (max-width: 900px){
-  .book{
-    width: var(--fab-size, 56px);
-    height: var(--fab-size, 56px);
-    padding: 0;
-    gap: 0;
-    justify-content: center;
-    inset-block-end: var(--fab-offset, 16px);
-    inset-inline-end: clamp(16px, 4vw, 22px);
-    inset-inline-start: auto;
-  }
-  /* Icon-only on phones; the accessible name lives on the <a> aria-label. */
-  .label{
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    overflow: hidden;
-    clip-path: inset(50%);
-    white-space: nowrap;
-  }
+  .book{ display: none; }
 }
 @media (prefers-reduced-motion: reduce){
   .book{ transition: opacity .2s linear; transform: none; }

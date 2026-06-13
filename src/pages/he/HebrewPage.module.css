@@ -55,6 +55,34 @@
 }
 .page ::selection{ background:var(--ink); color:var(--paper) }
 
+/* ──────────────────────────────────────────────────────────────────────────
+   CURTAIN REVEAL — the hero locks to the top while the first content section
+   (About) slides up and covers it like a curtain, then releases into normal
+   flow. Pure CSS, scoped to this stage; no JS, no IntersectionObserver (the
+   reveal orchestrator is untouched). The stage contains ONLY <Hero> (header)
+   and <About> (section), so the hero un-pins the moment About scrolls past —
+   no lingering fixed layer, safe on iOS Safari.
+   ────────────────────────────────────────────────────────────────────────── */
+.curtainStage{ position: relative; }
+
+.curtainStage > header{          /* the Hero — frozen in place */
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+.curtainStage > section{         /* About — the curtain that rises over it */
+  position: relative;
+  z-index: 2;
+  background: var(--paper);                            /* opaque → covers hero */
+  border-top: 1.5px solid var(--c-copper);            /* copper seam, clean cut */
+  box-shadow: 0 -28px 60px -34px rgba(40,28,18,.16);  /* lifts over the hero    */
+}
+
+/* Reduced motion: no lock — fall back to a normal stacked section boundary. */
+@media (prefers-reduced-motion: reduce){
+  .curtainStage > header{ position: relative; top: auto; }
+}
+
 /* Ultra-wide / 4K — type is already px-capped (clamp ceilings) so it never
    grows unbounded; just give the bounded canvas a little more room and grow the
    side gutters so content doesn't strand in a sea of paper on huge monitors. */

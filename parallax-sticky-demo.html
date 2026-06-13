@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Curtain Reveal — Nuovo</title>
+
+<!-- PLACEHOLDER fonts: swap for your real Nuovo font tokens.
+     Frank Ruhl Libre = editorial Hebrew serif, Assistant = clean Hebrew sans. -->
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Assistant:wght@400;500&family=Frank+Ruhl+Libre:wght@500;700&display=swap" rel="stylesheet" />
+
+<style>
+/* ════════════════════════════════════════════════════════════════
+   NUOVO TOKENS — mirror of src/styles/globals.css :root.
+   When you drop this into the codebase, DELETE this block and let
+   your real globals provide these. Components reference var() only;
+   never hardcode hexes.
+   ════════════════════════════════════════════════════════════════ */
+:root {
+  --paper:      #F2EFE9;   /* raw linen — primary surface  */
+  --paper-dim:  #E8E3DB;   /* stone — recessed surface     */
+  --rule:       #BDB7AB;   /* faded clay — hairlines        */
+  --warm:       #7B6044;   /* architectural bronze — accent */
+  --ink:        #231F1C;   /* charred espresso — all type  */
+  --ink-70:     rgba(35,31,28,.7);
+
+  --max: 1440px;
+  --pad-x: clamp(20px, 6vw, 96px);
+
+  --font-display: 'Frank Ruhl Libre', Georgia, serif;  /* → your token */
+  --font-body:    'Assistant', system-ui, sans-serif;  /* → your token */
+
+  /* buttery, low-opacity warm shadow — never harsh single-layer black */
+  --shadow-lift:
+    0 2px 8px rgba(40,28,18,.03),
+    0 16px 40px -20px rgba(40,28,18,.14),
+    0 -28px 60px -34px rgba(40,28,18,.16);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: var(--font-body);
+  color: var(--ink);
+  background: var(--paper);
+}
+
+/* ════════════════════════════════════════════════════════════════
+   ① THE CURTAIN MECHANIC  — this is the ENTIRE physics. Pure CSS.
+      • .stage          the scroll track (containing block)
+      • .stage__hero    sticky → locks to the top, cannot move
+      • .stage__panel   higher z-index + opaque bg → slides up & covers
+   No JS. No IntersectionObserver. No fixed-position iOS pitfalls.
+   ════════════════════════════════════════════════════════════════ */
+.stage {
+  position: relative;
+}
+.stage__hero {
+  position: sticky;
+  top: 0;
+  z-index: 1;                /* BELOW the panel */
+  height: 100vh;
+  height: 100svh;            /* honest mobile viewport (no URL-bar jump) */
+  overflow: hidden;
+}
+.stage__panel {
+  position: relative;
+  z-index: 2;                /* ABOVE the hero → covers it as it rises */
+  background: var(--paper);  /* MUST be opaque to act as the curtain */
+}
+@media (prefers-reduced-motion: reduce) {
+  /* mechanic is scroll-driven, not animated — nothing to disable,
+     but keep the hook here for anything you add inside. */
+}
+
+/* ════════════════════════════════════════════════════════════════
+   ② NUOVO SKIN  — cosmetic only. Replace freely; the physics above
+      do not depend on any of this.
+   ════════════════════════════════════════════════════════════════ */
+
+/* —— locked hero: quiet, editorial, recessed stone —— */
+.stage__hero {
+  display: grid;
+  place-items: center;
+  text-align: center;
+  background: var(--paper-dim);
+  padding-inline: var(--pad-x);
+}
+.hero__eyebrow {
+  font-size: clamp(.8rem, 1.6vw, .95rem);
+  letter-spacing: .22em;
+  color: var(--ink-70);
+  margin-block-end: clamp(20px, 3vw, 32px);
+}
+.hero__title {
+  font-family: var(--font-display);
+  font-weight: 700;
+  color: var(--ink);                       /* type is NEVER the accent */
+  line-height: 1.0;
+  font-size: clamp(3rem, 11vw, 9rem);
+  text-wrap: balance;
+}
+.hero__title em {                          /* italic accent word — ink, not copper */
+  font-style: italic;
+  font-weight: 500;
+}
+.hero__rule {                              /* the copper hairline beneath the title */
+  width: clamp(48px, 6vw, 80px);
+  height: 1.5px;
+  background: var(--warm);
+  margin: clamp(24px, 3.5vw, 40px) auto 0;
+}
+.hero__sub {
+  margin-block-start: clamp(20px, 3vw, 28px);
+  color: var(--ink-70);
+  font-size: clamp(1rem, 2vw, 1.2rem);
+  max-width: 46ch;
+  margin-inline: auto;
+  line-height: 1.6;
+  text-wrap: pretty;
+}
+
+/* —— the curtain panel: bright linen, clean cut + copper seam —— */
+.stage__panel {
+  border-block-start: 1.5px solid var(--warm);   /* the copper hairline seam */
+  box-shadow: var(--shadow-lift);                /* lifts it over the hero   */
+  padding: clamp(80px, 12vh, 160px) var(--pad-x);
+}
+.panel__wrap { max-width: var(--max); margin-inline: auto; }
+
+.section-title {
+  font-family: var(--font-display);
+  font-weight: 700;
+  color: var(--ink);
+  font-size: clamp(2rem, 5.5vw, 3.6rem);
+  line-height: 1.05;
+}
+@media (min-width: 900px) { .section-title { white-space: nowrap; } }
+.section-title em { font-style: italic; font-weight: 500; }
+.section-title + .title-rule {
+  width: clamp(48px, 6vw, 80px);
+  height: 1.5px;
+  background: var(--warm);
+  margin-block: clamp(20px, 2.5vw, 28px) clamp(48px, 6vw, 72px);
+}
+
+/* editorial two-column, generous whitespace — NO grey card boxes */
+.editorial {
+  display: grid;
+  gap: clamp(40px, 6vw, 96px);
+  grid-template-columns: 1fr;
+}
+@media (min-width: 900px) { .editorial { grid-template-columns: 1.1fr 1fr; } }
+.editorial p {
+  color: var(--ink-70);
+  font-size: clamp(1.05rem, 1.6vw, 1.25rem);
+  line-height: 1.75;
+  max-width: 56ch;
+  text-wrap: pretty;
+}
+
+/* a course list rendered as editorial rows split by hairlines */
+.menu { list-style: none; }
+.menu li {
+  display: flex;
+  align-items: baseline;
+  gap: 20px;
+  padding-block: clamp(16px, 2vw, 22px);
+  border-block-end: 1px solid var(--rule);
+}
+.menu li:first-child { border-block-start: 1px solid var(--rule); }
+.menu .num { font-family: var(--font-display); color: var(--ink-70); font-size: .95rem; min-width: 2.2ch; }
+.menu .name { font-size: clamp(1.1rem, 2vw, 1.4rem); color: var(--ink); }
+
+/* a trailing section to prove normal scrolling resumes after the curtain */
+.after {
+  padding: clamp(100px, 16vh, 220px) var(--pad-x);
+  background: var(--paper-dim);
+  border-block-start: 1px solid var(--rule);
+  text-align: center;
+}
+.after p { color: var(--ink-70); font-size: clamp(1.1rem, 2vw, 1.4rem); }
+</style>
+</head>
+<body>
+
+  <!-- ① THE CURTAIN STAGE ----------------------------------------- -->
+  <div class="stage">
+
+    <!-- locked hero (sticky) -->
+    <section class="stage__hero">
+      <div>
+        <p class="hero__eyebrow">מטבח פרטי · אירוח אינטימי</p>
+        <h1 class="hero__title">שולחן <em>השף</em></h1>
+        <div class="hero__rule" aria-hidden="true"></div>
+        <p class="hero__sub">ארוחות שף בביתכם — תפריט אישי, חומרי גלם עונתיים, וערב שנבנה סביבכם.</p>
+      </div>
+    </section>
+
+    <!-- the curtain: slides up and covers the hero -->
+    <section class="stage__panel">
+      <div class="panel__wrap">
+        <h2 class="section-title">המטבח <em>שלנו</em></h2>
+        <div class="title-rule" aria-hidden="true"></div>
+
+        <div class="editorial">
+          <p>אנחנו מביאים את חוויית המסעדה אל תוך הבית. כל ארוחה נבנית מחדש סביב העונה, המוצר והאנשים שסביב השולחן — בלי תפריט קבוע ובלי פשרות על איכות.</p>
+
+          <ol class="menu">
+            <li><span class="num">01</span><span class="name">אמוז בוש</span></li>
+            <li><span class="num">02</span><span class="name">מנה ראשונה</span></li>
+            <li><span class="num">03</span><span class="name">עיקרית</span></li>
+            <li><span class="num">04</span><span class="name">קינוח</span></li>
+          </ol>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- normal document flow resumes here -->
+  <section class="after">
+    <p>מכאן הגלילה ממשיכה כרגיל — הסקשן הנעול שוחרר.</p>
+  </section>
+
+</body>
+</html>
